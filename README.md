@@ -12,4 +12,6 @@ Simpler Instructions on how to do what you can find here:
   
 * Einfach_nur_Eli
 
+### Contributor/s:
+
 
