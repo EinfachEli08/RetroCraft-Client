@@ -1,4 +1,40 @@
-# How to contribute:
+
+# RetroCraft - Bringing Back the Legacy Minecraft Experience
+
+Welcome to RetroCraft, a community-driven modded Minecraft client focused on recreating the nostalgic experience of the Legacy Console Edition. Our aim is to bring back the old menus, controller support, and much more, all within the latest version of Minecraft (1.20.1).
+
+## Features
+
+-   **Legacy Console Experience**: Immerse yourself in the classic feel of Minecraft's Legacy Console Edition.
+    
+-   **Old Menus**: Say goodbye to the new menus and hello to the familiar interface you know and love.
+    
+-   **Controller Support**: Plug in your controller and dive into the world of RetroCraft with ease.
+    
+-   **Tutorial Worlds**: Do you want to experience the greatness of the Tutorial worlds? Well now you can relive those Memories!.
+-  **... And much more is planned!**
+    
+
+## Screenshots
+
+_Experience the classic Minecraft menu layout with RetroCraft._
+
+_Enjoy seamless gameplay with controller support._
+
+## Installation
+
+To install RetroCraft into eclipse, follow these simple steps:
+
+1.  Clone the latest Code updates from our GitHub repository.
+2.  Import the Project into Eclipse.
+3.  Use Start as the Gradle-Run Option.
+4.  Now you can run and compile the Project.
+5.  Enjoy the nostalgia!
+
+
+## How to contribute:
+
+To contribute to the Project, follow these Steps:
 
 1. Fork the Repository
 2. Make Changes
@@ -8,10 +44,23 @@ Simpler Instructions on how to do what you can find here:
 
 [Instructions by Github](https://docs.github.com/en/get-started/exploring-projects-on-github/contributing-to-a-project)
 
-### Creator:
+## Support
+
+If you encounter any issues or have questions about RetroCraft, feel free to reach out to us on Discord or open an issue on GitHub.
+[Discord Server link](https://discord.gg/kcTMt6HVAh)
+## License
+
+RetroCraft is licensed under the GPL v.3 License. See the LICENSE file for details.
+
+----------
+
+Thank you for choosing RetroCraft! Let's bring back the nostalgia together.
+
+## Creator:
   
 * Einfach_nur_Eli
 
-### Contributor/s:
+## Contributor/s:
 
+ - Still empty )-;
 
