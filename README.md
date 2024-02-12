@@ -47,6 +47,7 @@ Simpler Instructions on how to do what you can find here:
 ## Support
 
 If you encounter any issues or have questions about RetroCraft, feel free to reach out to us on Discord or open an issue on GitHub.
+
 [Discord Server link](https://discord.gg/kcTMt6HVAh)
 ## License
 
@@ -62,5 +63,5 @@ Thank you for choosing RetroCraft! Let's bring back the nostalgia together.
 
 ## Contributor/s:
 
- - Still empty )-;
+ - Still empty    )-;
 
