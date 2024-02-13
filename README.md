@@ -42,6 +42,12 @@ To install RetroCraft into eclipse, follow these simple steps:
 5.  Enjoy the nostalgia!
 
 
+## Current Project Status:
+
+To See the current status of the Project, 
+
+[please follow this link](https://trello.com/b/00cjI4SI/unbenanntes-board)
+
 ## How to contribute:
 
 To contribute to the Project, follow these Steps:
