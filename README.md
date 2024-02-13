@@ -1,5 +1,5 @@
 
-# RetroCraft - Bringing Back the Legacy Minecraft Experience
+# RetroCraft - Bringing Back the Legacy Minecraft Experience 
 
 Welcome to RetroCraft, a community-driven modded Minecraft client focused on recreating the nostalgic experience of the Legacy Console Edition. Our aim is to bring back the old menus, controller support, and much more, all within the latest version of Minecraft (1.20.1).
 
