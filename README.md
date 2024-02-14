@@ -79,5 +79,5 @@ Thank you for choosing RetroCraft! Let's bring back the nostalgia together.
 
 ## Contributor/s:
 
- - Still empty    )-;
+ - vakdmy06 (AssetInjector)
 
