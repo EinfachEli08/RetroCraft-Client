@@ -1,0 +1,22 @@
+{
+  "minecraft:recipes/misc/gold_ingot_from_gold_block": {
+    "criteria": {
+      "has_gold_block": "2024-02-12 11:23:44 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/crafting_table": {
+    "criteria": {
+      "unlock_right_away": "2024-02-12 11:23:44 +0100"
+    },
+    "done": true
+  },
+  "minecraft:adventure/adventuring_time": {
+    "criteria": {
+      "minecraft:savanna_plateau": "2024-02-12 11:24:13 +0100",
+      "minecraft:savanna": "2024-02-12 11:23:46 +0100"
+    },
+    "done": false
+  },
+  "DataVersion": 3465
+}

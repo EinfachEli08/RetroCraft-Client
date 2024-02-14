@@ -1,0 +1,142 @@
+---- Minecraft Crash Report ----
+// You're mean.
+
+Time: 2024-02-11 23:46:11
+Description: Ticking entity
+
+java.lang.NullPointerException: Cannot read field "jumping" because "this.input" is null
+	at net.minecraft.client.player.LocalPlayer.aiStep(LocalPlayer.java:630)
+	at net.minecraft.world.entity.LivingEntity.tick(LivingEntity.java:2249)
+	at net.minecraft.world.entity.player.Player.tick(Player.java:236)
+	at net.minecraft.client.player.AbstractClientPlayer.tick(AbstractClientPlayer.java:70)
+	at net.minecraft.client.player.LocalPlayer.tick(LocalPlayer.java:188)
+	at net.minecraft.client.multiplayer.ClientLevel.tickNonPassenger(ClientLevel.java:268)
+	at net.minecraft.world.level.Level.guardEntityTick(Level.java:427)
+	at net.minecraft.client.multiplayer.ClientLevel.lambda$4(ClientLevel.java:251)
+	at net.minecraft.world.level.entity.EntityTickList.forEach(EntityTickList.java:53)
+	at net.minecraft.client.multiplayer.ClientLevel.tickEntities(ClientLevel.java:249)
+	at net.minecraft.client.Minecraft.tick(Minecraft.java:1759)
+	at net.minecraft.client.Minecraft.runTick(Minecraft.java:1085)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:707)
+	at net.minecraft.client.main.Main.main(Main.java:218)
+	at mcp.client.Start.main(Start.java:17)
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Thread: Render thread
+Stacktrace:
+	at net.minecraft.client.player.LocalPlayer.aiStep(LocalPlayer.java:630)
+	at net.minecraft.world.entity.LivingEntity.tick(LivingEntity.java:2249)
+	at net.minecraft.world.entity.player.Player.tick(Player.java:236)
+	at net.minecraft.client.player.AbstractClientPlayer.tick(AbstractClientPlayer.java:70)
+	at net.minecraft.client.player.LocalPlayer.tick(LocalPlayer.java:188)
+	at net.minecraft.client.multiplayer.ClientLevel.tickNonPassenger(ClientLevel.java:268)
+	at net.minecraft.world.level.Level.guardEntityTick(Level.java:427)
+	at net.minecraft.client.multiplayer.ClientLevel.lambda$4(ClientLevel.java:251)
+	at net.minecraft.world.level.entity.EntityTickList.forEach(EntityTickList.java:53)
+	at net.minecraft.client.multiplayer.ClientLevel.tickEntities(ClientLevel.java:249)
+
+-- Entity being ticked --
+Details:
+	Entity Type: minecraft:player (net.minecraft.client.player.LocalPlayer)
+	Entity ID: 115
+	Entity Name: Player568
+	Entity's Exact location: 196.82, 63.00, 214.53
+	Entity's Block location: World: (196,63,214), Section: (at 4,15,6 in 12,3,13; chunk contains blocks 192,-64,208 to 207,319,223), Region: (0,0; contains chunks 0,0 to 31,31, blocks 0,-64,0 to 511,319,511)
+	Entity's Momentum: 0.00, 0.00, 0.00
+	Entity's Passengers: []
+	Entity's Vehicle: null
+Stacktrace:
+	at net.minecraft.world.level.Level.guardEntityTick(Level.java:427)
+	at net.minecraft.client.multiplayer.ClientLevel.lambda$4(ClientLevel.java:251)
+	at net.minecraft.world.level.entity.EntityTickList.forEach(EntityTickList.java:53)
+	at net.minecraft.client.multiplayer.ClientLevel.tickEntities(ClientLevel.java:249)
+	at net.minecraft.client.Minecraft.tick(Minecraft.java:1759)
+	at net.minecraft.client.Minecraft.runTick(Minecraft.java:1085)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:707)
+	at net.minecraft.client.main.Main.main(Main.java:218)
+	at mcp.client.Start.main(Start.java:17)
+
+-- Affected level --
+Details:
+	All players: 1 total; [LocalPlayer['Player568'/115, l='ClientLevel', x=196.82, y=63.00, z=214.53]]
+	Chunk stats: 961, 374
+	Level dimension: minecraft:overworld
+	Level spawn location: World: (32,108,48), Section: (at 0,12,0 in 2,6,3; chunk contains blocks 32,-64,48 to 47,319,63), Region: (0,0; contains chunks 0,0 to 31,31, blocks 0,-64,0 to 511,319,511)
+	Level time: 48168 game time, 81449 day time
+	Server brand: vanilla
+	Server type: Integrated singleplayer server
+Stacktrace:
+	at net.minecraft.client.multiplayer.ClientLevel.fillReportDetails(ClientLevel.java:447)
+	at net.minecraft.client.Minecraft.fillReport(Minecraft.java:2258)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:724)
+	at net.minecraft.client.main.Main.main(Main.java:218)
+	at mcp.client.Start.main(Start.java:17)
+
+-- Last reload --
+Details:
+	Reload number: 1
+	Reload reason: initial
+	Finished: Yes
+	Packs: vanilla, programmer_art
+
+-- System Details --
+Details:
+	Minecraft Version: 1.20.1
+	Minecraft Version ID: 1.20.1
+	Operating System: Windows 11 (amd64) version 10.0
+	Java Version: 17.0.9, Eclipse Adoptium
+	Java VM Version: OpenJDK 64-Bit Server VM (mixed mode), Eclipse Adoptium
+	Memory: 7720443520 bytes (7362 MiB) / 8589934592 bytes (8192 MiB) up to 8589934592 bytes (8192 MiB)
+	CPUs: 8
+	Processor Vendor: GenuineIntel
+	Processor Name: Intel(R) Core(TM) i7-6700K CPU @ 4.00GHz
+	Identifier: Intel64 Family 6 Model 94 Stepping 3
+	Microarchitecture: Skylake (Client)
+	Frequency (GHz): 4.01
+	Number of physical packages: 1
+	Number of physical CPUs: 4
+	Number of logical CPUs: 8
+	Graphics card #0 name: AMD Radeon RX 6500 XT
+	Graphics card #0 vendor: Advanced Micro Devices, Inc. (0x1002)
+	Graphics card #0 VRAM (MB): 4080.00
+	Graphics card #0 deviceId: 0x743f
+	Graphics card #0 versionInfo: DriverVersion=31.0.12027.9001
+	Memory slot #0 capacity (MB): 8192.00
+	Memory slot #0 clockSpeed (GHz): 2.13
+	Memory slot #0 type: DDR4
+	Memory slot #1 capacity (MB): 8192.00
+	Memory slot #1 clockSpeed (GHz): 2.13
+	Memory slot #1 type: DDR4
+	Memory slot #2 capacity (MB): 8192.00
+	Memory slot #2 clockSpeed (GHz): 2.13
+	Memory slot #2 type: DDR4
+	Memory slot #3 capacity (MB): 8192.00
+	Memory slot #3 clockSpeed (GHz): 2.13
+	Memory slot #3 type: DDR4
+	Virtual memory max (MB): 37552.89
+	Virtual memory used (MB): 27638.41
+	Swap memory total (MB): 4820.07
+	Swap memory used (MB): 1807.12
+	JVM Flags: 3 total; -Xmx8G -Xms8G -XX:+ShowCodeDetailsInExceptionMessages
+	Launched Version: mcp
+	Backend library: LWJGL version 3.3.1 build 7
+	Backend API: AMD Radeon(TM) RX 6500 XT GL version 3.2.0 Core Profile Context 22.20.27.09.230330, ATI Technologies Inc.
+	Window size: 1140x641
+	GL Caps: Using framebuffer using OpenGL 3.2
+	GL debug messages: 
+	Using VBOs: Yes
+	Is Modded: Very likely; Client jar signature invalidated; Server jar signature invalidated
+	Type: Integrated Server (map_client.txt)
+	Graphics mode: fabulous
+	Resource Packs: vanilla, programmer_art
+	Current Language: en_us
+	CPU: 8x Intel(R) Core(TM) i7-6700K CPU @ 4.00GHz
+	Server Running: true
+	Player Count: 1 / 8; [ServerPlayer['Player568'/115, l='ServerLevel[New World]', x=196.82, y=63.00, z=214.53]]
+	Data Packs: vanilla
+	Enabled Feature Flags: minecraft:vanilla
+	World Generation: Stable
