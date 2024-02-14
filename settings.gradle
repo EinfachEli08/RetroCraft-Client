@@ -1,0 +1,4 @@
+rootProject.name = 'RetroCraft_Client'
+
+include ':mcp'
+project(":mcp").projectDir = file("projects/mcp")
