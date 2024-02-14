@@ -1,0 +1,105 @@
+---- Minecraft Crash Report ----
+// I bet Cylons wouldn't have this problem.
+
+Time: 2024-02-11 13:51:39
+Description: Unexpected error
+
+java.lang.Error: Unresolved compilation problem: 
+	The method renderHotbar(float, GuiGraphics, int) in the type Gui is not applicable for the arguments (float, GuiGraphics)
+
+	at net.minecraft.client.gui.Gui.render(Gui.java:183)
+	at net.minecraft.client.renderer.GameRenderer.render(GameRenderer.java:931)
+	at net.minecraft.client.Minecraft.runTick(Minecraft.java:1117)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:707)
+	at net.minecraft.client.main.Main.main(Main.java:218)
+	at mcp.client.Start.main(Start.java:17)
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Thread: Render thread
+Stacktrace:
+	at net.minecraft.client.gui.Gui.render(Gui.java:183)
+
+-- Affected level --
+Details:
+	All players: 1 total; [LocalPlayer['Player244'/249, l='ClientLevel', x=-52.50, y=73.00, z=-6.50]]
+	Chunk stats: 961, 609
+	Level dimension: minecraft:overworld
+	Level spawn location: World: (-48,71,0), Section: (at 0,7,0 in -3,4,0; chunk contains blocks -48,-64,0 to -33,319,15), Region: (-1,0; contains chunks -32,0 to -1,31, blocks -512,-64,0 to -1,319,511)
+	Level time: 2949 game time, 2949 day time
+	Server brand: vanilla
+	Server type: Integrated singleplayer server
+Stacktrace:
+	at net.minecraft.client.multiplayer.ClientLevel.fillReportDetails(ClientLevel.java:447)
+	at net.minecraft.client.Minecraft.fillReport(Minecraft.java:2258)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:729)
+	at net.minecraft.client.main.Main.main(Main.java:218)
+	at mcp.client.Start.main(Start.java:17)
+
+-- Last reload --
+Details:
+	Reload number: 1
+	Reload reason: initial
+	Finished: Yes
+	Packs: vanilla
+
+-- System Details --
+Details:
+	Minecraft Version: 1.20.1
+	Minecraft Version ID: 1.20.1
+	Operating System: Windows 11 (amd64) version 10.0
+	Java Version: 17.0.9, Eclipse Adoptium
+	Java VM Version: OpenJDK 64-Bit Server VM (mixed mode), Eclipse Adoptium
+	Memory: 7699425136 bytes (7342 MiB) / 8589934592 bytes (8192 MiB) up to 8589934592 bytes (8192 MiB)
+	CPUs: 8
+	Processor Vendor: GenuineIntel
+	Processor Name: Intel(R) Core(TM) i7-6700K CPU @ 4.00GHz
+	Identifier: Intel64 Family 6 Model 94 Stepping 3
+	Microarchitecture: Skylake (Client)
+	Frequency (GHz): 4.01
+	Number of physical packages: 1
+	Number of physical CPUs: 4
+	Number of logical CPUs: 8
+	Graphics card #0 name: AMD Radeon RX 6500 XT
+	Graphics card #0 vendor: Advanced Micro Devices, Inc. (0x1002)
+	Graphics card #0 VRAM (MB): 4080.00
+	Graphics card #0 deviceId: 0x743f
+	Graphics card #0 versionInfo: DriverVersion=31.0.12027.9001
+	Memory slot #0 capacity (MB): 8192.00
+	Memory slot #0 clockSpeed (GHz): 2.13
+	Memory slot #0 type: DDR4
+	Memory slot #1 capacity (MB): 8192.00
+	Memory slot #1 clockSpeed (GHz): 2.13
+	Memory slot #1 type: DDR4
+	Memory slot #2 capacity (MB): 8192.00
+	Memory slot #2 clockSpeed (GHz): 2.13
+	Memory slot #2 type: DDR4
+	Memory slot #3 capacity (MB): 8192.00
+	Memory slot #3 clockSpeed (GHz): 2.13
+	Memory slot #3 type: DDR4
+	Virtual memory max (MB): 35820.91
+	Virtual memory used (MB): 31925.58
+	Swap memory total (MB): 3088.09
+	Swap memory used (MB): 1402.94
+	JVM Flags: 3 total; -Xmx8G -Xms8G -XX:+ShowCodeDetailsInExceptionMessages
+	Launched Version: mcp
+	Backend library: LWJGL version 3.3.1 build 7
+	Backend API: AMD Radeon(TM) RX 6500 XT GL version 3.2.0 Core Profile Context 22.20.27.09.230330, ATI Technologies Inc.
+	Window size: 854x480
+	GL Caps: Using framebuffer using OpenGL 3.2
+	GL debug messages: 
+	Using VBOs: Yes
+	Is Modded: Very likely; Client jar signature invalidated; Server jar signature invalidated
+	Type: Integrated Server (map_client.txt)
+	Graphics mode: fabulous
+	Resource Packs: vanilla
+	Current Language: en_us
+	CPU: 8x Intel(R) Core(TM) i7-6700K CPU @ 4.00GHz
+	Server Running: true
+	Player Count: 1 / 8; [ServerPlayer['Player244'/249, l='ServerLevel[New World]', x=-52.50, y=73.00, z=-6.50]]
+	Data Packs: vanilla
+	Enabled Feature Flags: minecraft:vanilla
+	World Generation: Stable
