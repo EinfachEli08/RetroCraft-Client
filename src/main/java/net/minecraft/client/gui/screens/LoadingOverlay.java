@@ -28,8 +28,8 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class LoadingOverlay extends Overlay {
-   static final ResourceLocation MOJANG_LOGO = new ResourceLocation("textures/gui/book.png");
-   //static final ResourceLocation MOJANG_LOGO = new ResourceLocation("textures/gui/title/mojang.png");
+   //static final ResourceLocation MOJANG_LOGO = new ResourceLocation("textures/gui/book.png");
+   static final ResourceLocation MOJANG_LOGO = new ResourceLocation("textures/gui/title/mojang.png");
    static final ResourceLocation FOURJ_LOGO = new ResourceLocation("textures/gui/title/4j.png");
    private static final int LOGO_BACKGROUND_COLOR = FastColor.ARGB32.color(100, 255, 255, 255);
    private static final IntSupplier BRAND_BACKGROUND = () -> {
@@ -125,9 +125,9 @@ public class LoadingOverlay extends Overlay {
 
       p_281839_.setColor(1.0F, 1.0F, 1.0F, f2);
 
-      if(stopTimer == 0 && f6 > 0.7F) stopTimer = k;
+      if(stopTimer == 0) stopTimer = k;
 
-      if(k - stopTimer > 3000){
+      if(k - stopTimer > 3000 && f6 > 0.7F){
          p_281839_.blit(FOURJ_LOGO, i / 2 - LOGO_SCALE/4, j/2 - LOGO_SCALE/4, 0, 0, LOGO_SCALE/2, LOGO_SCALE/2, LOGO_SCALE/2, LOGO_SCALE/2);
       } else {
          p_281839_.blit(MOJANG_LOGO, i / 2 - LOGO_SCALE/4, j/2 - LOGO_SCALE/4, 0, 0, LOGO_SCALE/2, LOGO_SCALE/2, LOGO_SCALE/2, LOGO_SCALE/2);
