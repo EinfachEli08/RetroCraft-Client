@@ -97,29 +97,21 @@ public class TitleScreen extends Screen {
          this.splash = this.minecraft.getSplashManager().getSplash();
       }
 
-      int i = this.font.width(COPYRIGHT_TEXT);
-      int j = this.width - i - 2;
-      int l = this.height / 4 + 48;
+      //int i = this.font.width(COPYRIGHT_TEXT);
+      //int j = this.width - i - 2;
+      int l = this.height / 4 + 42;
       this.createNormalMenuOptions(l, 24);
       
 
-      this.addRenderableWidget(new ImageButton(this.width / 2 - 124, l + 72 + 12, 20, 20, 0, 106, 20, Button.WIDGETS_LOCATION, 256, 256, (p_280830_) -> {
+      /*this.addRenderableWidget(new ImageButton(this.width / 2 - 124, l + 72 + 12, 20, 20, 0, 106, 20, Button.WIDGETS_LOCATION, 256, 256, (p_280830_) -> {
          this.minecraft.setScreen(new LanguageSelectScreen(this, this.minecraft.options, this.minecraft.getLanguageManager()));
       }, Component.translatable("narrator.button.language")));
-      
-      this.addRenderableWidget(Button.builder(Component.translatable("menu.options"), (p_280838_) -> {
-         this.minecraft.setScreen(new OptionsScreen(this, this.minecraft.options));
-      }).bounds(this.width / 2 - 100, l + 72 + 12, 98, 20).build());
-      
-      this.addRenderableWidget(Button.builder(Component.translatable("menu.quit"), (p_280831_) -> {
-         this.minecraft.stop();
-      }).bounds(this.width / 2 + 2, l + 72 + 12, 98, 20).build());
-      
+
       this.addRenderableWidget(new ImageButton(this.width / 2 + 104, l + 72 + 12, 20, 20, 0, 0, 20, Button.ACCESSIBILITY_TEXTURE, 32, 64, (p_280835_) -> {
          this.minecraft.setScreen(new AccessibilityOptionsScreen(this, this.minecraft.options));
       }, Component.translatable("narrator.button.accessibility")));
-      
-      /*this.addRenderableWidget(new PlainTextButton(j, this.height - 10, i, 10, COPYRIGHT_TEXT, (p_280834_) -> {
+
+      this.addRenderableWidget(new PlainTextButton(j, this.height - 10, i, 10, COPYRIGHT_TEXT, (p_280834_) -> {
          this.minecraft.setScreen(new CreditsAndAttributionScreen(this));
       }, this.font));*/
 
@@ -157,6 +149,14 @@ public class TitleScreen extends Screen {
       (this.addRenderableWidget(Button.builder(Component.translatable("menu.online"), (p_210872_) -> {
          this.realmsButtonClicked();
       }).bounds(this.width / 2 - 100, p_96764_ + p_96765_ * 2, 200, 20).tooltip(tooltip).build())).active = flag;
+
+      this.addRenderableWidget(Button.builder(Component.translatable("menu.options"), (p_280838_) -> {
+         this.minecraft.setScreen(new OptionsScreen(this, this.minecraft.options));
+      }).bounds(this.width / 2 - 100, p_96764_ + p_96765_ * 3, 200, 20).build());
+
+      this.addRenderableWidget(Button.builder(Component.translatable("menu.quit"), (p_280831_) -> {
+         this.minecraft.stop();
+      }).bounds(this.width / 2 - 100, p_96764_ + p_96765_ * 4, 200, 20).build());
    }
 
    @Nullable
