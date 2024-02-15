@@ -153,7 +153,7 @@ public class RealmsDownloadLatestWorldScreen extends RealmsScreen {
       }
 
       if (this.downloadStatus.bytesWritten != 0L && !this.cancelled) {
-         this.drawProgressBar(p_282124_);
+         //this.drawProgressBar(p_282124_);
          this.drawDownloadSpeed(p_282124_);
       }
 

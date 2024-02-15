@@ -23,6 +23,7 @@ projects/mcp
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
+runserver/
 
 ### Eclipse ###
 .apt_generated

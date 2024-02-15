@@ -28,11 +28,10 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class LoadingOverlay extends Overlay {
-   static final ResourceLocation MOJANG_STUDIOS_LOGO_LOCATION = new ResourceLocation("textures/gui/title/mojangstudios.png");
-   private static final int LOGO_BACKGROUND_COLOR = FastColor.ARGB32.color(255, 239, 50, 61);
-   private static final int LOGO_BACKGROUND_COLOR_DARK = FastColor.ARGB32.color(255, 0, 0, 0);
+   static final ResourceLocation MOJANG_STUDIOS_LOGO_LOCATION = new ResourceLocation("textures/gui/title/mojang.png");
+   private static final int LOGO_BACKGROUND_COLOR = FastColor.ARGB32.color(100, 255, 255, 255);
    private static final IntSupplier BRAND_BACKGROUND = () -> {
-      return Minecraft.getInstance().options.darkMojangStudiosBackground().get() ? LOGO_BACKGROUND_COLOR_DARK : LOGO_BACKGROUND_COLOR;
+      return LOGO_BACKGROUND_COLOR;
    };
    private static final int LOGO_SCALE = 240;
    private static final float LOGO_QUARTER_FLOAT = 60.0F;
@@ -93,45 +92,34 @@ public class LoadingOverlay extends Overlay {
          p_281839_.fill(RenderType.guiOverlay(), 0, 0, i, j, replaceAlpha(BRAND_BACKGROUND.getAsInt(), l1));
          f2 = Mth.clamp(f1, 0.0F, 1.0F);
       } else {
-         int i2 = BRAND_BACKGROUND.getAsInt();
+         /*int i2 = BRAND_BACKGROUND.getAsInt();
          float f3 = (float)(i2 >> 16 & 255) / 255.0F;
          float f4 = (float)(i2 >> 8 & 255) / 255.0F;
-         float f5 = (float)(i2 & 255) / 255.0F;
-         GlStateManager._clearColor(f3, f4, f5, 1.0F);
+         float f5 = (float)(i2 & 255) / 255.0F;*/
+         GlStateManager._clearColor(1, 1, 1, 1);
          GlStateManager._clear(16384, Minecraft.ON_OSX);
          f2 = 1.0F;
       }
 
       int j2 = (int)((double)p_281839_.guiWidth() * 0.5D);
-      int k2 = (int)((double)p_281839_.guiHeight() * 0.5D);
-      double d1 = Math.min((double)p_281839_.guiWidth() * 0.75D, (double)p_281839_.guiHeight()) * 0.25D;
-      int i1 = (int)(d1 * 0.5D);
-      double d0 = d1 * 4.0D;
-      int j1 = (int)(d0 * 0.5D);
-      RenderSystem.disableDepthTest();
+/*      RenderSystem.disableDepthTest();
       RenderSystem.depthMask(false);
       RenderSystem.enableBlend();
-      RenderSystem.blendFunc(770, 1);
+      RenderSystem.blendFunc(770, 1);*/
       p_281839_.setColor(1.0F, 1.0F, 1.0F, f2);
-      p_281839_.blit(MOJANG_STUDIOS_LOGO_LOCATION, j2 - j1, k2 - i1, j1, (int)d1, -0.0625F, 0.0F, 120, 60, 120, 120);
-      p_281839_.blit(MOJANG_STUDIOS_LOGO_LOCATION, j2, k2 - i1, j1, (int)d1, 0.0625F, 60.0F, 120, 60, 120, 120);
+      p_281839_.blit(MOJANG_STUDIOS_LOGO_LOCATION, (int)(i/2 - j/2), 0, 0, 0, j, j, j, j);
       p_281839_.setColor(1.0F, 1.0F, 1.0F, 1.0F);
-      RenderSystem.defaultBlendFunc();
+ /*     RenderSystem.defaultBlendFunc();
       RenderSystem.disableBlend();
       RenderSystem.depthMask(true);
-      RenderSystem.enableDepthTest();
+      RenderSystem.enableDepthTest();*/
       int k1 = (int)((double)p_281839_.guiHeight() * 0.8325D);
       float f6 = this.reload.getActualProgress();
       this.currentProgress = Mth.clamp(this.currentProgress * 0.95F + f6 * 0.050000012F, 0.0F, 1.0F);
-      if (f < 1.0F) {
-         this.drawProgressBar(p_281839_, i / 2 - j1, k1 - 5, i / 2 + j1, k1 + 5, 1.0F - Mth.clamp(f, 0.0F, 1.0F));
-      }
 
-      if (f >= 2.0F) {
-         this.minecraft.setOverlay((Overlay)null);
-      }
 
-      if (this.fadeOutStart == -1L && this.reload.isDone() && (!this.fadeIn || f1 >= 2.0F)) {
+
+      if (this.fadeOutStart == -1L && f6 == 1 && (!this.fadeIn || f1 >= 2.0F)) {
          try {
             this.reload.checkExceptions();
             this.onFinish.accept(Optional.empty());
@@ -143,6 +131,11 @@ public class LoadingOverlay extends Overlay {
          if (this.minecraft.screen != null) {
             this.minecraft.screen.init(this.minecraft, p_281839_.guiWidth(), p_281839_.guiHeight());
          }
+
+         RenderSystem.defaultBlendFunc();
+         RenderSystem.disableBlend();
+         RenderSystem.depthMask(true);
+         RenderSystem.enableDepthTest();
       }
 
    }

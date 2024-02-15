@@ -25,6 +25,8 @@ public class RealmsWorldSlotButton extends Button {
    public static final ResourceLocation DEFAULT_WORLD_SLOT_1 = new ResourceLocation("minecraft", "textures/gui/title/background/panorama_0.png");
    public static final ResourceLocation DEFAULT_WORLD_SLOT_2 = new ResourceLocation("minecraft", "textures/gui/title/background/panorama_2.png");
    public static final ResourceLocation DEFAULT_WORLD_SLOT_3 = new ResourceLocation("minecraft", "textures/gui/title/background/panorama_3.png");
+   public static final ResourceLocation DEFAULT_WORLD_SLOT_4 = new ResourceLocation("minecraft", "textures/gui/title/background/panorama_4.png");
+   public static final ResourceLocation DEFAULT_WORLD_SLOT_5 = new ResourceLocation("minecraft", "textures/gui/title/background/panorama_5.png");
    private static final Component SLOT_ACTIVE_TOOLTIP = Component.translatable("mco.configure.world.slot.tooltip.active");
    private static final Component SWITCH_TO_MINIGAME_SLOT_TOOLTIP = Component.translatable("mco.configure.world.slot.tooltip.minigame");
    private static final Component SWITCH_TO_WORLD_SLOT_TOOLTIP = Component.translatable("mco.configure.world.slot.tooltip");
@@ -149,6 +151,10 @@ public class RealmsWorldSlotButton extends Button {
          resourcelocation = DEFAULT_WORLD_SLOT_2;
       } else if (p_283521_ == 3) {
          resourcelocation = DEFAULT_WORLD_SLOT_3;
+      } else if (p_283521_ == 4) {
+         resourcelocation = DEFAULT_WORLD_SLOT_4;
+      } else if (p_283521_ == 5) {
+         resourcelocation = DEFAULT_WORLD_SLOT_5;
       } else {
          resourcelocation = EMPTY_SLOT_LOCATION;
       }

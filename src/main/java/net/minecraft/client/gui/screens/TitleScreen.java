@@ -119,12 +119,12 @@ public class TitleScreen extends Screen {
          this.minecraft.setScreen(new AccessibilityOptionsScreen(this, this.minecraft.options));
       }, Component.translatable("narrator.button.accessibility")));
       
-      this.addRenderableWidget(new PlainTextButton(j, this.height - 10, i, 10, COPYRIGHT_TEXT, (p_280834_) -> {
+      /*this.addRenderableWidget(new PlainTextButton(j, this.height - 10, i, 10, COPYRIGHT_TEXT, (p_280834_) -> {
          this.minecraft.setScreen(new CreditsAndAttributionScreen(this));
-      }, this.font));
-      
+      }, this.font));*/
+
       this.minecraft.setConnectedToRealms(false);
-      
+
       if (this.realmsNotificationsScreen == null) {
          this.realmsNotificationsScreen = new RealmsNotificationsScreen();
       }
@@ -209,16 +209,16 @@ public class TitleScreen extends Screen {
             s = s + ("release".equalsIgnoreCase(this.minecraft.getVersionType()) ? "" : "/" + this.minecraft.getVersionType());
          }
          
-         gfx.drawString(this.font, s, 2, this.height - 10, 16777215 | i);
+         //gfx.drawString(this.font, s, 2, this.height - 10, 16777215 | i);
 
          for(GuiEventListener guieventlistener : this.children()) {
             if (guieventlistener instanceof AbstractWidget) {
                ((AbstractWidget)guieventlistener).setAlpha(f1);
             }
          }
-         
-        
-         
+
+
+
          super.render(gfx, p_281753_, p_283539_, p_282628_);
          if (this.realmsNotificationsEnabled() && f1 >= 1.0F) {
             RenderSystem.enableDepthTest();

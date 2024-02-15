@@ -144,7 +144,7 @@ public class RealmsUploadScreen extends RealmsScreen {
       }
 
       if (this.uploadStatus.bytesWritten != 0L && !this.cancelled) {
-         this.drawProgressBar(p_282140_);
+         //this.drawProgressBar(p_282140_);
          this.drawUploadSpeed(p_282140_);
       }
 
