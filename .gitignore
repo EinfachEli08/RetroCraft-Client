@@ -24,6 +24,8 @@ out/
 !**/src/main/**/out/
 !**/src/test/**/out/
 runserver/
+run/logs/
+
 
 ### Eclipse ###
 .apt_generated
