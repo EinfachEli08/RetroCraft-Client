@@ -97,34 +97,18 @@ public class TitleScreen extends Screen {
          this.splash = this.minecraft.getSplashManager().getSplash();
       }
 
-      int i = this.font.width(COPYRIGHT_TEXT);
-      int j = this.width - i - 2;
-      int l = this.height / 4 + 48;
-      this.createNormalMenuOptions(l, 24);
-      
+      //int i = this.font.width(COPYRIGHT_TEXT);
+      //int j = this.width - i - 2;
+      int l = this.height / 4 + 35;
+      this.createNormalMenuOptions(l, 24, 210, 20);
 
-      this.addRenderableWidget(new ImageButton(this.width / 2 - 124, l + 72 + 12, 20, 20, 0, 106, 20, Button.WIDGETS_LOCATION, 256, 256, (p_280830_) -> {
-         this.minecraft.setScreen(new LanguageSelectScreen(this, this.minecraft.options, this.minecraft.getLanguageManager()));
-      }, Component.translatable("narrator.button.language")));
-      
-      this.addRenderableWidget(Button.builder(Component.translatable("menu.options"), (p_280838_) -> {
-         this.minecraft.setScreen(new OptionsScreen(this, this.minecraft.options));
-      }).bounds(this.width / 2 - 100, l + 72 + 12, 98, 20).build());
-      
-      this.addRenderableWidget(Button.builder(Component.translatable("menu.quit"), (p_280831_) -> {
-         this.minecraft.stop();
-      }).bounds(this.width / 2 + 2, l + 72 + 12, 98, 20).build());
-      
-      this.addRenderableWidget(new ImageButton(this.width / 2 + 104, l + 72 + 12, 20, 20, 0, 0, 20, Button.ACCESSIBILITY_TEXTURE, 32, 64, (p_280835_) -> {
-         this.minecraft.setScreen(new AccessibilityOptionsScreen(this, this.minecraft.options));
-      }, Component.translatable("narrator.button.accessibility")));
-      
-      this.addRenderableWidget(new PlainTextButton(j, this.height - 10, i, 10, COPYRIGHT_TEXT, (p_280834_) -> {
+
+      /*this.addRenderableWidget(new PlainTextButton(j, this.height - 10, i, 10, COPYRIGHT_TEXT, (p_280834_) -> {
          this.minecraft.setScreen(new CreditsAndAttributionScreen(this));
-      }, this.font));
-      
+      }, this.font));*/
+
       this.minecraft.setConnectedToRealms(false);
-      
+
       if (this.realmsNotificationsScreen == null) {
          this.realmsNotificationsScreen = new RealmsNotificationsScreen();
       }
@@ -139,24 +123,40 @@ public class TitleScreen extends Screen {
 
    }
 
-   private void createNormalMenuOptions(int p_96764_, int p_96765_) {
-	   
+   private void createNormalMenuOptions(int p_96764_, int p_96765_, int p_69696_, int p_42042_) {
+
       this.addRenderableWidget(Button.builder(Component.translatable("menu.singleplayer"), (p_280832_) -> {
          this.minecraft.setScreen(new SelectWorldScreen(this));
-      }).bounds(this.width / 2 - 100, p_96764_, 200, 20).build());
-      
+      }).bounds(this.width / 2 - 100, p_96764_, p_69696_, p_42042_).build());
+
       Component component = this.getMultiplayerDisabledReason();
       boolean flag = component == null;
       Tooltip tooltip = component != null ? Tooltip.create(component) : null;
-      
+
       (this.addRenderableWidget(Button.builder(Component.translatable("menu.multiplayer"), (p_280833_) -> {
          Screen screen = (Screen)(this.minecraft.options.skipMultiplayerWarning ? new JoinMultiplayerScreen(this) : new SafetyScreen(this));
          this.minecraft.setScreen(screen);
-      }).bounds(this.width / 2 - 100, p_96764_ + p_96765_ * 1, 200, 20).tooltip(tooltip).build())).active = flag;
-      
+      }).bounds(this.width / 2 - 100, p_96764_ + p_96765_ * 1, p_69696_, p_42042_).tooltip(tooltip).build())).active = flag;
+
       (this.addRenderableWidget(Button.builder(Component.translatable("menu.online"), (p_210872_) -> {
          this.realmsButtonClicked();
-      }).bounds(this.width / 2 - 100, p_96764_ + p_96765_ * 2, 200, 20).tooltip(tooltip).build())).active = flag;
+      }).bounds(this.width / 2 - 100, p_96764_ + p_96765_ * 2, p_69696_, p_42042_).tooltip(tooltip).build())).active = flag;
+
+      this.addRenderableWidget(Button.builder(Component.translatable("menu.options"), (p_280838_) -> {
+         this.minecraft.setScreen(new OptionsScreen(this, this.minecraft.options));
+      }).bounds(this.width / 2 - 100, p_96764_ + p_96765_ * 3, p_69696_, p_42042_).build());
+
+      this.addRenderableWidget(Button.builder(Component.translatable("narrator.button.language"), (p_280838_) -> {
+         this.minecraft.setScreen(new LanguageSelectScreen(this, this.minecraft.options, this.minecraft.getLanguageManager()));
+      }).bounds(this.width / 2 - 100, p_96764_ + p_96765_ * 4, p_69696_, p_42042_).build());
+
+      this.addRenderableWidget(Button.builder(Component.translatable("narrator.button.accessibility"), (p_280838_) -> {
+         this.minecraft.setScreen(new AccessibilityOptionsScreen(this, this.minecraft.options));
+      }).bounds(this.width / 2 - 100, p_96764_ + p_96765_ * 5, p_69696_, p_42042_).build());
+
+      this.addRenderableWidget(Button.builder(Component.translatable("menu.quit"), (p_280831_) -> {
+         this.minecraft.stop();
+      }).bounds(this.width / 2 - 100, p_96764_ + p_96765_ * 6, p_69696_, p_42042_).build());
    }
 
    @Nullable
@@ -189,9 +189,9 @@ public class TitleScreen extends Screen {
       gfx.blit(PANORAMA_OVERLAY, 0, 0, this.width, this.height, 0.0F, 0.0F, 16, 128, 16, 128);
       gfx.setColor(1.0F, 1.0F, 1.0F, 1.0F);
       float f1 = this.fading ? Mth.clamp(f - 1.0F, 0.0F, 1.0F) : 1.0F;
-      
+
       this.logoRenderer.renderLogo(gfx, this.width, f1);
-      
+
       int i = Mth.ceil(f1 * 255.0F) << 24;
       if ((i & -67108864) != 0) {
          if (this.warningLabel != null) {
@@ -208,17 +208,17 @@ public class TitleScreen extends Screen {
          } else {
             s = s + ("release".equalsIgnoreCase(this.minecraft.getVersionType()) ? "" : "/" + this.minecraft.getVersionType());
          }
-         
-         gfx.drawString(this.font, s, 2, this.height - 10, 16777215 | i);
+
+         //gfx.drawString(this.font, s, 2, this.height - 10, 16777215 | i);
 
          for(GuiEventListener guieventlistener : this.children()) {
             if (guieventlistener instanceof AbstractWidget) {
                ((AbstractWidget)guieventlistener).setAlpha(f1);
             }
          }
-         
-        
-         
+
+
+
          super.render(gfx, p_281753_, p_283539_, p_282628_);
          if (this.realmsNotificationsEnabled() && f1 >= 1.0F) {
             RenderSystem.enableDepthTest();
@@ -226,8 +226,8 @@ public class TitleScreen extends Screen {
          }
 
       }
-      
-      
+
+
    }
 
    public boolean mouseClicked(double p_96735_, double p_96736_, int p_96737_) {
