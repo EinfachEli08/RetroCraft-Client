@@ -33,13 +33,14 @@ _Experience the classic Minecraft menu layout with RetroCraft._
 
 ## Installation
 
-To install RetroCraft into eclipse, follow these simple steps:
+To install RetroCraft into eclipse/Intellij, follow these simple steps:
 
 1.  Clone the latest Code updates from our GitHub repository.
-2.  Import the Project into Eclipse.
-3.  Use Start as the Gradle-Run Option.
-4.  Now you can run and compile the Project.
-5.  Enjoy the nostalgia!
+2.  Import the Project into Eclipse/intellij.
+3.  Use runclient as the Gradle-Run Option.
+4.  Now you can run the Project.
+5.  To compile the project and use it as a jar, go to Gradle -> Tasks -> Build and then run build. After that go to the root foler and run build.bat. now in the RetroCraft folder you will find the jar and a json. Move them into minecravt versions or go to the root and run install.bat
+6.  Enjoy the nostalgia!
 
 
 ## Current Project Status:
