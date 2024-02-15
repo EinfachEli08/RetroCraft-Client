@@ -41,9 +41,9 @@ graphicsMode:1
 ao:true
 prioritizeChunkUpdates:0
 biomeBlendRadius:2
-renderClouds:"true"
-resourcePacks:["file/Plastic Texture Pack","vanilla"]
-incompatibleResourcePacks:["file/Plastic Texture Pack"]
+renderClouds:"false"
+resourcePacks:["vanilla"]
+incompatibleResourcePacks:[]
 lastServer:
 lang:en_us
 soundDevice:""

@@ -1,5 +1,5 @@
 @echo off
-echo BUILD RETROCRAFT
+echo MCP-REBORN BUILD RETROCRAFT
 .\gradlew build
 .\gradlew jar
 

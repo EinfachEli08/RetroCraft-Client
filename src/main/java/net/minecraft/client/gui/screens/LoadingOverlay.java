@@ -72,9 +72,11 @@ public class LoadingOverlay extends Overlay {
          this.fadeInStart = k;
       }
 
-      float f = this.fadeOutStart > -1L ? (float)(k - this.fadeOutStart) / 1000.0F : -1.0F;
-      float f1 = this.fadeInStart > -1L ? (float)(k - this.fadeInStart) / 500.0F : -1.0F;
+      float f = this.fadeOutStart > -1L ? (float) (k - this.fadeOutStart) / 1000.0F : -1.0F;
+      float f1 = this.fadeInStart > -1L ? (float) (k - this.fadeInStart) / 500.0F : -1.0F;
       float f2;
+      float f6 = this.reload.getActualProgress();
+      this.currentProgress = Mth.clamp(this.currentProgress * 0.95F + f6 * 0.050000012F, 0.0F, 1.0F);
       if (f >= 1.0F) {
          if (this.minecraft.screen != null) {
             this.minecraft.screen.render(p_281839_, 0, 0, p_283394_);
@@ -88,37 +90,20 @@ public class LoadingOverlay extends Overlay {
             this.minecraft.screen.render(p_281839_, p_282704_, p_283650_, p_283394_);
          }
 
-         int l1 = Mth.ceil(Mth.clamp((double)f1, 0.15D, 1.0D) * 255.0D);
+         int l1 = Mth.ceil(Mth.clamp((double) f1, 0.15D, 1.0D) * 255.0D);
          p_281839_.fill(RenderType.guiOverlay(), 0, 0, i, j, replaceAlpha(BRAND_BACKGROUND.getAsInt(), l1));
          f2 = Mth.clamp(f1, 0.0F, 1.0F);
       } else {
-         /*int i2 = BRAND_BACKGROUND.getAsInt();
+         /*
+         int i2 = BRAND_BACKGROUND.getAsInt();
          float f3 = (float)(i2 >> 16 & 255) / 255.0F;
          float f4 = (float)(i2 >> 8 & 255) / 255.0F;
-         float f5 = (float)(i2 & 255) / 255.0F;*/
+         float f5 = (float)(i2 & 255) / 255.0F;
+         */
          GlStateManager._clearColor(1, 1, 1, 1);
          GlStateManager._clear(16384, Minecraft.ON_OSX);
          f2 = 1.0F;
       }
-
-      int j2 = (int)((double)p_281839_.guiWidth() * 0.5D);
-/*      RenderSystem.disableDepthTest();
-      RenderSystem.depthMask(false);
-      RenderSystem.enableBlend();
-      RenderSystem.blendFunc(770, 1);*/
-      p_281839_.setColor(1.0F, 1.0F, 1.0F, f2);
-      p_281839_.blit(MOJANG_STUDIOS_LOGO_LOCATION, (int)(i/2 - j/2), 0, 0, 0, j, j, j, j);
-      p_281839_.setColor(1.0F, 1.0F, 1.0F, 1.0F);
- /*     RenderSystem.defaultBlendFunc();
-      RenderSystem.disableBlend();
-      RenderSystem.depthMask(true);
-      RenderSystem.enableDepthTest();*/
-      int k1 = (int)((double)p_281839_.guiHeight() * 0.8325D);
-      float f6 = this.reload.getActualProgress();
-      this.currentProgress = Mth.clamp(this.currentProgress * 0.95F + f6 * 0.050000012F, 0.0F, 1.0F);
-
-
-
       if (this.fadeOutStart == -1L && f6 == 1 && (!this.fadeIn || f1 >= 2.0F)) {
          try {
             this.reload.checkExceptions();
@@ -132,15 +117,24 @@ public class LoadingOverlay extends Overlay {
             this.minecraft.screen.init(this.minecraft, p_281839_.guiWidth(), p_281839_.guiHeight());
          }
 
-         RenderSystem.defaultBlendFunc();
-         RenderSystem.disableBlend();
-         RenderSystem.depthMask(true);
-         RenderSystem.enableDepthTest();
       }
+      RenderSystem.disableDepthTest();
+      RenderSystem.depthMask(false);
+      RenderSystem.enableBlend();
+      //RenderSystem.blendFunc(770, 1);
+
+      p_281839_.setColor(1.0F, 1.0F, 1.0F, f2);
+      p_281839_.blit(MOJANG_STUDIOS_LOGO_LOCATION, (int) (i / 2 - j / 2), 0, 0, 0, j, j, j, j);
+      p_281839_.setColor(1.0F, 1.0F, 1.0F, 1.0F);
+
+      //RenderSystem.defaultBlendFunc();
+      RenderSystem.disableBlend();
+      RenderSystem.depthMask(true);
+      RenderSystem.enableDepthTest();
 
    }
 
-   private void drawProgressBar(GuiGraphics p_283125_, int p_96184_, int p_96185_, int p_96186_, int p_96187_, float p_96188_) {
+/*   private void drawProgressBar(GuiGraphics p_283125_, int p_96184_, int p_96185_, int p_96186_, int p_96187_, float p_96188_) {
       int i = Mth.ceil((float)(p_96186_ - p_96184_ - 2) * this.currentProgress);
       int j = Math.round(p_96188_ * 255.0F);
       int k = FastColor.ARGB32.color(j, 255, 255, 255);
@@ -149,7 +143,7 @@ public class LoadingOverlay extends Overlay {
       p_283125_.fill(p_96184_ + 1, p_96187_, p_96186_ - 1, p_96187_ - 1, k);
       p_283125_.fill(p_96184_, p_96185_, p_96184_ + 1, p_96187_, k);
       p_283125_.fill(p_96186_, p_96185_, p_96186_ - 1, p_96187_, k);
-   }
+   }*/
 
    public boolean isPauseScreen() {
       return true;
