@@ -28,13 +28,14 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class LoadingOverlay extends Overlay {
-   static final ResourceLocation MOJANG_STUDIOS_LOGO_LOCATION = new ResourceLocation("textures/gui/title/mojangstudios.png");
-   private static final int LOGO_BACKGROUND_COLOR = FastColor.ARGB32.color(255, 239, 50, 61);
-   private static final int LOGO_BACKGROUND_COLOR_DARK = FastColor.ARGB32.color(255, 0, 0, 0);
+
+   static final ResourceLocation MOJANG_LOGO = new ResourceLocation("textures/gui/title/mojang.png");
+   static final ResourceLocation FOURJ_LOGO = new ResourceLocation("textures/gui/title/4j.png");
+   private static final int LOGO_BACKGROUND_COLOR = FastColor.ARGB32.color(100, 255, 255, 255);
    private static final IntSupplier BRAND_BACKGROUND = () -> {
-      return Minecraft.getInstance().options.darkMojangStudiosBackground().get() ? LOGO_BACKGROUND_COLOR_DARK : LOGO_BACKGROUND_COLOR;
+      return LOGO_BACKGROUND_COLOR;
    };
-   private static final int LOGO_SCALE = 240;
+   private static final int LOGO_SCALE = 256;
    private static final float LOGO_QUARTER_FLOAT = 60.0F;
    private static final int LOGO_QUARTER = 60;
    private static final int LOGO_HALF = 120;
@@ -49,6 +50,7 @@ public class LoadingOverlay extends Overlay {
    private float currentProgress;
    private long fadeOutStart = -1L;
    private long fadeInStart = -1L;
+   private float stopTimer = 0;
 
    public LoadingOverlay(Minecraft p_96172_, ReloadInstance p_96173_, Consumer<Optional<Throwable>> p_96174_, boolean p_96175_) {
       this.minecraft = p_96172_;
@@ -58,7 +60,7 @@ public class LoadingOverlay extends Overlay {
    }
 
    public static void registerTextures(Minecraft p_96190_) {
-      p_96190_.getTextureManager().register(MOJANG_STUDIOS_LOGO_LOCATION, new LoadingOverlay.LogoTexture());
+      p_96190_.getTextureManager().register(MOJANG_LOGO, new LoadingOverlay.LogoTexture());
    }
 
    private static int replaceAlpha(int p_169325_, int p_169326_) {
@@ -76,6 +78,8 @@ public class LoadingOverlay extends Overlay {
       float f = this.fadeOutStart > -1L ? (float)(k - this.fadeOutStart) / 1000.0F : -1.0F;
       float f1 = this.fadeInStart > -1L ? (float)(k - this.fadeInStart) / 500.0F : -1.0F;
       float f2;
+      float f6 = this.reload.getActualProgress();
+      this.currentProgress = Mth.clamp(this.currentProgress * 0.95F + f6 * 0.050000012F, 0.0F, 1.0F);
       if (f >= 1.0F) {
          if (this.minecraft.screen != null) {
             this.minecraft.screen.render(p_281839_, 0, 0, p_283394_);
@@ -93,39 +97,13 @@ public class LoadingOverlay extends Overlay {
          p_281839_.fill(RenderType.guiOverlay(), 0, 0, i, j, replaceAlpha(BRAND_BACKGROUND.getAsInt(), l1));
          f2 = Mth.clamp(f1, 0.0F, 1.0F);
       } else {
-         int i2 = BRAND_BACKGROUND.getAsInt();
-         float f3 = (float)(i2 >> 16 & 255) / 255.0F;
-         float f4 = (float)(i2 >> 8 & 255) / 255.0F;
-         float f5 = (float)(i2 & 255) / 255.0F;
-         GlStateManager._clearColor(f3, f4, f5, 1.0F);
+         GlStateManager._clearColor(1, 1, 1, 1);
          GlStateManager._clear(16384, Minecraft.ON_OSX);
          f2 = 1.0F;
       }
 
-      int j2 = (int)((double)p_281839_.guiWidth() * 0.5D);
-      int k2 = (int)((double)p_281839_.guiHeight() * 0.5D);
-      double d1 = Math.min((double)p_281839_.guiWidth() * 0.75D, (double)p_281839_.guiHeight()) * 0.25D;
-      int i1 = (int)(d1 * 0.5D);
-      double d0 = d1 * 4.0D;
-      int j1 = (int)(d0 * 0.5D);
-      RenderSystem.disableDepthTest();
-      RenderSystem.depthMask(false);
-      RenderSystem.enableBlend();
-      RenderSystem.blendFunc(770, 1);
-      p_281839_.setColor(1.0F, 1.0F, 1.0F, f2);
-      p_281839_.blit(MOJANG_STUDIOS_LOGO_LOCATION, j2 - j1, k2 - i1, j1, (int)d1, -0.0625F, 0.0F, 120, 60, 120, 120);
-      p_281839_.blit(MOJANG_STUDIOS_LOGO_LOCATION, j2, k2 - i1, j1, (int)d1, 0.0625F, 60.0F, 120, 60, 120, 120);
-      p_281839_.setColor(1.0F, 1.0F, 1.0F, 1.0F);
-      RenderSystem.defaultBlendFunc();
-      RenderSystem.disableBlend();
-      RenderSystem.depthMask(true);
-      RenderSystem.enableDepthTest();
-      int k1 = (int)((double)p_281839_.guiHeight() * 0.8325D);
-      float f6 = this.reload.getActualProgress();
       this.currentProgress = Mth.clamp(this.currentProgress * 0.95F + f6 * 0.050000012F, 0.0F, 1.0F);
-      if (f < 1.0F) {
-         this.drawProgressBar(p_281839_, i / 2 - j1, k1 - 5, i / 2 + j1, k1 + 5, 1.0F - Mth.clamp(f, 0.0F, 1.0F));
-      }
+
 
       if (f >= 2.0F) {
          this.minecraft.setOverlay((Overlay)null);
@@ -145,7 +123,32 @@ public class LoadingOverlay extends Overlay {
          }
       }
 
+      RenderSystem.disableDepthTest();
+      RenderSystem.depthMask(false);
+      RenderSystem.enableBlend();
+      //RenderSystem.blendFunc(770, 1);
+
+      p_281839_.setColor(1.0F, 1.0F, 1.0F, f2);
+
+      if(stopTimer == 0) stopTimer = k;
+
+      if(k - stopTimer > 3000 && f6 > 0.7F){
+         p_281839_.blit(FOURJ_LOGO, i / 2 - LOGO_SCALE/4, j/2 - LOGO_SCALE/4, 0, 0, LOGO_SCALE/2, LOGO_SCALE/2, LOGO_SCALE/2, LOGO_SCALE/2);
+      } else {
+         p_281839_.blit(MOJANG_LOGO, i / 2 - LOGO_SCALE/4, j/2 - LOGO_SCALE/4, 0, 0, LOGO_SCALE/2, LOGO_SCALE/2, LOGO_SCALE/2, LOGO_SCALE/2);
+      }
+      p_281839_.setColor(1.0F, 1.0F, 1.0F, 1.0F);
+      //p_281839_.fill(0, 0, i, j, FastColor.ARGB32.color((int)k/4, 0, 0, 0));
+
+      //RenderSystem.defaultBlendFunc();
+      RenderSystem.disableBlend();
+      RenderSystem.depthMask(true);
+      RenderSystem.enableDepthTest();
    }
+
+   /*
+
+   NEEDS TO BE REUSED FOR LOADING WORLD SCREEN
 
    private void drawProgressBar(GuiGraphics p_283125_, int p_96184_, int p_96185_, int p_96186_, int p_96187_, float p_96188_) {
       int i = Mth.ceil((float)(p_96186_ - p_96184_ - 2) * this.currentProgress);
@@ -158,6 +161,9 @@ public class LoadingOverlay extends Overlay {
       p_283125_.fill(p_96186_, p_96185_, p_96186_ - 1, p_96187_, k);
    }
 
+
+    */
+
    public boolean isPauseScreen() {
       return true;
    }
@@ -165,14 +171,14 @@ public class LoadingOverlay extends Overlay {
    @OnlyIn(Dist.CLIENT)
    static class LogoTexture extends SimpleTexture {
       public LogoTexture() {
-         super(LoadingOverlay.MOJANG_STUDIOS_LOGO_LOCATION);
+         super(LoadingOverlay.MOJANG_LOGO);
       }
 
       protected SimpleTexture.TextureImage getTextureImage(ResourceManager p_96194_) {
          VanillaPackResources vanillapackresources = Minecraft.getInstance().getVanillaPackResources();
-         IoSupplier<InputStream> iosupplier = vanillapackresources.getResource(PackType.CLIENT_RESOURCES, LoadingOverlay.MOJANG_STUDIOS_LOGO_LOCATION);
+         IoSupplier<InputStream> iosupplier = vanillapackresources.getResource(PackType.CLIENT_RESOURCES, LoadingOverlay.MOJANG_LOGO);
          if (iosupplier == null) {
-            return new SimpleTexture.TextureImage(new FileNotFoundException(LoadingOverlay.MOJANG_STUDIOS_LOGO_LOCATION.toString()));
+            return new SimpleTexture.TextureImage(new FileNotFoundException(LoadingOverlay.MOJANG_LOGO.toString()));
          } else {
             try (InputStream inputstream = iosupplier.get()) {
                return new SimpleTexture.TextureImage(new TextureMetadataSection(true, true), NativeImage.read(inputstream));

@@ -29,7 +29,7 @@ public class LogoRenderer {
    }
 
    public void renderLogo(GuiGraphics p_282217_, int p_283270_, float p_282051_) {
-      this.renderLogo(p_282217_, p_283270_, p_282051_, 30);
+      this.renderLogo(p_282217_, p_283270_, p_282051_, 25);
    }
 
    public void renderLogo(GuiGraphics p_281856_, int p_281512_, float p_281290_, int p_282296_) {
