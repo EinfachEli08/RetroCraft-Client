@@ -1,0 +1,62 @@
+{
+  "minecraft:recipes/transportation/acacia_boat": {
+    "criteria": {
+      "in_water": "2023-05-30 15:57:59 +0200"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/oak_boat": {
+    "criteria": {
+      "in_water": "2023-05-30 15:57:59 +0200"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/dark_oak_boat": {
+    "criteria": {
+      "in_water": "2023-05-30 15:57:59 +0200"
+    },
+    "done": true
+  },
+  "minecraft:adventure/root": {
+    "criteria": {
+      "killed_something": "2023-05-30 15:57:15 +0200"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/birch_boat": {
+    "criteria": {
+      "in_water": "2023-05-30 15:57:59 +0200"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/jungle_boat": {
+    "criteria": {
+      "in_water": "2023-05-30 15:57:59 +0200"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/spruce_boat": {
+    "criteria": {
+      "in_water": "2023-05-30 15:57:59 +0200"
+    },
+    "done": true
+  },
+  "minecraft:adventure/adventuring_time": {
+    "criteria": {
+      "minecraft:jungle_edge": "2023-05-30 15:57:39 +0200",
+      "minecraft:forest": "2023-05-30 15:57:45 +0200",
+      "minecraft:mountains": "2023-05-30 15:57:53 +0200",
+      "minecraft:giant_tree_taiga": "2023-05-30 15:58:06 +0200",
+      "minecraft:snowy_tundra": "2023-05-30 15:58:02 +0200",
+      "minecraft:taiga_hills": "2023-05-30 15:58:03 +0200",
+      "minecraft:jungle_hills": "2023-05-30 15:57:38 +0200",
+      "minecraft:river": "2023-05-30 15:57:25 +0200",
+      "minecraft:snowy_taiga": "2023-05-30 15:58:05 +0200",
+      "minecraft:wooded_hills": "2023-05-30 15:58:07 +0200",
+      "minecraft:savanna": "2023-05-30 15:57:27 +0200",
+      "minecraft:plains": "2023-05-30 15:56:59 +0200"
+    },
+    "done": false
+  },
+  "DataVersion": 2730
+}

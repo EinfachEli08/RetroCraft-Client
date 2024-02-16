@@ -15,8 +15,6 @@ public class SplashRenderer {
    public static final SplashRenderer HALLOWEEN = new SplashRenderer("OOoooOOOoooo! Spooky!");
 
    public static final SplashRenderer RETROCRAFT = new SplashRenderer("by EinfachNurEli!");
-   private static final int WIDTH_OFFSET = 123;
-   private static final int HEIGH_OFFSET = 69;
    private final String splash;
 
    public SplashRenderer(String p_283500_) {

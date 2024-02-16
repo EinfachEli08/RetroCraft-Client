@@ -58,9 +58,9 @@ public class SplashManager extends SimplePreparableReloadListener<List<String>> 
       } else if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31) {
          return SplashRenderer.HALLOWEEN;
       } else if (this.splashes.isEmpty()) {
-         return null;
+         return SplashRenderer.RETROCRAFT;
       } else {
-         return this.user != null && RANDOM.nextInt(this.splashes.size()) == 42 ? new SplashRenderer(this.user.getName().toUpperCase(Locale.ROOT) + " IS YOU") : new SplashRenderer(this.splashes.get(RANDOM.nextInt(this.splashes.size())));
+         return RANDOM.nextInt(this.splashes.size()) == 42 ? new SplashRenderer(this.user.getName().toUpperCase(Locale.ROOT) + " IS YOU") : new SplashRenderer(this.splashes.get(RANDOM.nextInt(this.splashes.size())));
       }
    }
 }
