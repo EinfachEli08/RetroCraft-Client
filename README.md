@@ -80,5 +80,6 @@ Thank you for choosing RetroCraft! Let's bring back the nostalgia together.
 
 ## Contributor/s:
 
- - vakdmy06 (AssetInjector)
+ - vakdmy06 (AssetInjector + Pull requests)
+ - Bleisenberg (Porting Demo worlds)
 
