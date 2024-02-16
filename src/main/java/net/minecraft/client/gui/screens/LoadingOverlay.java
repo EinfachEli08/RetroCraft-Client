@@ -146,23 +146,6 @@ public class LoadingOverlay extends Overlay {
       RenderSystem.enableDepthTest();
    }
 
-   /*
-
-   NEEDS TO BE REUSED FOR LOADING WORLD SCREEN
-
-   private void drawProgressBar(GuiGraphics p_283125_, int p_96184_, int p_96185_, int p_96186_, int p_96187_, float p_96188_) {
-      int i = Mth.ceil((float)(p_96186_ - p_96184_ - 2) * this.currentProgress);
-      int j = Math.round(p_96188_ * 255.0F);
-      int k = FastColor.ARGB32.color(j, 255, 255, 255);
-      p_283125_.fill(p_96184_ + 2, p_96185_ + 2, p_96184_ + i, p_96187_ - 2, k);
-      p_283125_.fill(p_96184_ + 1, p_96185_, p_96186_ - 1, p_96185_ + 1, k);
-      p_283125_.fill(p_96184_ + 1, p_96187_, p_96186_ - 1, p_96187_ - 1, k);
-      p_283125_.fill(p_96184_, p_96185_, p_96184_ + 1, p_96187_, k);
-      p_283125_.fill(p_96186_, p_96185_, p_96186_ - 1, p_96187_, k);
-   }
-
-
-    */
 
    public boolean isPauseScreen() {
       return true;

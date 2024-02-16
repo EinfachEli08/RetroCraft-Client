@@ -5,17 +5,23 @@ import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.minecraft.Util;
 import net.minecraft.client.GameNarrator;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.LogoRenderer;
 import net.minecraft.client.gui.narration.NarratedElementType;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.progress.StoringChunkProgressListener;
+import net.minecraft.util.FastColor;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.chunk.ChunkStatus;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
+import java.util.Objects;
+
 @OnlyIn(Dist.CLIENT)
 public class LevelLoadingScreen extends Screen {
+
+   private LogoRenderer logoRenderer;
    private static final long NARRATION_DELAY_MS = 2000L;
    private final StoringChunkProgressListener progressListener;
    private long lastNarration = -1L;
@@ -39,6 +45,7 @@ public class LevelLoadingScreen extends Screen {
    public LevelLoadingScreen(StoringChunkProgressListener p_96143_) {
       super(GameNarrator.NO_TITLE);
       this.progressListener = p_96143_;
+
    }
 
    public boolean shouldCloseOnEsc() {
@@ -68,19 +75,50 @@ public class LevelLoadingScreen extends Screen {
       return Mth.clamp(this.progressListener.getProgress(), 0, 100) + "%";
    }
 
-   public void render(GuiGraphics p_283534_, int p_96146_, int p_96147_, float p_96148_) {
-      this.renderBackground(p_283534_);
+   protected void init(){
+      this.logoRenderer = new LogoRenderer(false);
+   }
+   public void render(GuiGraphics gfx, int p_96146_, int p_96147_, float p_96148_) {
+
+      this.renderBackground(gfx);
+      this.logoRenderer.renderLogo(gfx, this.width, 2);
+
+
+      double d1 = Math.min((double)gfx.guiWidth() * 0.75D, gfx.guiHeight()) * 0.25D;
+      double d0 = d1 * 4.0D;
+      int j1 = (int)(d0 * 0.5D);
+      int k1 = (int) ((int)((double)gfx.guiHeight())/1.8);
+
+
+
+      gfx.drawString(this.font, this.getFormattedProgress(), gfx.guiWidth() / 2 - j1, k1 - 14, 16777215);
+
+      //TODO: Fix overscaling issue
+      this.drawProgressBar(gfx, gfx.guiWidth() / 2 - j1, k1 - 5, gfx.guiWidth() / 2 + j1, k1 + 5, 255);
+
+
+
+      /*
       long i = Util.getMillis();
       if (i - this.lastNarration > 2000L) {
          this.lastNarration = i;
          this.triggerImmediateNarration(true);
       }
 
-      int j = this.width / 2;
-      int k = this.height / 2;
-      int l = 30;
-      renderChunks(p_283534_, this.progressListener, j, k + 30, 2, 0);
-      p_283534_.drawCenteredString(this.font, this.getFormattedProgress(), j, k - 9 / 2 - 30, 16777215);
+
+      */
+
+   }
+   private void drawProgressBar(GuiGraphics gfx, int xPos, int yPos, int width, int height, int opacity) {
+
+      int i = Mth.ceil((float)(width - xPos -2) * ((float) Mth.clamp(this.progressListener.getProgress(), 0, 100) / 100));
+
+      int k = FastColor.ARGB32.color(opacity, 109, 109, 109);
+      int f = FastColor.ARGB32.color(opacity, 1, 255, 0);
+
+      gfx.fill(xPos, yPos, width ,  height, k);
+      gfx.fill(xPos + 2, yPos + 2, xPos + i  ,  height - 2, f);
+
    }
 
    public static void renderChunks(GuiGraphics p_283467_, StoringChunkProgressListener p_96151_, int p_96152_, int p_96153_, int p_96154_, int p_96155_) {
