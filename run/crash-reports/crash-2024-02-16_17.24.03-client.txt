@@ -1,0 +1,99 @@
+---- Minecraft Crash Report ----
+// Hi. I'm Minecraft, and I'm a crashaholic.
+
+Time: 2024-02-16 17:24:03
+Description: Rendering screen
+
+java.lang.NullPointerException: Cannot invoke "net.minecraft.client.gui.components.LogoRenderer.renderLogo(net.minecraft.client.gui.GuiGraphics, int, float)" because "this.logoRenderer" is null
+	at net.minecraft.client.gui.screens.OptionsScreen.render(OptionsScreen.java:181)
+	at net.minecraft.client.gui.screens.Screen.renderWithTooltip(Screen.java:112)
+	at net.minecraft.client.renderer.GameRenderer.render(GameRenderer.java:951)
+	at net.minecraft.client.Minecraft.runTick(Minecraft.java:1119)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:709)
+	at net.minecraft.client.main.Main.main(Main.java:218)
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Thread: Render thread
+Stacktrace:
+	at net.minecraft.client.gui.screens.OptionsScreen.render(OptionsScreen.java:181)
+	at net.minecraft.client.gui.screens.Screen.renderWithTooltip(Screen.java:112)
+
+-- Screen render details --
+Details:
+	Screen name: net.minecraft.client.gui.screens.OptionsScreen
+	Mouse location: Scaled: (293, 196). Absolute: (586.000000, 392.000000)
+	Screen size: Scaled: (570, 321). Absolute: (1140, 641). Scale factor of 2.000000
+Stacktrace:
+	at net.minecraft.client.renderer.GameRenderer.render(GameRenderer.java:951)
+	at net.minecraft.client.Minecraft.runTick(Minecraft.java:1119)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:709)
+	at net.minecraft.client.main.Main.main(Main.java:218)
+
+-- Last reload --
+Details:
+	Reload number: 1
+	Reload reason: initial
+	Finished: Yes
+	Packs: vanilla, file/Plastic Texture Pack
+Stacktrace:
+	at net.minecraft.client.ResourceLoadStateTracker.fillCrashReport(ResourceLoadStateTracker.java:51)
+	at net.minecraft.client.Minecraft.fillReport(Minecraft.java:2279)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:726)
+	at net.minecraft.client.main.Main.main(Main.java:218)
+
+-- System Details --
+Details:
+	Minecraft Version: 1.20.1
+	Minecraft Version ID: 1.20.1
+	Operating System: Windows 11 (amd64) version 10.0
+	Java Version: 17.0.10, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode, sharing), Oracle Corporation
+	Memory: 289848176 bytes (276 MiB) / 536870912 bytes (512 MiB) up to 8581545984 bytes (8184 MiB)
+	CPUs: 8
+	Processor Vendor: GenuineIntel
+	Processor Name: Intel(R) Core(TM) i7-6700K CPU @ 4.00GHz
+	Identifier: Intel64 Family 6 Model 94 Stepping 3
+	Microarchitecture: Skylake (Client)
+	Frequency (GHz): 4.01
+	Number of physical packages: 1
+	Number of physical CPUs: 4
+	Number of logical CPUs: 8
+	Graphics card #0 name: AMD Radeon RX 6500 XT
+	Graphics card #0 vendor: Advanced Micro Devices, Inc. (0x1002)
+	Graphics card #0 VRAM (MB): 4080.00
+	Graphics card #0 deviceId: 0x743f
+	Graphics card #0 versionInfo: DriverVersion=31.0.12027.9001
+	Memory slot #0 capacity (MB): 8192.00
+	Memory slot #0 clockSpeed (GHz): 2.13
+	Memory slot #0 type: DDR4
+	Memory slot #1 capacity (MB): 8192.00
+	Memory slot #1 clockSpeed (GHz): 2.13
+	Memory slot #1 type: DDR4
+	Memory slot #2 capacity (MB): 8192.00
+	Memory slot #2 clockSpeed (GHz): 2.13
+	Memory slot #2 type: DDR4
+	Memory slot #3 capacity (MB): 8192.00
+	Memory slot #3 clockSpeed (GHz): 2.13
+	Memory slot #3 type: DDR4
+	Virtual memory max (MB): 37596.82
+	Virtual memory used (MB): 15026.39
+	Swap memory total (MB): 4864.00
+	Swap memory used (MB): 0.00
+	JVM Flags: 0 total; 
+	Launched Version: 1.20.1
+	Backend library: LWJGL version 3.3.1 build 7
+	Backend API: AMD Radeon(TM) RX 6500 XT GL version 3.2.0 Core Profile Context 22.20.27.09.230330, ATI Technologies Inc.
+	Window size: 1140x641
+	GL Caps: Using framebuffer using OpenGL 3.2
+	GL debug messages: 
+	Using VBOs: Yes
+	Is Modded: Very likely; Client jar signature invalidated
+	Type: Client (map_client.txt)
+	Graphics mode: fancy
+	Resource Packs: vanilla, file/Plastic Texture Pack (incompatible)
+	Current Language: en_us
+	CPU: 8x Intel(R) Core(TM) i7-6700K CPU @ 4.00GHz

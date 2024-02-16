@@ -63,10 +63,6 @@ public class PauseScreen extends Screen {
 
    }
 
-   public static CompletableFuture<Void> preloadResources(TextureManager p_96755_, Executor p_96756_) {
-	      return CompletableFuture.allOf(p_96755_.preload(LogoRenderer.MINECRAFT_LOGO, p_96756_), p_96755_.preload(LogoRenderer.MINECRAFT_EDITION, p_96756_));
-	   }
-   
    private void createPauseMenu() {
       GridLayout gridlayout = new GridLayout();
       gridlayout.defaultCellSetting().padding(4, 4, 4, 0);

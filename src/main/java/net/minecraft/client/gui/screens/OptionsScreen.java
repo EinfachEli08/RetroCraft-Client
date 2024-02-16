@@ -7,6 +7,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.CycleButton;
 import net.minecraft.client.gui.components.LockIconButton;
+import net.minecraft.client.gui.components.LogoRenderer;
 import net.minecraft.client.gui.layouts.FrameLayout;
 import net.minecraft.client.gui.layouts.GridLayout;
 import net.minecraft.client.gui.layouts.LayoutElement;
@@ -36,11 +37,14 @@ public class OptionsScreen extends Screen {
    private static final Component ACCESSIBILITY = Component.translatable("options.accessibility.title");
    private static final Component TELEMETRY = Component.translatable("options.telemetry");
    private static final Component CREDITS_AND_ATTRIBUTION = Component.translatable("options.credits_and_attribution");
-   private static final int COLUMNS = 2;
+
+   private static final Component OPTIONS = Component.translatable("menu.options");
+
    private final Screen lastScreen;
    private final Options options;
    private CycleButton<Difficulty> difficultyButton;
    private LockIconButton lockButton;
+   private LogoRenderer logoRenderer;
 
    public OptionsScreen(Screen p_96242_, Options p_96243_) {
       super(Component.translatable("options.title"));
@@ -49,47 +53,75 @@ public class OptionsScreen extends Screen {
    }
 
    protected void init() {
+
+      this.logoRenderer = new LogoRenderer(false);
+
       GridLayout gridlayout = new GridLayout();
-      gridlayout.defaultCellSetting().paddingHorizontal(5).paddingBottom(4).alignHorizontallyCenter();
-      GridLayout.RowHelper gridlayout$rowhelper = gridlayout.createRowHelper(2);
-      gridlayout$rowhelper.addChild(this.options.fov().createButton(this.minecraft.options, 0, 0, 150));
+      gridlayout.defaultCellSetting().padding(4, 4, 4, 0);
+      GridLayout.RowHelper gridlayout$rowhelper = gridlayout.createRowHelper(1);
+/*
+      gridlayout$rowhelper.addChild(this.options.fov().createButton(this.minecraft.options, 0, 0, 210));
       gridlayout$rowhelper.addChild(this.createOnlineButton());
-      gridlayout$rowhelper.addChild(SpacerElement.height(26), 2);
+*/
       gridlayout$rowhelper.addChild(this.openScreenButton(SKIN_CUSTOMIZATION, () -> {
          return new SkinCustomizationScreen(this, this.options);
       }));
-      gridlayout$rowhelper.addChild(this.openScreenButton(SOUNDS, () -> {
-         return new SoundOptionsScreen(this, this.options);
+
+      gridlayout$rowhelper.addChild(this.openScreenButton(ACCESSIBILITY, () -> {
+         return new AccessibilityOptionsScreen(this, this.options);
       }));
-      gridlayout$rowhelper.addChild(this.openScreenButton(VIDEO, () -> {
-         return new VideoSettingsScreen(this, this.options);
+
+      gridlayout$rowhelper.addChild(this.openScreenButton(OPTIONS, () -> {
+
+         // There should be a sub menu in here
+
+         return new MoreOptionsScreen(this, this.options);
       }));
+
       gridlayout$rowhelper.addChild(this.openScreenButton(CONTROLS, () -> {
          return new ControlsScreen(this, this.options);
       }));
+
+      gridlayout$rowhelper.addChild(this.openScreenButton(CREDITS_AND_ATTRIBUTION, () -> {
+         return new CreditsAndAttributionScreen(this);
+      }));
+
+      gridlayout$rowhelper.addChild(Button.builder(CommonComponents.GUI_DONE, (p_280809_) -> {
+         this.minecraft.setScreen(this.lastScreen);
+      }).width(210).build(), 1);
+
+      /*
+
+      Sub-Menu stuff
+
+      gridlayout$rowhelper.addChild(this.openScreenButton(SOUNDS, () -> {
+         return new SoundOptionsScreen(this, this.options);
+      }));
+
+      gridlayout$rowhelper.addChild(this.openScreenButton(VIDEO, () -> {
+         return new VideoSettingsScreen(this, this.options);
+      }));
+
       gridlayout$rowhelper.addChild(this.openScreenButton(LANGUAGE, () -> {
          return new LanguageSelectScreen(this, this.options, this.minecraft.getLanguageManager());
       }));
+
       gridlayout$rowhelper.addChild(this.openScreenButton(CHAT, () -> {
          return new ChatOptionsScreen(this, this.options);
       }));
       gridlayout$rowhelper.addChild(this.openScreenButton(RESOURCEPACK, () -> {
          return new PackSelectionScreen(this.minecraft.getResourcePackRepository(), this::applyPacks, this.minecraft.getResourcePackDirectory(), Component.translatable("resourcePack.title"));
       }));
-      gridlayout$rowhelper.addChild(this.openScreenButton(ACCESSIBILITY, () -> {
-         return new AccessibilityOptionsScreen(this, this.options);
-      }));
+
       gridlayout$rowhelper.addChild(this.openScreenButton(TELEMETRY, () -> {
          return new TelemetryInfoScreen(this, this.options);
       }));
-      gridlayout$rowhelper.addChild(this.openScreenButton(CREDITS_AND_ATTRIBUTION, () -> {
-         return new CreditsAndAttributionScreen(this);
-      }));
-      gridlayout$rowhelper.addChild(Button.builder(CommonComponents.GUI_DONE, (p_280809_) -> {
-         this.minecraft.setScreen(this.lastScreen);
-      }).width(200).build(), 2, gridlayout$rowhelper.newCellSettings().paddingTop(6));
+
+
+
+*/
       gridlayout.arrangeElements();
-      FrameLayout.alignInRectangle(gridlayout, 0, this.height / 6 - 12, this.width, this.height, 0.5F, 0.0F);
+      FrameLayout.alignInRectangle(gridlayout, 0, 0, this.width, this.height, 0.5F, 0.5F);
       gridlayout.visitWidgets(this::addRenderableWidget);
    }
 
@@ -105,14 +137,16 @@ public class OptionsScreen extends Screen {
             this.lockButton = new LockIconButton(0, 0, (p_280806_) -> {
                this.minecraft.setScreen(new ConfirmScreen(this::lockCallback, Component.translatable("difficulty.lock.title"), Component.translatable("difficulty.lock.question", this.minecraft.level.getLevelData().getDifficulty().getDisplayName())));
             });
-            this.difficultyButton.setWidth(this.difficultyButton.getWidth() - this.lockButton.getWidth());
+            this.difficultyButton.setWidth(210);
             this.lockButton.setLocked(this.minecraft.level.getLevelData().isDifficultyLocked());
             this.lockButton.active = !this.lockButton.isLocked();
             this.difficultyButton.active = !this.lockButton.isLocked();
-            LinearLayout linearlayout = new LinearLayout(150, 0, LinearLayout.Orientation.HORIZONTAL);
-            linearlayout.addChild(this.difficultyButton);
-            linearlayout.addChild(this.lockButton);
-            return linearlayout;
+            GridLayout gl = new GridLayout(210, 0);
+            gl.defaultCellSetting().padding(0, 4, 4, 0);
+            GridLayout.RowHelper gridlayout$rowhelper = gl.createRowHelper(1);
+            gridlayout$rowhelper.addChild(this.difficultyButton);
+            gridlayout$rowhelper.addChild(this.lockButton);
+            return gridlayout$rowhelper.getGrid();
          } else {
             this.difficultyButton.active = false;
             return this.difficultyButton;
@@ -120,7 +154,7 @@ public class OptionsScreen extends Screen {
       } else {
          return Button.builder(Component.translatable("options.online"), (p_280805_) -> {
             this.minecraft.setScreen(OnlineOptionsScreen.createOnlineOptionsScreen(this.minecraft, this, this.options));
-         }).bounds(this.width / 2 + 5, this.height / 6 - 12 + 24, 150, 20).build();
+         }).bounds(this.width / 2 + 5, this.height / 6 - 12 + 24, 210, 20).build();
       }
    }
 
@@ -145,15 +179,15 @@ public class OptionsScreen extends Screen {
       this.options.save();
    }
 
-   public void render(GuiGraphics p_283520_, int p_281826_, int p_283378_, float p_281975_) {
-      this.renderBackground(p_283520_);
-      p_283520_.drawCenteredString(this.font, this.title, this.width / 2, 15, 16777215);
-      super.render(p_283520_, p_281826_, p_283378_, p_281975_);
+   public void render(GuiGraphics gfx, int p_281826_, int p_283378_, float p_281975_) {
+      this.renderBackground(gfx);
+      this.logoRenderer.renderLogo(gfx, this.width, 2);
+      super.render(gfx, p_281826_, p_283378_, p_281975_);
    }
 
    private Button openScreenButton(Component p_261565_, Supplier<Screen> p_262119_) {
       return Button.builder(p_261565_, (p_280808_) -> {
          this.minecraft.setScreen(p_262119_.get());
-      }).build();
+      }).width(210).build();
    }
 }
