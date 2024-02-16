@@ -38,7 +38,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class TitleScreen extends Screen {
-   public static final Component COPYRIGHT_TEXT = Component.literal("Copyright Mojang AB. Do not distribute!");
    public static final CubeMap CUBE_MAP = new CubeMap(new ResourceLocation("textures/gui/title/background/panorama"));
    private static final ResourceLocation PANORAMA_OVERLAY = new ResourceLocation("textures/gui/title/background/panorama_overlay.png");
    @Nullable
@@ -202,22 +201,11 @@ public class TitleScreen extends Screen {
             this.splash.render(gfx, this.width, this.font, i);
          }
 
-         String s = "Minecraft " + SharedConstants.getCurrentVersion().getName();
-         if (this.minecraft.isDemo()) {
-            s = s + " Demo";
-         } else {
-            s = s + ("release".equalsIgnoreCase(this.minecraft.getVersionType()) ? "" : "/" + this.minecraft.getVersionType());
-         }
-
-         //gfx.drawString(this.font, s, 2, this.height - 10, 16777215 | i);
-
          for(GuiEventListener guieventlistener : this.children()) {
             if (guieventlistener instanceof AbstractWidget) {
                ((AbstractWidget)guieventlistener).setAlpha(f1);
             }
          }
-
-
 
          super.render(gfx, p_281753_, p_283539_, p_282628_);
          if (this.realmsNotificationsEnabled() && f1 >= 1.0F) {
@@ -261,4 +249,7 @@ public class TitleScreen extends Screen {
          this.label.renderCentered(p_281783_, this.x, this.y, 9, 16777215 | p_281383_);
       }
    }
+
+
+
 }
