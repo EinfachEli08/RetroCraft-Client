@@ -184,8 +184,8 @@ public class GuiGraphics {
       RenderSystem.setShaderColor(p_281272_, p_281734_, p_282022_, p_281752_);
    }
 
-   public void fill(int p_282988_, int p_282861_, int p_281278_, int p_281710_, int p_281470_) {
-      this.fill(p_282988_, p_282861_, p_281278_, p_281710_, 0, p_281470_);
+   public void fill(int x, int y, int width, int height, int color) {
+      this.fill(x, y, width, height, 0, color);
    }
 
    public void fill(int p_281437_, int p_283660_, int p_282606_, int p_283413_, int p_283428_, int p_283253_) {
