@@ -1,6 +1,7 @@
 package net.minecraft.client.renderer;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -11,8 +12,8 @@ public class PanoramaRenderer {
    private float spin;
    private float bob;
 
-   public PanoramaRenderer(CubeMap p_110002_) {
-      this.cubeMap = p_110002_;
+   public PanoramaRenderer() {
+      this.cubeMap = new CubeMap(new ResourceLocation("textures/gui/title/background/panorama"));
       this.minecraft = Minecraft.getInstance();
    }
 

@@ -6,10 +6,10 @@ echo Opening jar
 ren RetroCraft*.jar game.zip
 
 echo injecting assets...
-..\..\7z.exe a game.zip ..\..\src\main\java\assets\ > log.txt
+..\..\7z.exe a game.zip ..\..\src\main\resources\assets\ > log.txt
 
 echo injecting data...
-..\..\7z.exe a game.zip ..\..\src\main\java\data\ > log.txt
+..\..\7z.exe a game.zip ..\..\src\main\resources\data\ > log.txt
 del log.txt
 
 echo Closing jar

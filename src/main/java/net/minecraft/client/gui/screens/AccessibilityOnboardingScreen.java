@@ -23,7 +23,7 @@ public class AccessibilityOnboardingScreen extends Screen {
    private static final Component ONBOARDING_NARRATOR_MESSAGE = Component.translatable("accessibility.onboarding.screen.narrator");
    private static final int PADDING = 4;
    private static final int TITLE_PADDING = 16;
-   private final PanoramaRenderer panorama = new PanoramaRenderer(TitleScreen.CUBE_MAP);
+   private final PanoramaRenderer panorama = new PanoramaRenderer();
    private final LogoRenderer logoRenderer;
    private final Options options;
    private final boolean narratorAvailable;
