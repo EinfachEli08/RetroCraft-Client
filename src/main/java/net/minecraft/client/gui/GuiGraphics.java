@@ -269,11 +269,11 @@ public class GuiGraphics {
       return this.drawString(p_282003_, p_281403_, p_282714_, p_282041_, p_281908_, true);
    }
 
-   public int drawString(Font p_283343_, @Nullable String p_281896_, int p_283569_, int p_283418_, int p_281560_, boolean p_282130_) {
+   public int drawString(Font p_283343_, @Nullable String p_281896_, int p_283569_, int p_283418_, int color, boolean p_282130_) {
       if (p_281896_ == null) {
          return 0;
       } else {
-         int i = p_283343_.drawInBatch(p_281896_, (float)p_283569_, (float)p_283418_, p_281560_, p_282130_, this.pose.last().pose(), this.bufferSource, Font.DisplayMode.NORMAL, 0, 15728880, p_283343_.isBidirectional());
+         int i = p_283343_.drawInBatch(p_281896_, (float)p_283569_, (float)p_283418_, color, p_282130_, this.pose.last().pose(), this.bufferSource, Font.DisplayMode.NORMAL, 0, 15728880, p_283343_.isBidirectional());
          this.flushIfUnmanaged();
          return i;
       }

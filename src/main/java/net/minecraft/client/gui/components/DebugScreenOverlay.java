@@ -7,6 +7,8 @@ import com.mojang.datafixers.DataFixUtils;
 import it.unimi.dsi.fastutil.longs.LongSet;
 import it.unimi.dsi.fastutil.longs.LongSets;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
+
+import java.awt.*;
 import java.lang.management.GarbageCollectorMXBean;
 import java.lang.management.ManagementFactory;
 import java.util.EnumMap;
@@ -141,28 +143,19 @@ public class DebugScreenOverlay {
    private void renderLines(GuiGraphics p_286519_, List<String> p_286665_, boolean p_286644_) {
       int i = 9;
 
-      for(int j = 0; j < p_286665_.size(); ++j) {
-         String s = p_286665_.get(j);
-         if (!Strings.isNullOrEmpty(s)) {
-            int k = this.font.width(s);
-            int l = p_286644_ ? 2 : p_286519_.guiWidth() - 2 - k;
-            int i1 = 2 + i * j;
-            p_286519_.fill(l - 1, i1 - 1, l + k + 1, i1 + i - 1, -1873784752);
-            p_286519_.drawString(this.font, s, l, i, 14737632, false);
-         }
-      }
-
-      /*
       for(int j1 = 0; j1 < p_286665_.size(); ++j1) {
          String s1 = p_286665_.get(j1);
          if (!Strings.isNullOrEmpty(s1)) {
             int k1 = this.font.width(s1);
             int l1 = p_286644_ ? 2 : p_286519_.guiWidth() - 2 - k1;
             int i2 = 2 + i * j1;
-            p_286519_.drawString(this.font, s1, l1, i2, 14737632, false);
+            int k = this.font.width(s1);
+            int l = p_286644_ ? 2 : p_286519_.guiWidth() - 2 - k;
+            int i1 = 2 + i * j1;
+            p_286519_.fill(l - 1, i1 - 1, l + k + 1, i1 + i - 1, -1873784752);
+            p_286519_.drawString(this.font, s1, l1, i2, Color.white.getRGB(), false);
          }
       }
-      */
 
    }
 

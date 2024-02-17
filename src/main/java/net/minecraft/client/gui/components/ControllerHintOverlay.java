@@ -2,6 +2,8 @@ package net.minecraft.client.gui.components;
 
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
+
+import java.awt.*;
 import java.util.List;
 import java.util.Arrays;
 import java.util.Collections;
@@ -45,8 +47,8 @@ public class ControllerHintOverlay {
         gfx.blit(BUTTONS_SHEET, (int)posX, (int)posY, (button > 7 ? button  - 8 : button)*ICON_SIZE, button > 7 ? ICON_SIZE : 0, ICON_SIZE, ICON_SIZE,128,128);
         //gfx.blit(BUTTONS_SHEET, (int)posX-ICON_SIZE/2, (int)posY-ICON_SIZE/2, (button > 7 ? button - 8: button)*32, button > 7 ? ICON_SIZE*2 : 0, 32, 32,256,256);
 
-        gfx.setColor(1.0F, 1.0F, 1.0F, 1.0F);
-        gfx.drawString(this.font, s, (int)posX + 20, (int)posY+ICON_SIZE/4, 14737632, true);
+        //gfx.setColor(1.0F, 1.0F, 1.0F, 1.0F);
+        gfx.drawString(this.font, s, (int)posX + 20, (int)posY+ICON_SIZE/4, Color.white.getRGB(), true);
 
         totalWidth += this.font.width(s) + 30;
     }
