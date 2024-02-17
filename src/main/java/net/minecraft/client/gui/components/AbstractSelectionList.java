@@ -193,12 +193,12 @@ public abstract class AbstractSelectionList<E extends AbstractSelectionList.Entr
       int i = this.getScrollbarPosition();
       int j = i + 6;
       this.hovered = this.isMouseOver((double)p_283242_, (double)p_282891_) ? this.getEntryAtPosition((double)p_283242_, (double)p_282891_) : null;
-      if (this.renderBackground) {
+      /*if (this.renderBackground) {
          p_282708_.setColor(0.125F, 0.125F, 0.125F, 1.0F);
          int k = 32;
          p_282708_.blit(Screen.BACKGROUND_LOCATION, this.x0, this.y0, (float)this.x1, (float)(this.y1 + (int)this.getScrollAmount()), this.x1 - this.x0, this.y1 - this.y0, 32, 32);
          p_282708_.setColor(1.0F, 1.0F, 1.0F, 1.0F);
-      }
+      }*/
 
       int l1 = this.getRowLeft();
       int l = this.y0 + 4 - (int)this.getScrollAmount();
@@ -209,7 +209,7 @@ public abstract class AbstractSelectionList<E extends AbstractSelectionList.Entr
 
       this.renderList(p_282708_, p_283242_, p_282891_, p_283683_);
       p_282708_.disableScissor();
-      if (this.renderTopAndBottom) {
+      /*if (this.renderTopAndBottom) {
          int i1 = 32;
          p_282708_.setColor(0.25F, 0.25F, 0.25F, 1.0F);
          p_282708_.blit(Screen.BACKGROUND_LOCATION, this.x0, 0, 0.0F, 0.0F, this.width, this.y0, 32, 32);
@@ -218,7 +218,7 @@ public abstract class AbstractSelectionList<E extends AbstractSelectionList.Entr
          int j1 = 4;
          p_282708_.fillGradient(RenderType.guiOverlay(), this.x0, this.y0, this.x1, this.y0 + 4, -16777216, 0, 0);
          p_282708_.fillGradient(RenderType.guiOverlay(), this.x0, this.y1 - 4, this.x1, this.y1, 0, -16777216, 0);
-      }
+      }*/
 
       int i2 = this.getMaxScroll();
       if (i2 > 0) {

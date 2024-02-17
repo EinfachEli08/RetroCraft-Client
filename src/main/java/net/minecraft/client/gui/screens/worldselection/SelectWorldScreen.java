@@ -76,6 +76,7 @@ public class SelectWorldScreen extends Screen {
    }
 
    public void render(GuiGraphics p_282382_, int p_281534_, int p_281859_, float p_283289_) {
+      this.renderBackground(p_282382_);
       this.list.render(p_282382_, p_281534_, p_281859_, p_283289_);
       this.searchBox.render(p_282382_, p_281534_, p_281859_, p_283289_);
       p_282382_.drawCenteredString(this.font, this.title, this.width / 2, 8, 16777215);

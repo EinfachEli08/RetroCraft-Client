@@ -69,7 +69,7 @@ public class LoadingOverlay extends Overlay {
          this.fadeInStart = k;
       }
 
-      float f = this.fadeOutStart > -1L ? (float)(k - this.fadeOutStart) / 1.0F : -1.0F;
+      float f = this.fadeOutStart > -1L ? (float)(k - this.fadeOutStart) / 10.0F : -1.0F;
       float f1 = this.fadeInStart > -1L ? (float)(k - this.fadeInStart) / 500.0F : -1.0F;
       float f2;
       float f6 = this.reload.getActualProgress();

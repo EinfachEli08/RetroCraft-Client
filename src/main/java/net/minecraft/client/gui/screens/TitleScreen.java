@@ -186,12 +186,9 @@ public class TitleScreen extends Screen {
       }
 
       float f = this.fading ? (float)(Util.getMillis() - this.fadeInStart) / 1000.0F : 1.0F;
-      this.panorama.render(p_282628_, Mth.clamp(f, 0.0F, 1.0F));
-      RenderSystem.enableBlend();
-      gfx.setColor(1.0F, 1.0F, 1.0F, this.fading ? (float)Mth.ceil(Mth.clamp(f, 0.0F, 1.0F)) : 1.0F);
-      gfx.blit(PANORAMA_OVERLAY, 0, 0, this.width, this.height, 0.0F, 0.0F, 16, 128, 16, 128);
-      gfx.setColor(1.0F, 1.0F, 1.0F, 1.0F);
       float f1 = this.fading ? Mth.clamp(f - 1.0F, 0.0F, 1.0F) : 1.0F;
+
+      this.renderBackground(gfx);
 
       this.logoRenderer.renderLogo(gfx, this.width, f1);
 

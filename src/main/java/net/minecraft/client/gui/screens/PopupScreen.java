@@ -56,7 +56,7 @@ public class PopupScreen extends Screen {
    }
 
    public void render(GuiGraphics p_283167_, int p_96350_, int p_96351_, float p_96352_) {
-      this.renderDirtBackground(p_283167_);
+      this.renderBackground(p_283167_);
       p_283167_.drawCenteredString(this.font, this.title, this.width / 2, this.contentTop - 9 * 2, -1);
       this.messageLines.renderCentered(p_283167_, this.width / 2, this.contentTop);
       super.render(p_283167_, p_96350_, p_96351_, p_96352_);
