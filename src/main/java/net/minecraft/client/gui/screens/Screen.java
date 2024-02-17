@@ -67,7 +67,6 @@ public abstract class Screen extends AbstractContainerEventHandler implements Re
    private static final Set<String> ALLOWED_PROTOCOLS = Sets.newHashSet("http", "https");
    private static final Component USAGE_NARRATION = Component.translatable("narrator.screen.usage");
    public static final ResourceLocation BACKGROUND_LOCATION = new ResourceLocation("textures/gui/options_background.png");
-   public static final CubeMap CUBE_MAP = new CubeMap(new ResourceLocation("textures/gui/title/background/panorama"));
    public static final ResourceLocation PANORAMA_OVERLAY = new ResourceLocation("textures/gui/title/background/panorama_overlay.png");
    protected final Component title;
    private final List<GuiEventListener> children = Lists.newArrayList();
@@ -93,7 +92,7 @@ public abstract class Screen extends AbstractContainerEventHandler implements Re
    private NarratableEntry lastNarratable;
    @Nullable
    private Screen.DeferredTooltipRendering deferredTooltipRendering;
-   private final PanoramaRenderer panorama = new PanoramaRenderer(CUBE_MAP);
+   private final PanoramaRenderer panorama = new PanoramaRenderer();
 
    protected final Executor screenExecutor = (p_289626_) -> {
       this.minecraft.execute(() -> {
@@ -418,7 +417,7 @@ public abstract class Screen extends AbstractContainerEventHandler implements Re
          p_283688_.fillGradient(0, 0, this.width, this.height, -1072689136, -804253680);
       } else {
 
-         this.panorama.render(1, 0.4F);
+         this.panorama.render(0.5F, 1);
          //RenderSystem.enableBlend();
          p_283688_.setColor(0.25F, 0.25F, 0.25F, 1.0F);
          p_283688_.blit(PANORAMA_OVERLAY, 0, 0, this.width, this.height, 0.0F, 0.0F, 16, 128, 16, 128);

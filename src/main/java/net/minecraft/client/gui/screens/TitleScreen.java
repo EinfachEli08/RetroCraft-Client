@@ -38,13 +38,10 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class TitleScreen extends Screen {
-
-   private static final ResourceLocation PANORAMA_OVERLAY = new ResourceLocation("textures/gui/title/background/panorama_overlay.png");
    @Nullable
    private SplashRenderer splash;
    @Nullable
    private RealmsNotificationsScreen realmsNotificationsScreen;
-   private final PanoramaRenderer panorama = new PanoramaRenderer();
    private final boolean fading;
    private long fadeInStart;
    @Nullable
