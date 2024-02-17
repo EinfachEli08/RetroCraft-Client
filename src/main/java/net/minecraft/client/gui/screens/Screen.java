@@ -4,6 +4,7 @@ import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.mojang.blaze3d.platform.InputConstants;
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.logging.LogUtils;
 import java.io.File;
 import java.net.URI;
@@ -45,6 +46,8 @@ import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipPositione
 import net.minecraft.client.gui.screens.inventory.tooltip.DefaultTooltipPositioner;
 import net.minecraft.client.player.controller.ControllerInput;
 import net.minecraft.client.player.controller.MouseSimulator;
+import net.minecraft.client.renderer.CubeMap;
+import net.minecraft.client.renderer.PanoramaRenderer;
 import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
@@ -87,7 +90,11 @@ public abstract class Screen extends AbstractContainerEventHandler implements Re
    private NarratableEntry lastNarratable;
    @Nullable
    private Screen.DeferredTooltipRendering deferredTooltipRendering;
-   
+   public static final CubeMap CUBE_MAP = new CubeMap(new ResourceLocation("textures/gui/title/background/panorama"));
+   private static final ResourceLocation PANORAMA_OVERLAY = new ResourceLocation("textures/gui/title/background/panorama_overlay.png");
+   @Nullable
+   private final PanoramaRenderer panorama = new PanoramaRenderer(CUBE_MAP);
+
    protected final Executor screenExecutor = (p_289626_) -> {
       this.minecraft.execute(() -> {
          if (this.minecraft.screen == this) {
@@ -410,16 +417,27 @@ public abstract class Screen extends AbstractContainerEventHandler implements Re
       if (this.minecraft.level != null) {
          p_283688_.fillGradient(0, 0, this.width, this.height, -1072689136, -804253680);
       } else {
-         this.renderDirtBackground(p_283688_);
+         /*if (this.fadeInStart == 0L && this.fading) {
+         this.fadeInStart = Util.getMillis();
+         }*/
+
+         //float f = this.fading ? (float)(Util.getMillis() - this.fadeInStart) / 1000.0F : 1.0F;
+         this.panorama.render(0, 1);
+         RenderSystem.enableBlend();
+         //gfx.setColor(1.0F, 1.0F, 1.0F, this.fading ? (float)Mth.ceil(Mth.clamp(f, 0.0F, 1.0F)) : 1.0F);
+         p_283688_.blit(PANORAMA_OVERLAY, 0, 0, this.width, this.height, 0.0F, 0.0F, 16, 128, 16, 128);
+         //gfx.setColor(1.0F, 1.0F, 1.0F, 1.0F);
+         //float f1 = this.fading ? Mth.clamp(f - 1.0F, 0.0F, 1.0F) : 1.0F;
+
       }
 
    }
 
-   public void renderDirtBackground(GuiGraphics p_282281_) {
+   /*public void renderDirtBackground(GuiGraphics p_282281_) {
       p_282281_.setColor(0.25F, 0.25F, 0.25F, 1.0F);
       p_282281_.blit(BACKGROUND_LOCATION, 0, 0, 0, 0.0F, 0.0F, this.width, this.height, 32, 32);
       p_282281_.setColor(1.0F, 1.0F, 1.0F, 1.0F);
-   }
+   }*/
 
    public boolean isPauseScreen() {
       return true;

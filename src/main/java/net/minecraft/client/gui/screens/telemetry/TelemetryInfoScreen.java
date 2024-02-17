@@ -100,7 +100,7 @@ public class TelemetryInfoScreen extends Screen {
    }
 
    public void render(GuiGraphics p_281800_, int p_283129_, int p_283666_, float p_282837_) {
-      this.renderDirtBackground(p_281800_);
+      this.renderBackground(p_281800_);
       super.render(p_281800_, p_283129_, p_283666_, p_282837_);
    }
 

@@ -158,7 +158,7 @@ public class PackSelectionScreen extends Screen {
    }
 
    public void render(GuiGraphics p_281318_, int p_99996_, int p_99997_, float p_99998_) {
-      this.renderDirtBackground(p_281318_);
+      this.renderBackground(p_281318_);
       this.availablePackList.render(p_281318_, p_99996_, p_99997_, p_99998_);
       this.selectedPackList.render(p_281318_, p_99996_, p_99997_, p_99998_);
       p_281318_.drawCenteredString(this.font, this.title, this.width / 2, 8, 16777215);

@@ -26,8 +26,6 @@ import net.minecraft.client.gui.screens.multiplayer.JoinMultiplayerScreen;
 import net.minecraft.client.gui.screens.multiplayer.SafetyScreen;
 import net.minecraft.client.gui.screens.worldselection.SelectWorldScreen;
 import net.minecraft.client.player.controller.MouseSimulator;
-import net.minecraft.client.renderer.CubeMap;
-import net.minecraft.client.renderer.PanoramaRenderer;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.network.chat.Component;
@@ -38,13 +36,10 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class TitleScreen extends Screen {
-   public static final CubeMap CUBE_MAP = new CubeMap(new ResourceLocation("textures/gui/title/background/panorama"));
-   private static final ResourceLocation PANORAMA_OVERLAY = new ResourceLocation("textures/gui/title/background/panorama_overlay.png");
    @Nullable
    private SplashRenderer splash;
    @Nullable
    private RealmsNotificationsScreen realmsNotificationsScreen;
-   private final PanoramaRenderer panorama = new PanoramaRenderer(CUBE_MAP);
    private final boolean fading;
    private long fadeInStart;
    @Nullable
@@ -80,7 +75,7 @@ public class TitleScreen extends Screen {
    }
 
    public static CompletableFuture<Void> preloadResources(TextureManager p_96755_, Executor p_96756_) {
-      return CompletableFuture.allOf(p_96755_.preload(LogoRenderer.MINECRAFT_LOGO, p_96756_), p_96755_.preload(LogoRenderer.MINECRAFT_EDITION, p_96756_), p_96755_.preload(PANORAMA_OVERLAY, p_96756_), CUBE_MAP.preload(p_96755_, p_96756_));
+      return CompletableFuture.allOf(p_96755_.preload(LogoRenderer.MINECRAFT_LOGO, p_96756_), p_96755_.preload(LogoRenderer.MINECRAFT_EDITION, p_96756_), CUBE_MAP.preload(p_96755_, p_96756_));
    }
 
    public boolean isPauseScreen() {
@@ -181,17 +176,11 @@ public class TitleScreen extends Screen {
    }
 
    public void render(GuiGraphics gfx, int p_281753_, int p_283539_, float p_282628_) {
-      if (this.fadeInStart == 0L && this.fading) {
-         this.fadeInStart = Util.getMillis();
-      }
+      if (this.fadeInStart == 0L && this.fading) this.fadeInStart = Util.getMillis();
 
       float f = this.fading ? (float)(Util.getMillis() - this.fadeInStart) / 1000.0F : 1.0F;
-      this.panorama.render(p_282628_, Mth.clamp(f, 0.0F, 1.0F));
-      RenderSystem.enableBlend();
-      gfx.setColor(1.0F, 1.0F, 1.0F, this.fading ? (float)Mth.ceil(Mth.clamp(f, 0.0F, 1.0F)) : 1.0F);
-      gfx.blit(PANORAMA_OVERLAY, 0, 0, this.width, this.height, 0.0F, 0.0F, 16, 128, 16, 128);
-      gfx.setColor(1.0F, 1.0F, 1.0F, 1.0F);
       float f1 = this.fading ? Mth.clamp(f - 1.0F, 0.0F, 1.0F) : 1.0F;
+
 
       this.logoRenderer.renderLogo(gfx, this.width, f1);
 
