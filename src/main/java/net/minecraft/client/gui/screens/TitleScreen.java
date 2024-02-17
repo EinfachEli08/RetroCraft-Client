@@ -38,13 +38,13 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class TitleScreen extends Screen {
-   public static final CubeMap CUBE_MAP = new CubeMap(new ResourceLocation("textures/gui/title/background/panorama"));
+
    private static final ResourceLocation PANORAMA_OVERLAY = new ResourceLocation("textures/gui/title/background/panorama_overlay.png");
    @Nullable
    private SplashRenderer splash;
    @Nullable
    private RealmsNotificationsScreen realmsNotificationsScreen;
-   private final PanoramaRenderer panorama = new PanoramaRenderer(CUBE_MAP);
+   private final PanoramaRenderer panorama = new PanoramaRenderer();
    private final boolean fading;
    private long fadeInStart;
    @Nullable
@@ -80,7 +80,7 @@ public class TitleScreen extends Screen {
    }
 
    public static CompletableFuture<Void> preloadResources(TextureManager p_96755_, Executor p_96756_) {
-      return CompletableFuture.allOf(p_96755_.preload(LogoRenderer.MINECRAFT_LOGO, p_96756_), p_96755_.preload(LogoRenderer.MINECRAFT_EDITION, p_96756_), p_96755_.preload(PANORAMA_OVERLAY, p_96756_), CUBE_MAP.preload(p_96755_, p_96756_));
+      return CompletableFuture.allOf(p_96755_.preload(LogoRenderer.MINECRAFT_LOGO, p_96756_), p_96755_.preload(LogoRenderer.MINECRAFT_EDITION, p_96756_), p_96755_.preload(PANORAMA_OVERLAY, p_96756_));
    }
 
    public boolean isPauseScreen() {

@@ -19,12 +19,11 @@ import org.joml.Matrix4f;
 
 @OnlyIn(Dist.CLIENT)
 public class CubeMap {
-   private static final int SIDES = 6;
    private final ResourceLocation[] images = new ResourceLocation[6];
 
-   public CubeMap(ResourceLocation p_108848_) {
+   public CubeMap(ResourceLocation location) {
       for(int i = 0; i < 6; ++i) {
-         this.images[i] = p_108848_.withPath(p_108848_.getPath() + "_" + i + ".png");
+         this.images[i] = location.withPath(location.getPath() + "_" + i + ".png");
       }
 
    }
@@ -119,13 +118,5 @@ public class CubeMap {
       RenderSystem.enableDepthTest();
    }
 
-   public CompletableFuture<Void> preload(TextureManager p_108855_, Executor p_108856_) {
-      CompletableFuture<?>[] completablefuture = new CompletableFuture[6];
 
-      for(int i = 0; i < completablefuture.length; ++i) {
-         completablefuture[i] = p_108855_.preload(this.images[i], p_108856_);
-      }
-
-      return CompletableFuture.allOf(completablefuture);
-   }
 }

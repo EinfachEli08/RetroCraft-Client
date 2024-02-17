@@ -60,42 +60,35 @@ public class MoreOptionsScreen extends OptionsSubScreen {
         gridlayout.defaultCellSetting().padding(4, 4, 4, 0);
         GridLayout.RowHelper gridlayout$rowhelper = gridlayout.createRowHelper(1);
 
-      gridlayout$rowhelper.addChild(this.options.fov().createButton(this.minecraft.options, 0, 0, 210));
-      gridlayout$rowhelper.addChild(this.createOnlineButton());
+        gridlayout$rowhelper.addChild(this.options.fov().createButton(this.minecraft.options, 0, 0, 210));
+        gridlayout$rowhelper.addChild(this.createOnlineButton());
 
-      gridlayout$rowhelper.addChild(this.openScreenButton(SOUNDS, () -> {
-         return new SoundOptionsScreen(this, this.options);
-      }));
+        gridlayout$rowhelper.addChild(this.openScreenButton(SOUNDS, () -> {
+            return new SoundOptionsScreen(this, this.options);
+        }));
 
-      gridlayout$rowhelper.addChild(this.openScreenButton(VIDEO, () -> {
-         return new VideoSettingsScreen(this, this.options);
-      }));
+        gridlayout$rowhelper.addChild(this.openScreenButton(VIDEO, () -> {
+            return new VideoSettingsScreen(this, this.options);
+        }));
 
 
-      /*
-
-      gridlayout$rowhelper.addChild(this.openScreenButton(CHAT, () -> {
-         return new ChatOptionsScreen(this, this.options);
-      }));
-      gridlayout$rowhelper.addChild(this.openScreenButton(RESOURCEPACK, () -> {
-         return new PackSelectionScreen(this.minecraft.getResourcePackRepository(), this::applyPacks, this.minecraft.getResourcePackDirectory(), Component.translatable("resourcePack.title"));
-      }));
-
-      */
+        gridlayout$rowhelper.addChild(this.openScreenButton(CHAT, () -> {
+         return new IngameOptionsScreen(this, this.options);
+        }));
 
         gridlayout$rowhelper.addChild(Button.builder(CommonComponents.GUI_DONE, (p_280809_) -> {
             this.minecraft.setScreen(this.lastScreen);
         }).width(210).build(), 1);
 
-      /*
+        /*
 
-      this shouldn't even exist...
+        this shouldn't even exist...
 
-      gridlayout$rowhelper.addChild(this.openScreenButton(TELEMETRY, () -> {
-         return new TelemetryInfoScreen(this, this.options);
-      }));
+        gridlayout$rowhelper.addChild(this.openScreenButton(TELEMETRY, () -> {
+            return new TelemetryInfoScreen(this, this.options);
+        }));
 
-       */
+        */
 
 
 
