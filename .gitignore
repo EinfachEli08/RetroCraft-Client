@@ -12,6 +12,7 @@ projects/mcp
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
+_Compile.bat
 
 ### IntelliJ IDEA ###
 .idea/modules.xml

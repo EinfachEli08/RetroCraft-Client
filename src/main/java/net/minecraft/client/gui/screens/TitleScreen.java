@@ -120,6 +120,10 @@ public class TitleScreen extends Screen {
          this.warningLabel = new TitleScreen.WarningLabel(this.font, MultiLineLabel.create(this.font, Component.translatable("title.32bit.deprecation"), 350, 2), this.width / 2, l - 24);
       }
 
+      this.minecraft.controllerHint.clearSwitch();
+      this.minecraft.controllerHint.setSwitch(0, "Select");
+      this.minecraft.controllerHint.setSwitch(1, "Back");
+
    }
 
    private void createNormalMenuOptions(int p_96764_, int p_96765_, int p_69696_, int p_42042_) {
