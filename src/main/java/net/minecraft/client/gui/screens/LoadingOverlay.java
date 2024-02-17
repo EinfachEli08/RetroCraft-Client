@@ -36,13 +36,7 @@ public class LoadingOverlay extends Overlay {
       return LOGO_BACKGROUND_COLOR;
    };
    private static final int LOGO_SCALE = 256;
-   private static final float LOGO_QUARTER_FLOAT = 60.0F;
-   private static final int LOGO_QUARTER = 60;
-   private static final int LOGO_HALF = 120;
-   private static final float LOGO_OVERLAP = 0.0625F;
-   private static final float SMOOTHING = 0.95F;
-   public static final long FADE_OUT_TIME = 1000L;
-   public static final long FADE_IN_TIME = 500L;
+
    private final Minecraft minecraft;
    private final ReloadInstance reload;
    private final Consumer<Optional<Throwable>> onFinish;
@@ -145,6 +139,7 @@ public class LoadingOverlay extends Overlay {
       RenderSystem.depthMask(true);
       RenderSystem.enableDepthTest();
    }
+
 
 
    public boolean isPauseScreen() {

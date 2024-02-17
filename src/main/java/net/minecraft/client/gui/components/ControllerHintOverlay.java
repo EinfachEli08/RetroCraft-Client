@@ -44,8 +44,10 @@ public class ControllerHintOverlay {
         //gfx.setColor(1.0F, 1.0F, 1.0F, this.alpha);
         gfx.blit(BUTTONS_SHEET, (int)posX, (int)posY, (button > 7 ? button  - 8 : button)*ICON_SIZE, button > 7 ? ICON_SIZE : 0, ICON_SIZE, ICON_SIZE,128,128);
         //gfx.blit(BUTTONS_SHEET, (int)posX-ICON_SIZE/2, (int)posY-ICON_SIZE/2, (button > 7 ? button - 8: button)*32, button > 7 ? ICON_SIZE*2 : 0, 32, 32,256,256);
-        //gfx.setColor(1.0F, 1.0F, 1.0F, 1F);
+
+        gfx.setColor(1.0F, 1.0F, 1.0F, 1.0F);
         gfx.drawString(this.font, s, (int)posX + 20, (int)posY+ICON_SIZE/4, 14737632, true);
+
         totalWidth += this.font.width(s) + 30;
     }
     public void clearSwitch(){ Collections.fill(hintSwitch, null); }

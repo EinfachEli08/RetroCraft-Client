@@ -360,7 +360,7 @@ public class Minecraft extends ReentrantBlockableEventLoop<Runnable> implements 
    @Nullable
    public Screen screen;
    @Nullable
-   private Overlay overlay;
+   public Overlay overlay;
    private boolean connectedToRealms;
    private Thread gameThread;
    private volatile boolean running;
