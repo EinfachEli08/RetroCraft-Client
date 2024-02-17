@@ -93,7 +93,7 @@ public class CreateWorldScreen extends Screen {
    private static final Component PREPARING_WORLD_DATA = Component.translatable("createWorld.preparing");
    public static final ResourceLocation HEADER_SEPERATOR = new ResourceLocation("textures/gui/header_separator.png");
    public static final ResourceLocation FOOTER_SEPERATOR = new ResourceLocation("textures/gui/footer_separator.png");
-   public static final ResourceLocation LIGHT_DIRT_BACKGROUND = new ResourceLocation("textures/gui/light_dirt_background.png");
+  // public static final ResourceLocation LIGHT_DIRT_BACKGROUND = new ResourceLocation("textures/gui/light_dirt_background.png");
    final WorldCreationUiState uiState;
    private final TabManager tabManager = new TabManager(this::addRenderableWidget, (p_267853_) -> {
       this.removeWidget(p_267853_);
@@ -258,11 +258,11 @@ public class CreateWorldScreen extends Screen {
       super.render(p_282137_, p_283640_, p_281243_, p_282743_);
    }
 
-   public void renderDirtBackground(GuiGraphics p_281950_) {
+   /*public void renderDirtBackground(GuiGraphics p_281950_) {
 
 
       p_281950_.blit(LIGHT_DIRT_BACKGROUND, 0, 0, 0, 0.0F, 0.0F, this.width, this.height, 32, 32);
-   }
+   }*/
 
    protected <T extends GuiEventListener & NarratableEntry> T addWidget(T p_100948_) {
       return super.addWidget(p_100948_);

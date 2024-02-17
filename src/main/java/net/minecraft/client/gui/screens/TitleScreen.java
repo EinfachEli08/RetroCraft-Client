@@ -26,6 +26,8 @@ import net.minecraft.client.gui.screens.multiplayer.JoinMultiplayerScreen;
 import net.minecraft.client.gui.screens.multiplayer.SafetyScreen;
 import net.minecraft.client.gui.screens.worldselection.SelectWorldScreen;
 import net.minecraft.client.player.controller.MouseSimulator;
+import net.minecraft.client.renderer.CubeMap;
+import net.minecraft.client.renderer.PanoramaRenderer;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.network.chat.Component;
@@ -35,8 +37,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class TitleScreen extends Screen {
-   @Nullable
+public class TitleScreen extends Screen {   @Nullable
    private SplashRenderer splash;
    @Nullable
    private RealmsNotificationsScreen realmsNotificationsScreen;
@@ -75,7 +76,7 @@ public class TitleScreen extends Screen {
    }
 
    public static CompletableFuture<Void> preloadResources(TextureManager p_96755_, Executor p_96756_) {
-      return CompletableFuture.allOf(p_96755_.preload(LogoRenderer.MINECRAFT_LOGO, p_96756_), p_96755_.preload(LogoRenderer.MINECRAFT_EDITION, p_96756_), CUBE_MAP.preload(p_96755_, p_96756_));
+      return CompletableFuture.allOf(p_96755_.preload(LogoRenderer.MINECRAFT_LOGO, p_96756_), p_96755_.preload(LogoRenderer.MINECRAFT_EDITION, p_96756_), p_96755_.preload(PANORAMA_OVERLAY, p_96756_), CUBE_MAP.preload(p_96755_, p_96756_));
    }
 
    public boolean isPauseScreen() {
@@ -176,11 +177,14 @@ public class TitleScreen extends Screen {
    }
 
    public void render(GuiGraphics gfx, int p_281753_, int p_283539_, float p_282628_) {
-      if (this.fadeInStart == 0L && this.fading) this.fadeInStart = Util.getMillis();
+      if (this.fadeInStart == 0L && this.fading) {
+         this.fadeInStart = Util.getMillis();
+      }
 
       float f = this.fading ? (float)(Util.getMillis() - this.fadeInStart) / 1000.0F : 1.0F;
       float f1 = this.fading ? Mth.clamp(f - 1.0F, 0.0F, 1.0F) : 1.0F;
 
+      this.renderBackground(gfx);
 
       this.logoRenderer.renderLogo(gfx, this.width, f1);
 
