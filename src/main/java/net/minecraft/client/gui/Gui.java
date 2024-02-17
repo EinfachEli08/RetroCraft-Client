@@ -249,6 +249,7 @@ public class Gui {
          this.debugScreen.render(gfx);
       }
 
+
       if (!this.minecraft.options.hideGui) {
          if (this.overlayMessageString != null && this.overlayMessageTime > 0) {
             this.minecraft.getProfiler().push("overlayMessage");

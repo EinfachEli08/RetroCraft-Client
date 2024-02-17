@@ -75,7 +75,7 @@ public class LoadingOverlay extends Overlay {
          this.fadeInStart = k;
       }
 
-      float f = this.fadeOutStart > -1L ? (float)(k - this.fadeOutStart) / 1000.0F : -1.0F;
+      float f = this.fadeOutStart > -1L ? (float)(k - this.fadeOutStart) / 1.0F : -1.0F;
       float f1 = this.fadeInStart > -1L ? (float)(k - this.fadeInStart) / 500.0F : -1.0F;
       float f2;
       float f6 = this.reload.getActualProgress();
@@ -135,7 +135,7 @@ public class LoadingOverlay extends Overlay {
       if(k - stopTimer > 3000 && f6 > 0.7F){
          p_281839_.blit(FOURJ_LOGO, i / 2 - LOGO_SCALE/4, j/2 - LOGO_SCALE/4, 0, 0, LOGO_SCALE/2, LOGO_SCALE/2, LOGO_SCALE/2, LOGO_SCALE/2);
       } else {
-         p_281839_.blit(MOJANG_LOGO, i / 2 - LOGO_SCALE/4, j/2 - LOGO_SCALE/4, 0, 0, LOGO_SCALE/2, LOGO_SCALE/2, LOGO_SCALE/2, LOGO_SCALE/2);
+         p_281839_.blit(MOJANG_LOGO, i / 2 - LOGO_SCALE/3, j/2 - LOGO_SCALE/3, 0, 0, (int)(LOGO_SCALE/1.5F), (int)(LOGO_SCALE/1.5F), (int)(LOGO_SCALE/1.5F), (int)(LOGO_SCALE/1.5F));
       }
       p_281839_.setColor(1.0F, 1.0F, 1.0F, 1.0F);
       //p_281839_.fill(0, 0, i, j, FastColor.ARGB32.color((int)k/4, 0, 0, 0));

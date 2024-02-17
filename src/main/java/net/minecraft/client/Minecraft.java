@@ -74,6 +74,7 @@ import net.minecraft.client.color.item.ItemColors;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.ControllerHintOverlay;
 import net.minecraft.client.gui.components.toasts.SystemToast;
 import net.minecraft.client.gui.components.toasts.ToastComponent;
 import net.minecraft.client.gui.components.toasts.TutorialToast;
@@ -329,6 +330,8 @@ public class Minecraft extends ReentrantBlockableEventLoop<Runnable> implements 
    private final ProfileKeyPairManager profileKeyPairManager;
    private final RealmsDataFetcher realmsDataFetcher;
    private final QuickPlayLog quickPlayLog;
+   @Nullable
+   public ControllerHintOverlay controllerHint;
    @Nullable
    public MultiPlayerGameMode gameMode;
    @Nullable

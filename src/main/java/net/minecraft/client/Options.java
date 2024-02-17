@@ -553,6 +553,7 @@ public class Options {
    });
    public boolean onboardAccessibility = true;
    public boolean syncWrites;
+   public boolean showControllerHints = true;
 
    public OptionInstance<Boolean> darkMojangStudiosBackground() {
       return this.darkMojangStudiosBackground;
@@ -989,6 +990,7 @@ public class Options {
       p_168428_.process("panoramaScrollSpeed", this.panoramaSpeed);
       p_168428_.process("telemetryOptInExtra", this.telemetryOptInExtra);
       this.onboardAccessibility = p_168428_.process("onboardAccessibility", this.onboardAccessibility);
+      p_168428_.process("showControllerHints", this.showControllerHints);
 
       for(KeyMapping keymapping : this.keyMappings) {
          String s = keymapping.saveString();
