@@ -37,6 +37,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.Screenshot;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.MapRenderer;
+import net.minecraft.client.gui.components.ControllerHintOverlay;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.server.IntegratedServer;
@@ -254,6 +255,7 @@ public class GameRenderer implements AutoCloseable {
       this.lightTexture = new LightTexture(this, p_234219_);
       this.renderBuffers = p_234222_;
       this.postEffect = null;
+      this.minecraft.controllerHint = new ControllerHintOverlay(p_234219_);
    }
 
    public void close() {
@@ -963,6 +965,7 @@ public class GameRenderer implements AutoCloseable {
                });
                throw new ReportedException(crashreport1);
             }
+            if(this.minecraft.options.showControllerHints && !this.minecraft.options.hideGui) this.minecraft.controllerHint.render(guigraphics);
 
             try {
                if (this.minecraft.screen != null) {
