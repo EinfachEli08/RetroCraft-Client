@@ -148,9 +148,11 @@ public class DebugScreenOverlay {
             int l = p_286644_ ? 2 : p_286519_.guiWidth() - 2 - k;
             int i1 = 2 + i * j;
             p_286519_.fill(l - 1, i1 - 1, l + k + 1, i1 + i - 1, -1873784752);
+            p_286519_.drawString(this.font, s, l, i, 14737632, false);
          }
       }
 
+      /*
       for(int j1 = 0; j1 < p_286665_.size(); ++j1) {
          String s1 = p_286665_.get(j1);
          if (!Strings.isNullOrEmpty(s1)) {
@@ -160,6 +162,7 @@ public class DebugScreenOverlay {
             p_286519_.drawString(this.font, s1, l1, i2, 14737632, false);
          }
       }
+      */
 
    }
 
