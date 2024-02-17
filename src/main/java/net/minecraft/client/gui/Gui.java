@@ -25,11 +25,13 @@ import net.minecraft.client.gui.components.DebugScreenOverlay;
 import net.minecraft.client.gui.components.PlayerTabOverlay;
 import net.minecraft.client.gui.components.SubtitleOverlay;
 import net.minecraft.client.gui.components.spectator.SpectatorGui;
+import net.minecraft.client.gui.components.toasts.SystemToast;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.gui.screens.inventory.EffectRenderingInventoryScreen;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.client.player.controller.MouseSimulator;
+import net.minecraft.client.renderer.CubeMap;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.ItemRenderer;
@@ -70,6 +72,7 @@ import net.minecraft.world.scores.Score;
 import net.minecraft.world.scores.Scoreboard;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import org.joml.Quaternionf;
 
 @OnlyIn(Dist.CLIENT)
 public class Gui {
@@ -130,6 +133,8 @@ public class Gui {
    protected int leftPos;
    protected int topPos;
 
+
+
    public Gui(Minecraft p_232355_, ItemRenderer p_232356_) {
       this.minecraft = p_232355_;
       this.itemRenderer = p_232356_;
@@ -149,9 +154,8 @@ public class Gui {
    }
 
    public void render(GuiGraphics gfx, float p_282611_) {
-	   
-	 
-	   
+
+
       Window window = this.minecraft.getWindow();
       this.screenWidth = gfx.guiWidth();
       this.screenHeight = gfx.guiHeight();
@@ -1243,4 +1247,5 @@ public class Gui {
          return gui$hearttype;
       }
    }
+
 }

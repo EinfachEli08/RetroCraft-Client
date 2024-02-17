@@ -1,6 +1,8 @@
 package net.minecraft.client.renderer;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -9,8 +11,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 public class PanoramaRenderer {
    private final Minecraft minecraft;
    private final CubeMap cubeMap;
-   private float spin;
-   private float bob;
+
 
    public PanoramaRenderer() {
       this.cubeMap = new CubeMap(new ResourceLocation("textures/gui/title/background/panorama"));
@@ -18,10 +19,8 @@ public class PanoramaRenderer {
    }
 
    public void render(float p_110004_, float p_110005_) {
-      float f = (float)((double)p_110004_ * this.minecraft.options.panoramaSpeed().get());
-      this.spin = wrap(this.spin + f * 0.1F, 360.0F);
-      this.bob = wrap(this.bob + f * 0.001F, ((float)Math.PI * 2F));
-      this.cubeMap.render(this.minecraft, 10.0F, -this.spin, p_110005_);
+
+      this.cubeMap.render(this.minecraft, 10.0F, -Screen.spin, p_110005_);
    }
 
    private static float wrap(float p_249058_, float p_249548_) {

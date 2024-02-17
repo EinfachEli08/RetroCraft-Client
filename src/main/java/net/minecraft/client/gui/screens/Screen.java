@@ -19,6 +19,8 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import javax.annotation.Nullable;
+
+import com.mojang.math.Axis;
 import net.minecraft.CrashReport;
 import net.minecraft.CrashReportCategory;
 import net.minecraft.ReportedException;
@@ -59,6 +61,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import org.joml.Quaternionf;
 import org.slf4j.Logger;
 
 @OnlyIn(Dist.CLIENT)
@@ -93,7 +96,11 @@ public abstract class Screen extends AbstractContainerEventHandler implements Re
    private NarratableEntry lastNarratable;
    @Nullable
    private Screen.DeferredTooltipRendering deferredTooltipRendering;
-   private final PanoramaRenderer panorama = new PanoramaRenderer(CUBE_MAP);
+   private final PanoramaRenderer panorama = new PanoramaRenderer();
+   public static float spin;
+
+   private float rotation;
+   private float bob;
 
    protected final Executor screenExecutor = (p_289626_) -> {
       this.minecraft.execute(() -> {
@@ -126,9 +133,11 @@ public abstract class Screen extends AbstractContainerEventHandler implements Re
    }
 
    public void render(GuiGraphics gfx, int p_281550_, int p_282878_, float p_282465_) {
-	   
+
       for(Renderable renderable : this.renderables) {
          renderable.render(gfx, p_281550_, p_282878_, p_282465_);
+
+
       }
 
       if(ControllerInput.getPressedButton(14)){
@@ -143,8 +152,28 @@ public abstract class Screen extends AbstractContainerEventHandler implements Re
       if(ControllerInput.getPressedButton(15)) {
     	  controllerPressed(15);
       }
-      
+
+
+
       MouseSimulator.drawMouseCursor(gfx, true, 15);
+
+      /*
+         This is not here
+         nopenopenopenope
+         this is not just a dirty hack for the titlescreen
+         nooooooooo, neverrrrrrrrrrr
+       */
+      if( Minecraft.getInstance().screen instanceof TitleScreen){
+         rotation = (float)((double) CubeMap.rotationVal * this.minecraft.options.panoramaSpeed().get())/2;
+         spin = wrap(spin + rotation * 0.1F, 360.0F);
+         bob = wrap(bob + rotation * 0.001F, ((float)Math.PI * 2F));
+
+      }else{
+         rotation = (float)((double) CubeMap.rotationVal * this.minecraft.options.panoramaSpeed().get());
+         spin = wrap(spin + rotation * 0.1F, 360.0F);
+         bob = wrap(bob + rotation * 0.001F, ((float)Math.PI * 2F));
+
+}
 
 
    }
@@ -418,7 +447,7 @@ public abstract class Screen extends AbstractContainerEventHandler implements Re
          p_283688_.fillGradient(0, 0, this.width, this.height, -1072689136, -804253680);
       } else {
 
-         this.panorama.render(1, 0.4F);
+         this.panorama.render(0.5F, 0.5F);
          //RenderSystem.enableBlend();
          p_283688_.setColor(0.25F, 0.25F, 0.25F, 1.0F);
          p_283688_.blit(PANORAMA_OVERLAY, 0, 0, this.width, this.height, 0.0F, 0.0F, 16, 128, 16, 128);
@@ -690,5 +719,8 @@ public abstract class Screen extends AbstractContainerEventHandler implements Re
          this.index = p_169425_;
          this.priority = p_169426_;
       }
+   }
+   private static float wrap(float p_249058_, float p_249548_) {
+      return p_249058_ > p_249548_ ? p_249058_ - p_249548_ : p_249058_;
    }
 }
