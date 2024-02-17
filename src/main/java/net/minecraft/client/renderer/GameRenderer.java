@@ -38,6 +38,8 @@ import net.minecraft.client.Screenshot;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.MapRenderer;
 import net.minecraft.client.gui.components.ControllerHintOverlay;
+import net.minecraft.client.gui.screens.LevelLoadingScreen;
+import net.minecraft.client.gui.screens.LoadingOverlay;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.server.IntegratedServer;
@@ -965,7 +967,7 @@ public class GameRenderer implements AutoCloseable {
                });
                throw new ReportedException(crashreport1);
             }
-            if(this.minecraft.options.showControllerHints && !this.minecraft.options.hideGui) this.minecraft.controllerHint.render(guigraphics);
+
 
             try {
                if (this.minecraft.screen != null) {
@@ -980,6 +982,9 @@ public class GameRenderer implements AutoCloseable {
                throw new ReportedException(crashreport2);
             }
          }
+
+         if(this.minecraft.options.showControllerHints && !this.minecraft.options.hideGui && LevelLoadingScreen.done && !(Minecraft.getInstance().overlay instanceof LoadingOverlay)) this.minecraft.controllerHint.render(guigraphics);
+
 
          this.minecraft.getProfiler().push("toasts");
          this.minecraft.getToasts().render(guigraphics);
