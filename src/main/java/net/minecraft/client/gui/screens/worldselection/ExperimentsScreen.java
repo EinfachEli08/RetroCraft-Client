@@ -103,10 +103,11 @@ public class ExperimentsScreen extends Screen {
 
    public void render(GuiGraphics p_283515_, int p_283170_, int p_283248_, float p_283106_) {
       this.renderBackground(p_283515_);
-      p_283515_.setColor(0.125F, 0.125F, 0.125F, 1.0F);
+      /*p_283515_.setColor(0.125F, 0.125F, 0.125F, 1.0F);
       int i = 32;
       p_283515_.blit(BACKGROUND_LOCATION, 0, this.layout.getHeaderHeight(), 0.0F, 0.0F, this.width, this.height - this.layout.getHeaderHeight() - this.layout.getFooterHeight(), 32, 32);
       p_283515_.setColor(1.0F, 1.0F, 1.0F, 1.0F);
+      */
       super.render(p_283515_, p_283170_, p_283248_, p_283106_);
    }
 }

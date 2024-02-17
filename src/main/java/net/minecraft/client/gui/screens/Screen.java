@@ -54,6 +54,7 @@ import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.Music;
 import net.minecraft.util.FormattedCharSequence;
+import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraftforge.api.distmarker.Dist;
@@ -66,6 +67,8 @@ public abstract class Screen extends AbstractContainerEventHandler implements Re
    private static final Set<String> ALLOWED_PROTOCOLS = Sets.newHashSet("http", "https");
    private static final Component USAGE_NARRATION = Component.translatable("narrator.screen.usage");
    public static final ResourceLocation BACKGROUND_LOCATION = new ResourceLocation("textures/gui/options_background.png");
+   public static final CubeMap CUBE_MAP = new CubeMap(new ResourceLocation("textures/gui/title/background/panorama"));
+   public static final ResourceLocation PANORAMA_OVERLAY = new ResourceLocation("textures/gui/title/background/panorama_overlay.png");
    protected final Component title;
    private final List<GuiEventListener> children = Lists.newArrayList();
    private final List<NarratableEntry> narratables = Lists.newArrayList();
@@ -90,9 +93,6 @@ public abstract class Screen extends AbstractContainerEventHandler implements Re
    private NarratableEntry lastNarratable;
    @Nullable
    private Screen.DeferredTooltipRendering deferredTooltipRendering;
-   public static final CubeMap CUBE_MAP = new CubeMap(new ResourceLocation("textures/gui/title/background/panorama"));
-   private static final ResourceLocation PANORAMA_OVERLAY = new ResourceLocation("textures/gui/title/background/panorama_overlay.png");
-   @Nullable
    private final PanoramaRenderer panorama = new PanoramaRenderer(CUBE_MAP);
 
    protected final Executor screenExecutor = (p_289626_) -> {
@@ -130,8 +130,7 @@ public abstract class Screen extends AbstractContainerEventHandler implements Re
       for(Renderable renderable : this.renderables) {
          renderable.render(gfx, p_281550_, p_282878_, p_282465_);
       }
-      
-     
+
       if(ControllerInput.getPressedButton(14)){
      	 controllerPressed(14);
       }
@@ -192,9 +191,9 @@ public abstract class Screen extends AbstractContainerEventHandler implements Re
          return true;
       } else {
          Object object;
-         
          switch (p_96552_) {
             case 258:
+
                object = this.createTabEvent();
                break;
             case 259:
@@ -417,23 +416,17 @@ public abstract class Screen extends AbstractContainerEventHandler implements Re
       if (this.minecraft.level != null) {
          p_283688_.fillGradient(0, 0, this.width, this.height, -1072689136, -804253680);
       } else {
-         /*if (this.fadeInStart == 0L && this.fading) {
-         this.fadeInStart = Util.getMillis();
-         }*/
 
-         //float f = this.fading ? (float)(Util.getMillis() - this.fadeInStart) / 1000.0F : 1.0F;
-         this.panorama.render(0, 1);
-         RenderSystem.enableBlend();
-         //gfx.setColor(1.0F, 1.0F, 1.0F, this.fading ? (float)Mth.ceil(Mth.clamp(f, 0.0F, 1.0F)) : 1.0F);
+         this.panorama.render(1, 0.4F);
+         //RenderSystem.enableBlend();
+         p_283688_.setColor(0.25F, 0.25F, 0.25F, 1.0F);
          p_283688_.blit(PANORAMA_OVERLAY, 0, 0, this.width, this.height, 0.0F, 0.0F, 16, 128, 16, 128);
-         //gfx.setColor(1.0F, 1.0F, 1.0F, 1.0F);
-         //float f1 = this.fading ? Mth.clamp(f - 1.0F, 0.0F, 1.0F) : 1.0F;
+         p_283688_.setColor(1.0F, 1.0F, 1.0F, 1.0F);
 
       }
-
    }
 
-   /*public void renderDirtBackground(GuiGraphics p_282281_) {
+  /* public void renderDirtBackground(GuiGraphics p_282281_) {
       p_282281_.setColor(0.25F, 0.25F, 0.25F, 1.0F);
       p_282281_.blit(BACKGROUND_LOCATION, 0, 0, 0, 0.0F, 0.0F, this.width, this.height, 32, 32);
       p_282281_.setColor(1.0F, 1.0F, 1.0F, 1.0F);
