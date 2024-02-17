@@ -146,6 +146,7 @@ public abstract class Screen extends AbstractContainerEventHandler implements Re
       
       MouseSimulator.drawMouseCursor(gfx, true, 15);
 
+
    }
 
    public void controllerPressed(int id) {

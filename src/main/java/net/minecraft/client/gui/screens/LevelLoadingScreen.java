@@ -25,7 +25,7 @@ public class LevelLoadingScreen extends Screen {
    private static final long NARRATION_DELAY_MS = 2000L;
    private final StoringChunkProgressListener progressListener;
    private long lastNarration = -1L;
-   private boolean done;
+   public static boolean done = true;
    private static final Object2IntMap<ChunkStatus> COLORS = Util.make(new Object2IntOpenHashMap<>(), (p_280803_) -> {
       p_280803_.defaultReturnValue(0);
       p_280803_.put(ChunkStatus.EMPTY, 5526612);
@@ -76,6 +76,7 @@ public class LevelLoadingScreen extends Screen {
    }
 
    protected void init(){
+      done = false;
       this.logoRenderer = new LogoRenderer(false);
    }
    public void render(GuiGraphics gfx, int p_96146_, int p_96147_, float p_96148_) {
@@ -83,12 +84,15 @@ public class LevelLoadingScreen extends Screen {
       this.renderBackground(gfx);
       this.logoRenderer.renderLogo(gfx, this.width, 2);
 
+      int fieldHeight=50;
+      int yPos = 50;
 
       double d1 = Math.min((double)gfx.guiWidth() * 0.75D, gfx.guiHeight()) * 0.25D;
       double d0 = d1 * 4.0D;
       int j1 = (int)(d0 * 0.5D);
       int k1 = (int) ((int)((double)gfx.guiHeight())/1.8);
 
+      gfx.fill(gfx.guiWidth() / 2 - j1,k1 + yPos,gfx.guiWidth() / 2 + j1,k1 + yPos + fieldHeight,FastColor.ARGB32.color(255, 109, 109, 109));
 
 
       gfx.drawString(this.font, this.getFormattedProgress(), gfx.guiWidth() / 2 - j1, k1 - 14, 16777215);
@@ -98,15 +102,6 @@ public class LevelLoadingScreen extends Screen {
 
 
 
-      /*
-      long i = Util.getMillis();
-      if (i - this.lastNarration > 2000L) {
-         this.lastNarration = i;
-         this.triggerImmediateNarration(true);
-      }
-
-
-      */
 
    }
    private void drawProgressBar(GuiGraphics gfx, int xPos, int yPos, int width, int height, int opacity) {
@@ -121,6 +116,8 @@ public class LevelLoadingScreen extends Screen {
 
    }
 
+
+   //usefull some day?
    public static void renderChunks(GuiGraphics p_283467_, StoringChunkProgressListener p_96151_, int p_96152_, int p_96153_, int p_96154_, int p_96155_) {
       int i = p_96154_ + p_96155_;
       int j = p_96151_.getFullDiameter();
