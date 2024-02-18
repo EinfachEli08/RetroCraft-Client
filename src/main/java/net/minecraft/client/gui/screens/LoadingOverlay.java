@@ -126,7 +126,7 @@ public class LoadingOverlay extends Overlay {
 
       if(stopTimer == 0) stopTimer = k;
 
-      if(k - stopTimer > 3000 && f6 > 0.7F){
+      if(currentProgress > 0.8F){
          p_281839_.blit(FOURJ_LOGO, i / 2 - LOGO_SCALE/4, j/2 - LOGO_SCALE/4, 0, 0, LOGO_SCALE/2, LOGO_SCALE/2, LOGO_SCALE/2, LOGO_SCALE/2);
       } else {
          p_281839_.blit(MOJANG_LOGO, i / 2 - LOGO_SCALE/3, j/2 - LOGO_SCALE/3, 0, 0, (int)(LOGO_SCALE/1.5F), (int)(LOGO_SCALE/1.5F), (int)(LOGO_SCALE/1.5F), (int)(LOGO_SCALE/1.5F));

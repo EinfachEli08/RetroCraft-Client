@@ -97,7 +97,6 @@ public class TitleScreen extends Screen {
       }
 
       GridLayout gridLayout = new GridLayout();
-      gridLayout.setY(100);
       gridLayout.defaultCellSetting().padding(4, 4, 4, 0);
       GridLayout.RowHelper gridlayout$rowhelper = gridLayout.createRowHelper(1);
 
@@ -116,7 +115,7 @@ public class TitleScreen extends Screen {
       }));
 
       gridLayout.arrangeElements();
-      FrameLayout.alignInRectangle(gridLayout, 0, 0, this.width, this.height, 0.5F, 0.5F);
+      FrameLayout.alignInRectangle(gridLayout, 0, 112, this.width, this.height, 0.5F, 0);
       gridLayout.visitWidgets(this::addRenderableWidget);
 
       this.minecraft.setConnectedToRealms(false);
@@ -194,42 +193,41 @@ public class TitleScreen extends Screen {
    }
 
    public void render(GuiGraphics gfx, int p_281753_, int p_283539_, float p_282628_) {
+      /*
       if (this.fadeInStart == 0L && this.fading) {
          this.fadeInStart = Util.getMillis();
       }
 
       float f = this.fading ? (float)(Util.getMillis() - this.fadeInStart) / 1000.0F : 1.0F;
       float f1 = this.fading ? Mth.clamp(f - 1.0F, 0.0F, 1.0F) : 1.0F;
-
+*/
       this.renderBackground(gfx);
 
-      this.logoRenderer.renderLogo(gfx, this.width, f1);
+      this.logoRenderer.renderLogo(gfx, this.width, 1);
 
-      int i = Mth.ceil(f1 * 255.0F) << 24;
+      /*int i = Mth.ceil(f1 * 255.0F) << 24;
       if ((i & -67108864) != 0) {
          if (this.warningLabel != null) {
-            this.warningLabel.render(gfx, i);
-         }
+            this.warningLabel.render(gfx, 1F);
+         }*/
 
          if (this.splash != null) {
-            this.splash.render(gfx, this.width, this.font, i);
+            this.splash.render(gfx, this.width, this.font, 1);
          }
 
-         for(GuiEventListener guieventlistener : this.children()) {
+         /*for(GuiEventListener guieventlistener : this.children()) {
             if (guieventlistener instanceof AbstractWidget) {
                ((AbstractWidget)guieventlistener).setAlpha(f1);
             }
-         }
+         }*/
 
          super.render(gfx, p_281753_, p_283539_, p_282628_);
-         if (this.realmsNotificationsEnabled() && f1 >= 1.0F) {
+         //if (this.realmsNotificationsEnabled() && f1 >= 1.0F) {
             RenderSystem.enableDepthTest();
             this.realmsNotificationsScreen.render(gfx, p_281753_, p_283539_, p_282628_);
-         }
+         //}
 
-      }
-
-
+      //}
    }
 
    public boolean mouseClicked(double p_96735_, double p_96736_, int p_96737_) {

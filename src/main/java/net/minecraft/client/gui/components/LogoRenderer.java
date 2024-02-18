@@ -28,7 +28,7 @@ public class LogoRenderer {
       int i = p_281512_ / 2 - 128;
       p_281856_.blit(this.showEasterEgg ? EASTER_EGG_LOGO : MINECRAFT_LOGO, i, p_282296_, 0.0F, 0.0F, 256, 44, 256, 64);
       int j = p_281512_ / 2 - 64;
-      int k = p_282296_ + 44 - 7;
+      int k = p_282296_ + 36;
       p_281856_.blit(MINECRAFT_EDITION, j, k, 0.0F, 0.0F, 128, 14, 128, 16);
       p_281856_.setColor(1.0F, 1.0F, 1.0F, 1.0F);
    }

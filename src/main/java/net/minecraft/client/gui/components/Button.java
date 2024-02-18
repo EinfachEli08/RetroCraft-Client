@@ -92,7 +92,7 @@ public class Button extends AbstractButton {
       }
 
       public Button build() {
-         Button button = new Button(this.x, this.y, this.width, this.height, this.message, this.onPress, this.createNarration);
+         Button button = new Button(this.x, this.y + /*this.isLogoVisible ? */0/* : 0*/, this.width, this.height, this.message, this.onPress, this.createNarration);
          button.setTooltip(this.tooltip);
          return button;
       }

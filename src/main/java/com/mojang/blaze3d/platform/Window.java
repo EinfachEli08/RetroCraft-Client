@@ -362,7 +362,11 @@ public final class Window implements AutoCloseable {
 
    public int calculateScale(int p_85386_, boolean p_85387_) {
       int i;
-      for(i = 1; i != p_85386_ && i < this.framebufferWidth && i < this.framebufferHeight && this.framebufferWidth / (i + 1) >= 320 && this.framebufferHeight / (i + 1) >= 240; ++i) {
+      for(i = 1; i != p_85386_
+              && i < this.framebufferWidth
+              && i < this.framebufferHeight
+              && this.framebufferWidth / (i + 1) >= 320
+              && this.framebufferHeight / (i + 1) >= 280; ++i) {
       }
 
       if (p_85387_ && i % 2 != 0) {

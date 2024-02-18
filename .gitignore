@@ -8,6 +8,8 @@ build/generated
 build/srg2mcp
 build/tmp
 build/mappings.zip
+build/libs
+build/
 projects/mcp
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
