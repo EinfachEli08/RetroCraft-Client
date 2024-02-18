@@ -97,7 +97,7 @@ public class PauseScreen extends Screen {
       }).width(210).build(), 1);
       
       gridlayout.arrangeElements();
-      FrameLayout.alignInRectangle(gridlayout, 0, 112, this.width, this.height, 0, 0.5F);
+      FrameLayout.alignInRectangle(gridlayout, 0, 112, this.width, this.height, 0.5F, 0);
       gridlayout.visitWidgets(this::addRenderableWidget);
    }
 
