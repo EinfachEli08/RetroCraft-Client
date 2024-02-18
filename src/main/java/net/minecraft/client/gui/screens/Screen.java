@@ -46,8 +46,6 @@ import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipPositione
 import net.minecraft.client.gui.screens.inventory.tooltip.DefaultTooltipPositioner;
 import net.minecraft.client.player.controller.ControllerInput;
 import net.minecraft.client.player.controller.MouseSimulator;
-import net.minecraft.client.renderer.CubeMap;
-import net.minecraft.client.renderer.PanoramaRenderer;
 import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
@@ -92,7 +90,6 @@ public abstract class Screen extends AbstractContainerEventHandler implements Re
    private NarratableEntry lastNarratable;
    @Nullable
    private Screen.DeferredTooltipRendering deferredTooltipRendering;
-   private final PanoramaRenderer panorama = new PanoramaRenderer();
 
    protected final Executor screenExecutor = (p_289626_) -> {
       this.minecraft.execute(() -> {
@@ -125,26 +122,25 @@ public abstract class Screen extends AbstractContainerEventHandler implements Re
    }
 
    public void render(GuiGraphics gfx, int p_281550_, int p_282878_, float p_282465_) {
-	   
-      for(Renderable renderable : this.renderables) {
-         renderable.render(gfx, p_281550_, p_282878_, p_282465_);
-      }
 
-      if(ControllerInput.getPressedButton(14)){
-     	 controllerPressed(14);
-      }
-      if(ControllerInput.getPressedButton(16)) {
-    	  controllerPressed(16);
-      }
-      if(ControllerInput.getPressedButton(17)) {
-    	  controllerPressed(17);
-      }
-      if(ControllerInput.getPressedButton(15)) {
-    	  controllerPressed(15);
-      }
-      
-      MouseSimulator.drawMouseCursor(gfx, true, 15);
+       for (Renderable renderable : this.renderables) {
+           renderable.render(gfx, p_281550_, p_282878_, p_282465_);
+       }
 
+       if (ControllerInput.getPressedButton(14)) {
+           controllerPressed(14);
+       }
+       if (ControllerInput.getPressedButton(16)) {
+           controllerPressed(16);
+       }
+       if (ControllerInput.getPressedButton(17)) {
+           controllerPressed(17);
+       }
+       if (ControllerInput.getPressedButton(15)) {
+           controllerPressed(15);
+       }
+
+       MouseSimulator.drawMouseCursor(gfx, true, 15);
 
    }
 
@@ -416,13 +412,12 @@ public abstract class Screen extends AbstractContainerEventHandler implements Re
       if (this.minecraft.level != null) {
          p_283688_.fillGradient(0, 0, this.width, this.height, -1072689136, -804253680);
       } else {
-
-         this.panorama.render(0.5F, 1);
-         //RenderSystem.enableBlend();
+         this.minecraft.panorama.render(p_283688_, 0.5F, 1);
+         RenderSystem.enableBlend();
          p_283688_.setColor(0.25F, 0.25F, 0.25F, 1.0F);
          p_283688_.blit(PANORAMA_OVERLAY, 0, 0, this.width, this.height, 0.0F, 0.0F, 16, 128, 16, 128);
          p_283688_.setColor(1.0F, 1.0F, 1.0F, 1.0F);
-
+         RenderSystem.disableBlend();
       }
    }
 

@@ -12,7 +12,6 @@ import net.minecraft.client.gui.components.CommonButtons;
 import net.minecraft.client.gui.components.LogoRenderer;
 import net.minecraft.client.gui.layouts.FrameLayout;
 import net.minecraft.client.gui.layouts.GridLayout;
-import net.minecraft.client.renderer.PanoramaRenderer;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraftforge.api.distmarker.Dist;
@@ -23,7 +22,6 @@ public class AccessibilityOnboardingScreen extends Screen {
    private static final Component ONBOARDING_NARRATOR_MESSAGE = Component.translatable("accessibility.onboarding.screen.narrator");
    private static final int PADDING = 4;
    private static final int TITLE_PADDING = 16;
-   private final PanoramaRenderer panorama = new PanoramaRenderer();
    private final LogoRenderer logoRenderer;
    private final Options options;
    private final boolean narratorAvailable;
@@ -87,7 +85,6 @@ public class AccessibilityOnboardingScreen extends Screen {
 
    public void render(GuiGraphics p_282353_, int p_265135_, int p_265032_, float p_265387_) {
       this.handleInitialNarrationDelay();
-      this.panorama.render(0.0F, 1.0F);
       p_282353_.fill(0, 0, this.width, this.height, -1877995504);
       this.logoRenderer.renderLogo(p_282353_, this.width, 1.0F);
       if (this.textWidget != null) {

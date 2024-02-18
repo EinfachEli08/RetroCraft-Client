@@ -124,6 +124,7 @@ import net.minecraft.client.renderer.FogRenderer;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.GpuWarnlistManager;
 import net.minecraft.client.renderer.LevelRenderer;
+import net.minecraft.client.renderer.PanoramaRenderer;
 import net.minecraft.client.renderer.RenderBuffers;
 import net.minecraft.client.renderer.VirtualScreen;
 import net.minecraft.client.renderer.block.BlockModelShaper;
@@ -330,6 +331,7 @@ public class Minecraft extends ReentrantBlockableEventLoop<Runnable> implements 
    private final ProfileKeyPairManager profileKeyPairManager;
    private final RealmsDataFetcher realmsDataFetcher;
    private final QuickPlayLog quickPlayLog;
+   public final PanoramaRenderer panorama;
    @Nullable
    public ControllerHintOverlay controllerHint;
    @Nullable
@@ -559,6 +561,7 @@ public class Minecraft extends ReentrantBlockableEventLoop<Runnable> implements 
       this.reloadStateTracker.startReload(ResourceLoadStateTracker.ReloadReason.INITIAL, list);
       ReloadInstance reloadinstance = this.resourceManager.createReload(Util.backgroundExecutor(), this, RESOURCE_RELOAD_INITIAL_TASK, list);
       GameLoadTimesEvent.INSTANCE.beginStep(TelemetryProperty.LOAD_TIME_LOADING_OVERLAY_MS);
+      panorama = new PanoramaRenderer();
       this.setOverlay(new LoadingOverlay(this, reloadinstance, (p_210745_) -> {
          Util.ifElse(p_210745_, this::rollbackResourcePacks, () -> {
             if (SharedConstants.IS_RUNNING_IN_IDE) {
