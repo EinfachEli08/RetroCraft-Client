@@ -44,7 +44,6 @@ public class LoadingOverlay extends Overlay {
    private float currentProgress;
    private long fadeOutStart = -1L;
    private long fadeInStart = -1L;
-   private float stopTimer = 0;
 
    public LoadingOverlay(Minecraft p_96172_, ReloadInstance p_96173_, Consumer<Optional<Throwable>> p_96174_, boolean p_96175_) {
       this.minecraft = p_96172_;
@@ -123,8 +122,6 @@ public class LoadingOverlay extends Overlay {
       //RenderSystem.blendFunc(770, 1);
 
       p_281839_.setColor(1.0F, 1.0F, 1.0F, f2);
-
-      if(stopTimer == 0) stopTimer = k;
 
       if(currentProgress > 0.8F){
          p_281839_.blit(FOURJ_LOGO, i / 2 - LOGO_SCALE/4, j/2 - LOGO_SCALE/4, 0, 0, LOGO_SCALE/2, LOGO_SCALE/2, LOGO_SCALE/2, LOGO_SCALE/2);

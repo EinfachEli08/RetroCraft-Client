@@ -89,7 +89,6 @@ public abstract class Screen extends AbstractContainerEventHandler implements Re
    private NarratableEntry lastNarratable;
    @Nullable
    private Screen.DeferredTooltipRendering deferredTooltipRendering;
-
    protected final Executor screenExecutor = (p_289626_) -> {
       this.minecraft.execute(() -> {
          if (this.minecraft.screen == this) {
@@ -139,7 +138,6 @@ public abstract class Screen extends AbstractContainerEventHandler implements Re
        }
 
        MouseSimulator.drawMouseCursor(gfx, true, 15);
-
    }
 
    public void controllerPressed(int id) {
