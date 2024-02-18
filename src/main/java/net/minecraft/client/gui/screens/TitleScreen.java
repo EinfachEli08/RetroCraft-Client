@@ -7,6 +7,7 @@ import com.mojang.realmsclient.gui.screens.RealmsNotificationsScreen;
 import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
+import java.util.function.Supplier;
 import javax.annotation.Nullable;
 import net.minecraft.SharedConstants;
 import net.minecraft.Util;
@@ -22,6 +23,10 @@ import net.minecraft.client.gui.components.PlainTextButton;
 import net.minecraft.client.gui.components.SplashRenderer;
 import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.components.events.GuiEventListener;
+import net.minecraft.client.gui.layouts.FrameLayout;
+import net.minecraft.client.gui.layouts.GridLayout;
+import net.minecraft.client.gui.layouts.LayoutElement;
+import net.minecraft.client.gui.screens.controls.ControlsScreen;
 import net.minecraft.client.gui.screens.multiplayer.JoinMultiplayerScreen;
 import net.minecraft.client.gui.screens.multiplayer.SafetyScreen;
 import net.minecraft.client.gui.screens.worldselection.SelectWorldScreen;
@@ -71,7 +76,7 @@ public class TitleScreen extends Screen {
          this.realmsNotificationsScreen.tick();
       }
 
-      this.minecraft.getRealms32BitWarningStatus().showRealms32BitWarningIfNeeded(this);
+      //this.minecraft.getRealms32BitWarningStatus().showRealms32BitWarningIfNeeded(this);
    }
 
    public static CompletableFuture<Void> preloadResources(TextureManager p_96755_, Executor p_96756_) {
@@ -91,15 +96,28 @@ public class TitleScreen extends Screen {
          this.splash = this.minecraft.getSplashManager().getSplash();
       }
 
-      //int i = this.font.width(COPYRIGHT_TEXT);
-      //int j = this.width - i - 2;
-      int l = this.height / 4 + 35;
-      this.createNormalMenuOptions(l, 24, 210, 20);
+      GridLayout gridLayout = new GridLayout();
+      gridLayout.setY(100);
+      gridLayout.defaultCellSetting().padding(4, 4, 4, 0);
+      GridLayout.RowHelper gridlayout$rowhelper = gridLayout.createRowHelper(1);
 
+      gridlayout$rowhelper.addChild(this.openScreenButton(Component.translatable("menu.singleplayer"), () -> new SelectWorldScreen(this)));
+      gridlayout$rowhelper.addChild(this.openScreenButton(Component.translatable("menu.multiplayer"), () -> {
+         Screen screen = this.minecraft.options.skipMultiplayerWarning ? new JoinMultiplayerScreen(this) : new SafetyScreen(this);
+         return screen;
+      }));
+      gridlayout$rowhelper.addChild(this.openScreenButton(Component.translatable("menu.online"), () -> new RealmsMainScreen(this)));
+      gridlayout$rowhelper.addChild(this.openScreenButton(Component.translatable("menu.options"), () -> new OptionsScreen(this, this.minecraft.options)));
+      gridlayout$rowhelper.addChild(this.openScreenButton(Component.translatable("narrator.button.language"), () -> new LanguageSelectScreen(this, this.minecraft.options, this.minecraft.getLanguageManager())));
+      gridlayout$rowhelper.addChild(this.openScreenButton(Component.translatable("narrator.button.accessibility"), () -> new AccessibilityOptionsScreen(this, this.minecraft.options)));
+      gridlayout$rowhelper.addChild(this.openScreenButton(Component.translatable("menu.quit"), () -> {
+         this.minecraft.stop();
+         return null;
+      }));
 
-      /*this.addRenderableWidget(new PlainTextButton(j, this.height - 10, i, 10, COPYRIGHT_TEXT, (p_280834_) -> {
-         this.minecraft.setScreen(new CreditsAndAttributionScreen(this));
-      }, this.font));*/
+      gridLayout.arrangeElements();
+      FrameLayout.alignInRectangle(gridLayout, 0, 0, this.width, this.height, 0.5F, 0.5F);
+      gridLayout.visitWidgets(this::addRenderableWidget);
 
       this.minecraft.setConnectedToRealms(false);
 
@@ -111,16 +129,16 @@ public class TitleScreen extends Screen {
          this.realmsNotificationsScreen.init(this.minecraft, this.width, this.height);
       }
 
-      if (!this.minecraft.is64Bit()) {
+      /*if (!this.minecraft.is64Bit()) {
          this.warningLabel = new TitleScreen.WarningLabel(this.font, MultiLineLabel.create(this.font, Component.translatable("title.32bit.deprecation"), 350, 2), this.width / 2, l - 24);
-      }
+      }*/
 
       this.minecraft.controllerHint.clearSwitch();
       this.minecraft.controllerHint.setSwitch(0, "Select");
       this.minecraft.controllerHint.setSwitch(1, "Back");
 
    }
-
+/*
    private void createNormalMenuOptions(int p_96764_, int p_96765_, int p_69696_, int p_42042_) {
 
       this.addRenderableWidget(Button.builder(Component.translatable("menu.singleplayer"), (p_280832_) -> {
@@ -155,7 +173,7 @@ public class TitleScreen extends Screen {
       this.addRenderableWidget(Button.builder(Component.translatable("menu.quit"), (p_280831_) -> {
          this.minecraft.stop();
       }).bounds(this.width / 2 - 100, p_96764_ + p_96765_ * 6, p_69696_, p_42042_).build());
-   }
+   }*/
 
    @Nullable
    private Component getMultiplayerDisabledReason() {
@@ -246,6 +264,9 @@ public class TitleScreen extends Screen {
       }
    }
 
-
-
+   private Button openScreenButton(Component p_261565_, Supplier<Screen> p_262119_) {
+      return Button.builder(p_261565_, (p_280808_) -> {
+         this.minecraft.setScreen(p_262119_.get());
+      }).width(210).build();
+   }
 }

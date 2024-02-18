@@ -22,6 +22,8 @@ import org.joml.Matrix4f;
 public class CubeMap {
    private final ResourceLocation[] images = new ResourceLocation[6];
 
+   public static float rotationVal;
+
    public CubeMap(ResourceLocation location) {
       for(int i = 0; i < 6; ++i) {
          this.images[i] = location.withPath(location.getPath() + "_" + i + ".png");
@@ -30,6 +32,7 @@ public class CubeMap {
    }
 
    public void render(Minecraft p_108850_, float p_108851_, float p_108852_, float p_108853_) {
+      rotationVal = p_108853_;
       Tesselator tesselator = Tesselator.getInstance();
       BufferBuilder bufferbuilder = tesselator.getBuilder();
       Matrix4f matrix4f = (new Matrix4f()).setPerspective(1.4835298F, (float)p_108850_.getWindow().getWidth() / (float)p_108850_.getWindow().getHeight(), 0.05F, 10.0F);

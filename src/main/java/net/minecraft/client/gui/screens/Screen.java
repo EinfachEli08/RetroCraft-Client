@@ -19,6 +19,8 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import javax.annotation.Nullable;
+
+import com.mojang.math.Axis;
 import net.minecraft.CrashReport;
 import net.minecraft.CrashReportCategory;
 import net.minecraft.ReportedException;
@@ -57,6 +59,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import org.joml.Quaternionf;
 import org.slf4j.Logger;
 
 @OnlyIn(Dist.CLIENT)
@@ -122,7 +125,6 @@ public abstract class Screen extends AbstractContainerEventHandler implements Re
    }
 
    public void render(GuiGraphics gfx, int p_281550_, int p_282878_, float p_282465_) {
-
        for (Renderable renderable : this.renderables) {
            renderable.render(gfx, p_281550_, p_282878_, p_282465_);
        }
@@ -684,5 +686,8 @@ public abstract class Screen extends AbstractContainerEventHandler implements Re
          this.index = p_169425_;
          this.priority = p_169426_;
       }
+   }
+   private static float wrap(float p_249058_, float p_249548_) {
+      return p_249058_ > p_249548_ ? p_249058_ - p_249548_ : p_249058_;
    }
 }
