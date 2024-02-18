@@ -1,6 +1,6 @@
 .gradle
-run/logs
-run/crash-reports
+run/logs/
+run/crash-reports/
 build/applyPatches
 build/classes
 build/downloadMCMeta
@@ -8,13 +8,16 @@ build/generated
 build/srg2mcp
 build/tmp
 build/mappings.zip
-build/libs
+build/libs/
+build/libs/*
 build/
+projects/
 projects/mcp
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
 _Compile.bat
+runserver/
 
 ### IntelliJ IDEA ###
 .idea/modules.xml

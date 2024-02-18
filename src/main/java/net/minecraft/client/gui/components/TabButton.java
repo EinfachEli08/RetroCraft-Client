@@ -27,38 +27,35 @@ public class TabButton extends AbstractWidget {
    private static final int UNDERLINE_MARGIN_BOTTOM = 2;
    private final TabManager tabManager;
    private final Tab tab;
+   private final int yPos;
 
-   public TabButton(TabManager p_275399_, Tab p_275391_, int p_275340_, int p_275364_) {
+   public TabButton(TabManager p_275399_, Tab p_275391_, int p_275340_, int p_275364_, int yPos) {
       super(0, 0, p_275340_, p_275364_, p_275391_.getTabTitle());
       this.tabManager = p_275399_;
       this.tab = p_275391_;
+      this.yPos = yPos;
    }
 
    public void renderWidget(GuiGraphics p_283350_, int p_283437_, int p_281595_, float p_282117_) {
-      p_283350_.blitNineSliced(TEXTURE_LOCATION, this.getX(), this.getY(), this.width, this.height, 2, 2, 2, 0, 130, 24, 0, this.getTextureY());
+      p_283350_.blitNineSliced(TEXTURE_LOCATION, this.getX(), this.yPos, this.width, 24, 4, 4, 4, 100, 130, 24, 0, this.getTextureY());
       Font font = Minecraft.getInstance().font;
-      int i = this.active ? -1 : -6250336;
-      this.renderString(p_283350_, font, i);
-      if (this.isSelected()) {
-         this.renderFocusUnderline(p_283350_, font, i);
-      }
+
+      this.renderString(p_283350_, font, 0x181818);
+
 
    }
 
-   public void renderString(GuiGraphics p_282917_, Font p_275208_, int p_275293_) {
+   public void renderString(GuiGraphics gfx, Font font, int color) {
       int i = this.getX() + 1;
-      int j = this.getY() + (this.isSelected() ? 0 : 3);
+      int j = this.yPos - 3 + (this.isSelected() ? 0 : 3);
       int k = this.getX() + this.getWidth() - 1;
-      int l = this.getY() + this.getHeight();
-      renderScrollingString(p_282917_, p_275208_, this.getMessage(), i, j, k, l, p_275293_);
+      int l = this.yPos + this.getHeight();
+
+      //TODO: Remove shadow
+      renderScrollingString(gfx, font, this.getMessage(), i, j, k, l, color);
    }
 
-   private void renderFocusUnderline(GuiGraphics p_282383_, Font p_275475_, int p_275367_) {
-      int i = Math.min(p_275475_.width(this.getMessage()), this.getWidth() - 4);
-      int j = this.getX() + (this.getWidth() - i) / 2;
-      int k = this.getY() + this.getHeight() - 2;
-      p_282383_.fill(j, k, j + i, k + 1, p_275367_);
-   }
+
 
    protected int getTextureY() {
       int i = 2;

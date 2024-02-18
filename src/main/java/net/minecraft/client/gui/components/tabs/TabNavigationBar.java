@@ -35,28 +35,28 @@ public class TabNavigationBar extends AbstractContainerEventHandler implements R
    private final ImmutableList<Tab> tabs;
    private final ImmutableList<TabButton> tabButtons;
 
-   TabNavigationBar(int p_275379_, TabManager p_275624_, Iterable<Tab> p_275279_) {
-      this.width = p_275379_;
-      this.tabManager = p_275624_;
-      this.tabs = ImmutableList.copyOf(p_275279_);
+   TabNavigationBar(int width, TabManager mgr, Iterable<Tab> iTab) {
+      this.width = width;
+      this.tabManager = mgr;
+      this.tabs = ImmutableList.copyOf(iTab);
       this.layout = new GridLayout(0, 0);
       this.layout.defaultCellSetting().alignHorizontallyCenter();  
       ImmutableList.Builder<TabButton> builder = ImmutableList.builder();
       int i = 0;
 
-      for(Tab tab : p_275279_) {
-         builder.add(this.layout.addChild(new TabButton(p_275624_, tab, 0, 24), 0, i++));
+      for(Tab tab : iTab) {
+         builder.add(this.layout.addChild(new TabButton(mgr, tab, 0, 24,0), 0, i++));
       }
 
       this.tabButtons = builder.build();
    }
 
-   public static TabNavigationBar.Builder builder(TabManager p_268126_, int p_268070_) {
-      return new TabNavigationBar.Builder(p_268126_, p_268070_);
+   public static TabNavigationBar.Builder builder(TabManager mgr, int p_268070_) {
+      return new TabNavigationBar.Builder(mgr, p_268070_);
    }
 
-   public void setWidth(int p_268094_) {
-      this.width = p_268094_;
+   public void setWidth(int width) {
+      this.width = width;
    }
 
    public void setFocused(boolean p_275488_) {
@@ -133,7 +133,7 @@ public class TabNavigationBar extends AbstractContainerEventHandler implements R
    }
 
    public void arrangeElements() {
-      int i = Math.min(400, this.width) - 28;
+      int i = Math.min(300, this.width) - 28;
       int j = Mth.roundToward(i / this.tabs.size(), 2);
 
       for(TabButton tabbutton : this.tabButtons) {
@@ -184,8 +184,7 @@ public class TabNavigationBar extends AbstractContainerEventHandler implements R
 
    private int currentTabIndex() {
       Tab tab = this.tabManager.getCurrentTab();
-      int i = this.tabs.indexOf(tab);
-      return i != -1 ? i : -1;
+       return this.tabs.indexOf(tab);
    }
 
    private @Nullable TabButton currentTabButton() {
