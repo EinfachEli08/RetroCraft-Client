@@ -4,10 +4,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
 public class PanoramaRenderer {
    private final Minecraft minecraft;
    private final CubeMap cubeMap;
@@ -18,8 +15,7 @@ public class PanoramaRenderer {
       this.minecraft = Minecraft.getInstance();
    }
 
-   public void render(float p_110004_, float p_110005_) {
-
+   public void render(float p_110005_) {
       this.cubeMap.render(this.minecraft, 10.0F, -Screen.spin, p_110005_);
    }
 

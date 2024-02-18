@@ -158,8 +158,11 @@ public class CreateWorldScreen extends Screen {
    }
 
    protected void init() {
+
       this.tabNavigationBar = TabNavigationBar.builder(this.tabManager, this.width).addTabs(new CreateWorldScreen.GameTab(), new CreateWorldScreen.WorldTab(), new CreateWorldScreen.MoreTab()).build();
+
       this.addRenderableWidget(this.tabNavigationBar);
+
       this.bottomButtons = (new GridLayout()).columnSpacing(10);
       GridLayout.RowHelper gridlayout$rowhelper = this.bottomButtons.createRowHelper(2);
       gridlayout$rowhelper.addChild(Button.builder(Component.translatable("selectWorld.create"), (p_232938_) -> {
@@ -223,7 +226,7 @@ public class CreateWorldScreen extends Screen {
       String s = this.uiState.getName().trim();
       if (p_205448_) {
          GameRules gamerules = new GameRules();
-         gamerules.getRule(GameRules.RULE_DAYLIGHT).set(false, (MinecraftServer)null);
+         gamerules.getRule(GameRules.RULE_DAYLIGHT).set(false, null);
          return new LevelSettings(s, GameType.SPECTATOR, false, Difficulty.PEACEFUL, true, gamerules, WorldDataConfiguration.DEFAULT);
       } else {
          return new LevelSettings(s, this.uiState.getGameMode().gameType, this.uiState.isHardcore(), this.uiState.getDifficulty(), this.uiState.isAllowCheats(), this.uiState.getGameRules(), this.uiState.getSettings().dataConfiguration());
@@ -254,7 +257,7 @@ public class CreateWorldScreen extends Screen {
 
    public void render(GuiGraphics p_282137_, int p_283640_, int p_281243_, float p_282743_) {
       this.renderBackground(p_282137_);
-      p_282137_.blit(FOOTER_SEPERATOR, 0, Mth.roundToward(this.height - 36 - 2, 2), 0.0F, 0.0F, this.width, 2, 32, 2);
+      //p_282137_.blit(FOOTER_SEPERATOR, 0, Mth.roundToward(this.height - 36 - 2, 2), 0.0F, 0.0F, this.width, 2, 32, 2);
       super.render(p_282137_, p_283640_, p_281243_, p_282743_);
    }
 

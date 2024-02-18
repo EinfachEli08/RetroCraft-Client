@@ -87,7 +87,7 @@ public class AccessibilityOnboardingScreen extends Screen {
 
    public void render(GuiGraphics p_282353_, int p_265135_, int p_265032_, float p_265387_) {
       this.handleInitialNarrationDelay();
-      this.panorama.render(0.5F, 0.5F);
+      this.panorama.render(0.5F);
       p_282353_.fill(0, 0, this.width, this.height, -1877995504);
       this.logoRenderer.renderLogo(p_282353_, this.width, 1.0F);
       if (this.textWidget != null) {
