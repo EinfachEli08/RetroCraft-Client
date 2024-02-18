@@ -95,7 +95,7 @@ public class MoreOptionsScreen extends OptionsSubScreen {
 
 
         gridlayout.arrangeElements();
-        FrameLayout.alignInRectangle(gridlayout, 0, 0, this.width, this.height, 0.5F, 0.5F);
+        FrameLayout.alignInRectangle(gridlayout, 0, 112, this.width, this.height, 0, 0.5F);
         gridlayout.visitWidgets(this::addRenderableWidget);
     }
 
