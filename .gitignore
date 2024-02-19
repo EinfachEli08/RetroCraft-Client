@@ -8,18 +8,16 @@ build/generated
 build/srg2mcp
 build/tmp
 build/mappings.zip
-<<<<<<< HEAD
 build/libs/
 build/libs/*
 build/
 projects/
-=======
->>>>>>> refs/remotes/origin/main
 projects/mcp
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
 _Compile.bat
+java_*
 runserver/
 
 ### IntelliJ IDEA ###

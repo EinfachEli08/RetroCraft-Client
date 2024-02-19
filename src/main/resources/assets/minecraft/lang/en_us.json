@@ -1,4 +1,4 @@
-{
+﻿{
   "accessibility.onboarding.screen.narrator": "Press enter to enable the narrator",
   "accessibility.onboarding.screen.title": "Welcome to Minecraft!\n\nWould you like to enable the Narrator or visit the Accessibility Settings?",
   "addServer.add": "Done",
@@ -4571,15 +4571,15 @@
   "menu.generatingTerrain": "Building terrain",
   "menu.loadingForcedChunks": "Loading forced chunks for dimension %s",
   "menu.loadingLevel": "Loading world",
-  "menu.modded": " (Modded)",
+  "menu.modded": " ",
   "menu.multiplayer": "Multiplayer",
   "menu.online": "Minecraft Realms",
-  "menu.options": "Options...",
+  "menu.options": "Help & Options",
   "menu.paused": "Game Paused",
   "menu.playdemo": "Play Demo World",
   "menu.playerReporting": "Player Reporting",
   "menu.preparingSpawn": "Preparing spawn area: %s%%",
-  "menu.quit": "Quit Game",
+  "menu.quit": "Exit Game",
   "menu.reportBugs": "Report Bugs",
   "menu.resetdemo": "Reset Demo World",
   "menu.respawning": "Respawning",
@@ -4589,7 +4589,7 @@
   "menu.savingLevel": "Saving world",
   "menu.sendFeedback": "Give Feedback",
   "menu.shareToLan": "Open to LAN",
-  "menu.singleplayer": "Singleplayer",
+  "menu.singleplayer": "Play Game",
   "menu.working": "Working...",
   "merchant.current_level": "Trader's current level",
   "merchant.deprecated": "Villagers restock up to two times per day.",
@@ -6215,5 +6215,6 @@
   "tutorial.punch_tree.title": "Destroy the tree",
   "tutorial.socialInteractions.description": "Press %s to open",
   "tutorial.socialInteractions.title": "Social Interactions",
-  "upgrade.minecraft.netherite_upgrade": "Netherite Upgrade"
+  "upgrade.minecraft.netherite_upgrade": "Netherite Upgrade",
+  "test": "Testing"
 }

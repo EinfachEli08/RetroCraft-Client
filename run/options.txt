@@ -37,9 +37,6 @@ entityDistanceScaling:0.5
 guiScale:2
 particles:0
 maxFps:120
-graphicsMode:0
-ao:true
-prioritizeChunkUpdates:0
 graphicsMode:2
 ao:true
 prioritizeChunkUpdates:2

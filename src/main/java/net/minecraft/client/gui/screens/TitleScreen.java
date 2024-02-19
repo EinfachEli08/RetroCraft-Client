@@ -30,6 +30,7 @@ import net.minecraft.client.gui.screens.controls.ControlsScreen;
 import net.minecraft.client.gui.screens.multiplayer.JoinMultiplayerScreen;
 import net.minecraft.client.gui.screens.multiplayer.SafetyScreen;
 import net.minecraft.client.gui.screens.worldselection.SelectWorldScreen;
+import net.minecraft.client.gui.screens.worldselection.SelectGameScreen;
 import net.minecraft.client.player.controller.MouseSimulator;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.resources.language.I18n;
@@ -109,6 +110,9 @@ public class TitleScreen extends Screen {
       gridlayout$rowhelper.addChild(this.openScreenButton(Component.translatable("menu.options"), () -> new OptionsScreen(this, this.minecraft.options)));
       gridlayout$rowhelper.addChild(this.openScreenButton(Component.translatable("narrator.button.language"), () -> new LanguageSelectScreen(this, this.minecraft.options, this.minecraft.getLanguageManager())));
       gridlayout$rowhelper.addChild(this.openScreenButton(Component.translatable("narrator.button.accessibility"), () -> new AccessibilityOptionsScreen(this, this.minecraft.options)));
+
+      gridlayout$rowhelper.addChild(this.openScreenButton(Component.translatable("test"), () -> new SelectGameScreen(this)));
+
       gridlayout$rowhelper.addChild(this.openScreenButton(Component.translatable("menu.quit"), () -> {
          this.minecraft.stop();
          return null;
