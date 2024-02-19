@@ -64,7 +64,6 @@ public abstract class Screen extends AbstractContainerEventHandler implements Re
    private static final Set<String> ALLOWED_PROTOCOLS = Sets.newHashSet("http", "https");
    private static final Component USAGE_NARRATION = Component.translatable("narrator.screen.usage");
    public static final ResourceLocation BACKGROUND_LOCATION = new ResourceLocation("textures/gui/options_background.png");
-   public static final ResourceLocation PANORAMA_OVERLAY = new ResourceLocation("textures/gui/title/background/panorama_overlay.png");
    protected final Component title;
    private final List<GuiEventListener> children = Lists.newArrayList();
    private final List<NarratableEntry> narratables = Lists.newArrayList();
@@ -408,12 +407,7 @@ public abstract class Screen extends AbstractContainerEventHandler implements Re
       if (this.minecraft.level != null) {
          p_283688_.fillGradient(0, 0, this.width, this.height, -1072689136, -804253680);
       } else {
-         this.minecraft.panorama.render(p_283688_, 0.5F, 1);
-         RenderSystem.enableBlend();
-         p_283688_.setColor(0.25F, 0.25F, 0.25F, 1.0F);
-         p_283688_.blit(PANORAMA_OVERLAY, 0, 0, this.width, this.height, 0.0F, 0.0F, 16, 128, 16, 128);
-         p_283688_.setColor(1.0F, 1.0F, 1.0F, 1.0F);
-         RenderSystem.disableBlend();
+         this.minecraft.panorama.render(p_283688_, this.width, this.height);
       }
    }
 

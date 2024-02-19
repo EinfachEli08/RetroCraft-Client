@@ -561,7 +561,7 @@ public class Minecraft extends ReentrantBlockableEventLoop<Runnable> implements 
       this.reloadStateTracker.startReload(ResourceLoadStateTracker.ReloadReason.INITIAL, list);
       ReloadInstance reloadinstance = this.resourceManager.createReload(Util.backgroundExecutor(), this, RESOURCE_RELOAD_INITIAL_TASK, list);
       GameLoadTimesEvent.INSTANCE.beginStep(TelemetryProperty.LOAD_TIME_LOADING_OVERLAY_MS);
-      panorama = new PanoramaRenderer();
+      panorama = new PanoramaRenderer(this);
       this.setOverlay(new LoadingOverlay(this, reloadinstance, (p_210745_) -> {
          Util.ifElse(p_210745_, this::rollbackResourcePacks, () -> {
             if (SharedConstants.IS_RUNNING_IN_IDE) {

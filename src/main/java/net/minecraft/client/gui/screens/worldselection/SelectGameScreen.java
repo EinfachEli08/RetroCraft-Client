@@ -53,7 +53,7 @@ public class SelectGameScreen extends Screen {
         this.lastScreen = screen;
     }
 
-    public void init(){
+    protected void init(){
         this.tabNavigationBar = TabNavigationBar.builder(this.tabManager, this.width)
                 .addTabs(new SelectGameScreen.LoadTab(), new SelectGameScreen.CreateTab(), new SelectGameScreen.JoinTab()).build();
         this.addRenderableWidget(this.tabNavigationBar);
@@ -72,23 +72,23 @@ public class SelectGameScreen extends Screen {
     }
 
     public void repositionElements() {
+        this.x = this.width / 2 - TEXTURE_WIDTH / 2;
+        this.y = this.height / 2 - TEXTURE_HEIGHT / 2;
+
         if (this.tabNavigationBar != null && this.bottomButtons != null) {
             this.tabNavigationBar.setWidth(TEXTURE_WIDTH);
             this.tabNavigationBar.arrangeElements();
             this.bottomButtons.arrangeElements();
-            FrameLayout.alignInRectangle(this.bottomButtons, 0, y-TAB_HEIGHT, TEXTURE_WIDTH, TAB_HEIGHT, 0.5F, 0);
-            ScreenRectangle screenrectangle = new ScreenRectangle(x, y, TEXTURE_WIDTH, TEXTURE_HEIGHT);
+            FrameLayout.alignInRectangle(this.bottomButtons, this.x, this.y-TAB_HEIGHT, TEXTURE_WIDTH, TAB_HEIGHT, 0.5F, 0);
+            ScreenRectangle screenrectangle = new ScreenRectangle(-100, 0, TEXTURE_WIDTH, TEXTURE_HEIGHT);
             this.tabManager.setTabArea(screenrectangle);
         }
     }
-    public void render(GuiGraphics gfx, int p_281262_, int p_283321_, float p_282251_){
-        x = this.width / 2 - TEXTURE_WIDTH / 2;
-        y = this.height / 2 - TEXTURE_HEIGHT / 2;
-
+    public void render(GuiGraphics gfx, int mousex, int mousey, float p_282251_){
         this.renderBackground(gfx);
-        gfx.blit(MENU_LOCATION, x, y, 0, 0, 207, 163, TEXTURE_WIDTH, TEXTURE_HEIGHT);
+        gfx.blit(MENU_LOCATION, this.x, this.y, 0, 0, 207, 163, TEXTURE_WIDTH, TEXTURE_HEIGHT);
 
-        super.render(gfx, p_281262_, p_283321_, p_282251_);
+        super.render(gfx, width, height, p_282251_);
     }
     public void onClose() {
         this.popScreen();
@@ -113,7 +113,6 @@ public class SelectGameScreen extends Screen {
             super(TITLE);
             GridLayout.RowHelper gridlayout$rowhelper = this.layout.createRowHelper(1);
             //gridlayout$rowhelper.addChild(openScreenButton(Component.translatable("menu.singleplayer"), () -> new SelectWorldScreen(this)));
-
         }
     }
     @OnlyIn(Dist.CLIENT)
