@@ -25,8 +25,11 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew build
 
+    - name: Rename JAR file
+      run: mv build/libs/*.jar build/libs/RetroCraft.jar   # Rename the JAR file
+
     - name: Archive artifacts
       uses: actions/upload-artifact@v2
       with:
-        name: my-java-artifact
-        path: build/libs/*.jar
+        name: RetroCraft.jar   # Change the name of the artifact here
+        path: build/libs/RetroCraft.jar   # Specify the renamed JAR file path
