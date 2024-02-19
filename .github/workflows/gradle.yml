@@ -13,6 +13,9 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
+    - name: Set execute permissions for gradlew
+      run: chmod +x gradlew   # Add this line to set execute permissions
+
     - name: Set up JDK
       uses: actions/setup-java@v2
       with:
