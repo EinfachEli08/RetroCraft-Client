@@ -1,0 +1,35 @@
+name: Build and Publish Artifact
+
+on:
+  push:
+    branches:
+      - main  # or specify your main branch name
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set execute permissions for gradlew
+      run: chmod +x gradlew   # Add this line to set execute permissions
+
+    - name: Set up JDK
+      uses: actions/setup-java@v2
+      with:
+        distribution: 'adopt'
+        java-version: '17'
+
+    - name: Build with Gradle
+      run: ./gradlew build
+
+    - name: Rename JAR file
+      run: mv build/libs/*.jar build/libs/RetroCraft.jar   # Rename the JAR file
+
+    - name: Archive artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: RetroCraft.jar   # Change the name of the artifact here
+        path: build/libs/RetroCraft.jar   # Specify the renamed JAR file path
