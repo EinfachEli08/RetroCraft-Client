@@ -22,6 +22,8 @@ java_*
 runserver/
 run/assets/
 ### Or else it will take forever, its rebuilt for every run anyways.
+RetroCraft/RetroCraft.jar ###better set up some online building, this makes the repo lotta bigger in file size(recloning)
+RetroCraft/
 
 ### IntelliJ IDEA ###
 .idea/modules.xml
