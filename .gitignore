@@ -10,6 +10,7 @@ build/tmp
 build/mappings.zip
 build/libs/
 build/libs/*
+build/resources/
 build/
 projects/
 projects/mcp
@@ -19,6 +20,8 @@ projects/mcp
 _Compile.bat
 java_*
 runserver/
+run/assets/
+### Or else it will take forever, its rebuilt for every run anyways.
 
 ### IntelliJ IDEA ###
 .idea/modules.xml
