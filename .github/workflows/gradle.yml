@@ -1,0 +1,29 @@
+name: Build and Publish Artifact
+
+on:
+  push:
+    branches:
+      - main  # or specify your main branch name
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up JDK
+      uses: actions/setup-java@v2
+      with:
+        distribution: 'adopt'
+        java-version: '17'
+
+    - name: Build with Gradle
+      run: ./gradlew build
+
+    - name: Archive artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: my-java-artifact
+        path: build/libs/*.jar
