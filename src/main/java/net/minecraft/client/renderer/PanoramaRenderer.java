@@ -13,7 +13,7 @@ public class PanoramaRenderer {
     public PanoramaRenderer(Minecraft minecraft){
         this.minecraft = minecraft;
     }
-    public void render(GuiGraphics gfx, int width, int height){
+    public void render(GuiGraphics gfx, int height){
         scroll += (float) (this.minecraft.options.panoramaSpeed().get() / 100 * this.minecraft.getDeltaFrameTime());
 
         float aspectRatio = 6150f / 1080f;

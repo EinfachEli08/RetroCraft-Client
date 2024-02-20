@@ -4,7 +4,6 @@ import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.mojang.blaze3d.platform.InputConstants;
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.logging.LogUtils;
 import java.io.File;
 import java.net.URI;
@@ -407,7 +406,7 @@ public abstract class Screen extends AbstractContainerEventHandler implements Re
       if (this.minecraft.level != null) {
          p_283688_.fillGradient(0, 0, this.width, this.height, -1072689136, -804253680);
       } else {
-         this.minecraft.panorama.render(p_283688_, this.width, this.height);
+         this.minecraft.panorama.render(p_283688_, this.height);
       }
    }
 

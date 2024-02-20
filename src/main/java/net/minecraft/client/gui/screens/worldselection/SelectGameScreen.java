@@ -1,10 +1,7 @@
 package net.minecraft.client.gui.screens.worldselection;
 
-import com.mojang.logging.LogUtils;
-import com.mojang.serialization.Lifecycle;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
-import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.components.TextAndImageButton;
 import net.minecraft.client.gui.components.tabs.GridLayoutTab;
 import net.minecraft.client.gui.components.tabs.TabManager;
@@ -13,17 +10,11 @@ import net.minecraft.client.gui.layouts.FrameLayout;
 import net.minecraft.client.gui.layouts.GridLayout;
 import net.minecraft.client.gui.navigation.ScreenRectangle;
 import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.core.LayeredRegistryAccess;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.RegistryLayer;
-import net.minecraft.world.flag.FeatureFlags;
-import net.minecraft.world.level.levelgen.WorldDimensions;
-import net.minecraft.world.level.levelgen.WorldOptions;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import org.slf4j.Logger;
 
 import javax.annotation.Nullable;
 import java.util.function.Supplier;
@@ -92,7 +83,7 @@ public class SelectGameScreen extends Screen {
         }
     }
     public void render(GuiGraphics gfx, int mousex, int mousey, float p_282251_) {
-        this.minecraft.panorama.render(gfx, this.width, this.height);
+        this.minecraft.panorama.render(gfx, this.height);
         gfx.blit(MENU_LOCATION, x, y, myWidth, myHeight, 0.0F, 0.0F, 64, 256, 64, 256);
 
         super.render(gfx, width, height, p_282251_);
