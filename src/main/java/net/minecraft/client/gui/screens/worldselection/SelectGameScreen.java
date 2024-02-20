@@ -85,8 +85,7 @@ public class SelectGameScreen extends Screen {
         }
     }
     public void render(GuiGraphics gfx, int mousex, int mousey, float p_282251_){
-        this.renderBackground(gfx);
-        gfx.blit(MENU_LOCATION, this.x, this.y, 0, 0, 207, 163, TEXTURE_WIDTH, TEXTURE_HEIGHT);
+        gfx.blit(MENU_LOCATION, x, y, this.width, this.height, 0.0F, 0.0F, 16, 128, 16, 128);
 
         super.render(gfx, width, height, p_282251_);
     }
