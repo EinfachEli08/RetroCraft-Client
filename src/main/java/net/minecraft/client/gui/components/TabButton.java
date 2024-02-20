@@ -46,8 +46,8 @@ public class TabButton extends AbstractWidget {
    }
 
    public void renderString(GuiGraphics gfx, Font font, int color) {
-      int i = this.getX() + 1;
-      int j = this.getY() - 3 + (this.isSelected() ? 0 : 3);
+      int i = this.getX();
+      int j = this.getY() - 1 + (this.isSelected() ? 0 : 2);
       int k = this.getX() + this.getWidth() - 1;
       int l = this.getY() + this.getHeight();
 
@@ -58,7 +58,7 @@ public class TabButton extends AbstractWidget {
 
 
    protected int getTextureY() {
-      return this.isFocused() ? this.type * TEXTURE_HEIGHT : 4 * TEXTURE_HEIGHT;
+      return this.isSelected() ? this.type * TEXTURE_HEIGHT : 4 * TEXTURE_HEIGHT;
    }
 
    protected void updateWidgetNarration(NarrationElementOutput p_275465_) {
