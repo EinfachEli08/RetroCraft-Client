@@ -14,8 +14,16 @@ public class PanoramaRenderer {
         this.minecraft = minecraft;
     }
     public void render(GuiGraphics gfx, int width, int height){
-        scroll += this.minecraft.options.panoramaSpeed().get() / 100 * this.minecraft.getDeltaFrameTime();
-        gfx.blit(PANORAMA_LOCATION, 0, 0, (2060/width)*width, height, scroll, 0.0F, 16, 128, 16, 128);
+        scroll += (float) (this.minecraft.options.panoramaSpeed().get() / 100 * this.minecraft.getDeltaFrameTime());
+
+        float aspectRatio = 6150f / 1080f;
+        int targetWidth = Math.round(height * aspectRatio);
+
+
+        gfx.blit(PANORAMA_LOCATION, 0, 0, targetWidth, height, scroll, 0.0F, 16, 128, 16, 128);
+
+
+
 
     }
 }
