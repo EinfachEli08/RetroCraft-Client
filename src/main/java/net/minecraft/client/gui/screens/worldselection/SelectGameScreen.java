@@ -32,8 +32,8 @@ public class SelectGameScreen extends Screen {
 
     public static final ResourceLocation MENU_LOCATION = new ResourceLocation("textures/gui/container/menu/map_select.png");
 
-    private static final int TEXTURE_WIDTH = 207/4+207;
-    private static final int TEXTURE_HEIGHT = 163/4+163;
+    private static final int TEXTURE_WIDTH = 207;
+    private static final int TEXTURE_HEIGHT = 163;
     private static final int TAB_HEIGHT = 21;
     @Nullable
     private final Screen lastScreen;
@@ -43,6 +43,8 @@ public class SelectGameScreen extends Screen {
     private TabNavigationBar tabNavigationBar;
     private int x;
     private int y;
+    private int myWidth;
+    private int myHeight;
 
     private final TabManager tabManager = new TabManager(this::addRenderableWidget, (p_267853_) -> {
         this.removeWidget(p_267853_);
@@ -72,8 +74,10 @@ public class SelectGameScreen extends Screen {
     }
 
     public void repositionElements() {
-        this.x = this.width / 2 - TEXTURE_WIDTH / 2;
-        this.y = this.height / 2 - TEXTURE_HEIGHT / 2;
+        myWidth = TEXTURE_WIDTH *this.minecraft.options.guiScale().get();
+        myHeight = TEXTURE_HEIGHT *this.minecraft.options.guiScale().get();
+        this.x = this.width / 2 - myWidth / 2;
+        this.y = this.height / 2 - myHeight / 2;
 
         if (this.tabNavigationBar != null && this.bottomButtons != null) {
             this.tabNavigationBar.setWidth(TEXTURE_WIDTH);
@@ -84,8 +88,8 @@ public class SelectGameScreen extends Screen {
             this.tabManager.setTabArea(screenrectangle);
         }
     }
-    public void render(GuiGraphics gfx, int mousex, int mousey, float p_282251_){
-        gfx.blit(MENU_LOCATION, x, y, this.width, this.height, 0.0F, 0.0F, 16, 128, 16, 128);
+    public void render(GuiGraphics gfx, int mousex, int mousey, float p_282251_) {
+        gfx.blit(MENU_LOCATION, x, y, myWidth, myHeight, 0.0F, 0.0F, 16, 128, 16, 128);
 
         super.render(gfx, width, height, p_282251_);
     }
