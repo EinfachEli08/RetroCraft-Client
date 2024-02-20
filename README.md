@@ -29,6 +29,7 @@ _Experience the classic Minecraft menu layout with RetroCraft._
 
 ![](https://github.com/EinfachEli08/RetroCraft-Client/blob/main/Screenshots/menu.png)
 
+![](https://github.com/EinfachEli08/RetroCraft-Client/blob/main/Screenshots/TitleScreen.png)
 
 
 ## Installation

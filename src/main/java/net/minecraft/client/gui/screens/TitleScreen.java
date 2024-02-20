@@ -123,7 +123,6 @@ public class TitleScreen extends Screen {
 
    private void createNormalMenuOptions(int p_96764_, int buttonTopSpacing, int buttonWidth, int buttonHeight, int ySpacingFromTop, boolean isTesting) {
 
-
       this.addRenderableWidget(Button.builder(Component.translatable("menu.singleplayer"), (p_280832_) -> {
          this.minecraft.setScreen(new SelectWorldScreen(this));
       }).bounds(this.width / 2 - 100, p_96764_ + ySpacingFromTop, buttonWidth , buttonHeight).build());
