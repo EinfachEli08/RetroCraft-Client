@@ -43,9 +43,14 @@ public class TabNavigationBar extends AbstractContainerEventHandler implements R
       this.layout.defaultCellSetting().alignHorizontallyCenter();  
       ImmutableList.Builder<TabButton> builder = ImmutableList.builder();
       int i = 0;
+      int j = -1;
 
       for(Tab tab : iTab) {
-         builder.add(this.layout.addChild(new TabButton(mgr, tab, 0, 24,0), 0, i++));
+         j++;
+      }
+      for(Tab tab : iTab) {
+         builder.add(this.layout.addChild(new TabButton(mgr, tab, 0, 21,0), 0, j==0 ? 3 : i==0 ? 1 : i==j ? j : 0));//if only one tab, type 3, first, type 1, last, type 0.
+         i++;
       }
 
       this.tabButtons = builder.build();
