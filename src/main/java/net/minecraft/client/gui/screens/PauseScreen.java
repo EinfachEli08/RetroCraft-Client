@@ -10,16 +10,16 @@ import javax.annotation.Nullable;
 import net.minecraft.SharedConstants;
 import net.minecraft.Util;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.components.AbstractWidget;
-import net.minecraft.client.gui.components.Button;
-import net.minecraft.client.gui.components.LogoRenderer;
-import net.minecraft.client.gui.components.StringWidget;
+import net.minecraft.client.gui.components.*;
 import net.minecraft.client.gui.layouts.FrameLayout;
 import net.minecraft.client.gui.layouts.GridLayout;
 import net.minecraft.client.gui.screens.achievement.StatsScreen;
 import net.minecraft.client.gui.screens.advancements.AdvancementsScreen;
 import net.minecraft.client.gui.screens.multiplayer.JoinMultiplayerScreen;
+import net.minecraft.client.gui.screens.multiplayer.SafetyScreen;
 import net.minecraft.client.gui.screens.social.SocialInteractionsScreen;
+import net.minecraft.client.gui.screens.worldselection.SelectGameScreen;
+import net.minecraft.client.gui.screens.worldselection.SelectWorldScreen;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.network.chat.Component;
 import net.minecraftforge.api.distmarker.Dist;
@@ -56,49 +56,40 @@ public class PauseScreen extends Screen {
 	   this.logoRenderer = new LogoRenderer(false);
 	      
       if (this.showPauseMenu) {
-         this.createPauseMenu();
+         this.createPauseMenu(this.height / 4 + 35,22, 200, 18, 0);
       }
-
-
-
    }
 
-   private void createPauseMenu() {
-      GridLayout gridlayout = new GridLayout();
-      gridlayout.defaultCellSetting().padding(4, 4, 4, 0);
-      GridLayout.RowHelper gridlayout$rowhelper = gridlayout.createRowHelper(1);
-      
-      gridlayout$rowhelper.addChild(Button.builder(RETURN_TO_GAME, (p_280814_) -> {
+   private void createPauseMenu(int p_96764_, int buttonTopSpacing, int buttonWidth, int buttonHeight, int ySpacingFromTop) {
+
+      this.addRenderableWidget(Button.builder(RETURN_TO_GAME, (p_280814_) -> {
          this.minecraft.setScreen((Screen)null);
          this.minecraft.mouseHandler.grabMouse();
-      }).width(210).build(), 1, gridlayout.newCellSettings().paddingTop(50));
-      
-      gridlayout$rowhelper.addChild(this.openScreenButton(OPTIONS, () -> {
-          return new OptionsScreen(this, this.minecraft.options);
-       }));
-      
-      gridlayout$rowhelper.addChild(this.openScreenButton(ADVANCEMENTS, () -> {
-         return new AdvancementsScreen(this.minecraft.player.connection.getAdvancements());
-      }));
-      
+      }).bounds(this.width / 2 - 100, p_96764_ + ySpacingFromTop, buttonWidth , buttonHeight).build());
 
+      this.addRenderableWidget(Button.builder(OPTIONS, (p_280833_) -> {
+         Screen screen = new OptionsScreen(this, this.minecraft.options);
+         this.minecraft.setScreen(screen);
+      }).bounds(this.width / 2 - 100, p_96764_ + buttonTopSpacing * 1 + ySpacingFromTop, buttonWidth, buttonHeight).build());
 
-      if (this.minecraft.hasSingleplayerServer() && !this.minecraft.getSingleplayerServer().isPublished()) {
-         gridlayout$rowhelper.addChild(this.openScreenButton(SHARE_TO_LAN, () -> {
-            return new ShareToLanScreen(this);
-         }));
-      }
+      this.addRenderableWidget(Button.builder(ADVANCEMENTS, (p_280833_) -> {
+         Screen screen = new AdvancementsScreen(this.minecraft.player.connection.getAdvancements());
+         this.minecraft.setScreen(screen);
+      }).bounds(this.width / 2 - 100, p_96764_ + buttonTopSpacing * 2 + ySpacingFromTop, buttonWidth, buttonHeight).build());
+
+      this.addRenderableWidget(Button.builder(SHARE_TO_LAN, (p_280833_) -> {
+         Screen screen = new ShareToLanScreen(this);
+         this.minecraft.setScreen(screen);
+      }).bounds(this.width / 2 - 100, p_96764_ + buttonTopSpacing * 3 + ySpacingFromTop, buttonWidth, buttonHeight).build());
+
 
       Component component = this.minecraft.isLocalServer() ? RETURN_TO_MENU : DISCONNECT;
-      
-      this.disconnectButton = gridlayout$rowhelper.addChild(Button.builder(component, (p_280815_) -> {
+
+      this.addRenderableWidget(Button.builder(component, (p_280815_) -> {
          p_280815_.active = false;
          this.minecraft.getReportingContext().draftReportHandled(this.minecraft, this, this::onDisconnect, true);
-      }).width(210).build(), 1);
-      
-      gridlayout.arrangeElements();
-      FrameLayout.alignInRectangle(gridlayout, 0, 112, this.width, this.height, 0.5F, 0);
-      gridlayout.visitWidgets(this::addRenderableWidget);
+      }).bounds(this.width / 2 - 100, p_96764_ + buttonTopSpacing * 4 + ySpacingFromTop, buttonWidth, buttonHeight).build());
+
    }
 
    private void onDisconnect() {
@@ -141,6 +132,6 @@ public class PauseScreen extends Screen {
    private Button openScreenButton(Component p_262567_, Supplier<Screen> p_262581_) {
       return Button.builder(p_262567_, (p_280817_) -> {
          this.minecraft.setScreen(p_262581_.get());
-      }).width(210).build();
+      }).width(200).bounds(22, 200, 18, 0).build();
    }
 }
