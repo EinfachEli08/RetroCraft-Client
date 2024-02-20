@@ -17,19 +17,18 @@ public class TabManager {
    private final Consumer<AbstractWidget> removeWidget;
    @Nullable
    private Tab currentTab;
-   @Nullable
-   private ScreenRectangle tabArea;
+   //@Nullable
+   //private ScreenRectangle tabArea;
 
    public TabManager(Consumer<AbstractWidget> p_268279_, Consumer<AbstractWidget> p_268196_) {
       this.addWidget = p_268279_;
       this.removeWidget = p_268196_;
    }
 
-   public void setTabArea(ScreenRectangle p_268042_) {
-      this.tabArea = p_268042_;
+   public void setTabArea(int x, int y, int w, int h) {
       Tab tab = this.getCurrentTab();
       if (tab != null) {
-         tab.doLayout(p_268042_);
+         tab.doLayout(x,y,w,h);
       }
 
    }
@@ -42,9 +41,9 @@ public class TabManager {
 
          this.currentTab = p_276109_;
          p_276109_.visitChildren(this.addWidget);
-         if (this.tabArea != null) {
+         /*if (this.tabArea != null) {
             p_276109_.doLayout(this.tabArea);
-         }
+         }*/
 
          if (p_276120_) {
             Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.UI_BUTTON_CLICK, 1.0F));

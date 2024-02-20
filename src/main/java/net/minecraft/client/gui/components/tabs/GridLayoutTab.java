@@ -26,8 +26,10 @@ public class GridLayoutTab implements Tab {
       this.layout.visitWidgets(p_268098_);
    }
 
-   public void doLayout(ScreenRectangle p_268281_) {
+   public void doLayout(int x, int y, int w, int h) {
       this.layout.arrangeElements();
-      FrameLayout.alignInRectangle(this.layout, p_268281_, 0.5F, 0.16666667F);
+      //FrameLayout.alignInRectangle(this.layout, p_268281_, 0F, 0F);
+      FrameLayout.alignInRectangle(this.layout, x, y, w, h, 0, 0);
+
    }
 }

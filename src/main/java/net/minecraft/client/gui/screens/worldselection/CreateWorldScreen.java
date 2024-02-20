@@ -188,7 +188,7 @@ public class CreateWorldScreen extends Screen {
          FrameLayout.centerInRectangle(this.bottomButtons, 0, this.height - 36, this.width, 36);
          int i = this.tabNavigationBar.getRectangle().bottom();
          ScreenRectangle screenrectangle = new ScreenRectangle(0, i, this.width, this.bottomButtons.getY() - i);
-         this.tabManager.setTabArea(screenrectangle);
+         //this.tabManager.setTabArea(screenrectangle);
       }
    }
 

@@ -49,7 +49,8 @@ public class TabNavigationBar extends AbstractContainerEventHandler implements R
          j++;
       }
       for(Tab tab : iTab) {
-         builder.add(this.layout.addChild(new TabButton(mgr, tab, 0, 21,0), 0, j==0 ? 3 : i==0 ? 1 : i==j ? j : 0));//if only one tab, type 3, first, type 1, last, type 0.
+         int type = j==0 ? 3 : i==0 ? 1 : i==j ? 3 : 0; //if only one tab, type 3, first, type 1, last, type 0.
+         builder.add(this.layout.addChild(new TabButton(mgr, tab, 0, 21,0), 0, type));
          i++;
       }
 
@@ -127,10 +128,13 @@ public class TabNavigationBar extends AbstractContainerEventHandler implements R
      // p_281720_.fill(10, 0, this.width, 24, -16777216);
       //p_281720_.blit(CreateWorldScreen.HEADER_SEPERATOR, 0, this.layout.getY() + this.layout.getHeight() - 2, 10.0F, 0.0F, this.width, 2, 32, 2);
 
-      for(TabButton tabbutton : this.tabButtons) {
-         tabbutton.render(p_281720_, p_282085_, p_281687_, p_283048_);
-      }
+      this.currentTabButton().render(p_281720_, p_282085_, p_281687_, p_283048_);
 
+   }
+   public void render(GuiGraphics p_281720_){
+      for(TabButton tabbutton : this.tabButtons) {
+         tabbutton.renderWidget(p_281720_);
+      }
    }
 
    public ScreenRectangle getRectangle() {

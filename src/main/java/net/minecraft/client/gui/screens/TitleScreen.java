@@ -99,7 +99,7 @@ public class TitleScreen extends Screen {
       //int i = this.font.width(COPYRIGHT_TEXT);
       //int j = this.width - i - 2;
       int l = this.height / 4 + 35;
-      this.createNormalMenuOptions(l, 22, 200, 18, 0,false);
+      this.createNormalMenuOptions(l, 22, 200, 18, 0,true);
 
       this.minecraft.setConnectedToRealms(false);
 

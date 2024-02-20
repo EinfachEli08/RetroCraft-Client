@@ -67,9 +67,9 @@ public class SelectGameScreen extends Screen {
     }
 
     public void repositionElements() {
-        int scale = (int)(this.minecraft.options.guiScale().get()*0.8F);
-        this.myWidth = TEXTURE_WIDTH *scale;
-        this.myHeight = TEXTURE_HEIGHT *scale;
+        float scale = (this.minecraft.options.guiScale().get()*0.8F);
+        this.myWidth = (int)(TEXTURE_WIDTH *scale);
+        this.myHeight = (int)(TEXTURE_HEIGHT *scale);
         this.x = this.width / 2 - myWidth / 2;
         this.y = this.height / 2 - myHeight / 2;
 
@@ -77,13 +77,15 @@ public class SelectGameScreen extends Screen {
             this.tabNavigationBar.setWidth(this.myWidth);
             this.tabNavigationBar.arrangeElements();
             this.bottomButtons.arrangeElements();
-            FrameLayout.alignInRectangle(this.bottomButtons, this.x, this.y+5, TEXTURE_WIDTH, TAB_HEIGHT, 0.5F, 0);
-            ScreenRectangle screenrectangle = new ScreenRectangle(x, y-TAB_HEIGHT, 0, 0);
-            this.tabManager.setTabArea(screenrectangle);
+            FrameLayout.alignInRectangle(this.bottomButtons, this.x, this.y+5, TEXTURE_WIDTH, TAB_HEIGHT, 0, 0);
+            //ScreenRectangle screenrectangle = new ScreenRectangle(this.width / 2, y-(int)(TAB_HEIGHT*scale), 0, 0);
+            this.tabManager.setTabArea(x, y, 0, 0);
         }
     }
     public void render(GuiGraphics gfx, int mousex, int mousey, float p_282251_) {
         this.minecraft.panorama.render(gfx, this.height);
+        this.tabNavigationBar.render(gfx);
+
         gfx.blit(MENU_LOCATION, x, y, myWidth, myHeight, 0.0F, 0.0F, 64, 256, 64, 256);
 
         super.render(gfx, width, height, p_282251_);

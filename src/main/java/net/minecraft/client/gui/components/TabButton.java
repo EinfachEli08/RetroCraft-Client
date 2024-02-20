@@ -22,7 +22,7 @@ public class TabButton extends AbstractWidget {
    private static final int TEXTURE_BORDER_BOTTOM = 100;
    private final TabManager tabManager;
    private final Tab tab;
-   private final int type;
+   private int type;
 
    public TabButton(TabManager p_275399_, Tab p_275391_, int p_275340_, int p_275364_, int type) {
       super(0, 0, p_275340_, p_275364_, p_275391_.getTabTitle());
@@ -32,13 +32,17 @@ public class TabButton extends AbstractWidget {
    }
 
    public void renderWidget(GuiGraphics p_283350_, int p_283437_, int p_281595_, float p_282117_) {
-      p_283350_.blitNineSliced(TEXTURE_LOCATION, this.getX(), this.getX(), this.width, TEXTURE_HEIGHT, TEXTURE_BORDER, TEXTURE_BORDER, TEXTURE_BORDER, TEXTURE_BORDER_BOTTOM, TEXTURE_WIDTH, TEXTURE_HEIGHT, 0, this.getTextureY());
+      p_283350_.blitNineSliced(TEXTURE_LOCATION, this.getX(), this.getY(), this.width, TEXTURE_HEIGHT, TEXTURE_BORDER, TEXTURE_BORDER, TEXTURE_BORDER, TEXTURE_BORDER_BOTTOM, TEXTURE_WIDTH, TEXTURE_HEIGHT, 0, this.getTextureY());
       // texture, x, y, full width, full height, left border, top border, right border, bottom border, texture width, texture height, tex offset x, tex offset y
       Font font = Minecraft.getInstance().font;
 
       this.renderString(p_283350_, font, 0x181818);
-
-
+   }
+   public void renderWidget(GuiGraphics p_281720_){
+      int _type = this.type;
+      this.type = 4;
+      renderWidget(p_281720_, 0, 0, 0);
+      this.type = _type;
    }
 
    public void renderString(GuiGraphics gfx, Font font, int color) {
@@ -54,10 +58,7 @@ public class TabButton extends AbstractWidget {
 
 
    protected int getTextureY() {
-      int i = 4;
-      if (this.isSelected()) i = this.type;
-
-      return i * TEXTURE_HEIGHT;
+      return this.isFocused() ? this.type * TEXTURE_HEIGHT : 4 * TEXTURE_HEIGHT;
    }
 
    protected void updateWidgetNarration(NarrationElementOutput p_275465_) {
