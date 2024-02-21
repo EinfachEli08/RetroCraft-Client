@@ -6216,5 +6216,8 @@
   "tutorial.socialInteractions.description": "Press %s to open",
   "tutorial.socialInteractions.title": "Social Interactions",
   "upgrade.minecraft.netherite_upgrade": "Netherite Upgrade",
-  "test": "Testing"
+  "test": "Testing",
+  "menu.worlds" : "Worlds",
+  "menu.servers" : "Servers",
+  "menu.realms" : "Realms"
 }

@@ -47,7 +47,7 @@ public class TabButton extends AbstractWidget {
 
    public void renderString(GuiGraphics gfx, Font font, int color) {
       int i = this.getX();
-      int j = this.getY() - 1 + (this.isSelected() ? 0 : 2);
+      int j = this.getY() + (this.isSelected() ? 0 : 3);
       int k = this.getX() + this.getWidth() - 1;
       int l = this.getY() + this.getHeight();
 

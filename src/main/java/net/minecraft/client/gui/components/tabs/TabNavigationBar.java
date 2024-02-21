@@ -141,7 +141,7 @@ public class TabNavigationBar extends AbstractContainerEventHandler implements R
       return this.layout.getRectangle();
    }
 
-   public void arrangeElements() {
+   public void arrangeElements(int x, int y) {
       int i = Math.min(300, this.width) - 28;
       int j = Mth.roundToward(i / this.tabs.size(), 2);
 
@@ -150,8 +150,8 @@ public class TabNavigationBar extends AbstractContainerEventHandler implements R
       }
 
       this.layout.arrangeElements();
-      this.layout.setX(Mth.roundToward((this.width - i) / 2, 2));
-      this.layout.setY(0);
+      this.layout.setX(x);
+      this.layout.setY(y);
    }
 
    public void selectTab(int p_276107_, boolean p_276125_) {

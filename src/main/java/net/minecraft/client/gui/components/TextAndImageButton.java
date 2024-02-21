@@ -19,9 +19,10 @@ public class TextAndImageButton extends Button {
    private final int yOffset;
    private final int usedTextureWidth;
    private final int usedTextureHeight;
+   private final int stringX;
 
-   TextAndImageButton(Component p_268357_, int p_268106_, int p_268141_, int p_268331_, int p_268045_, int p_268300_, int p_268151_, int p_267955_, int p_268114_, int p_268103_, ResourceLocation p_268067_, Button.OnPress p_268052_) {
-      super(0, 0, 150, 20, p_268357_, p_268052_, DEFAULT_NARRATION);
+   TextAndImageButton(Component p_268357_, int p_268106_, int p_268141_, int p_268331_, int p_268045_, int p_268300_, int p_268151_, int p_267955_, int p_268114_, int p_268103_, int width, int height, int stringOffset, ResourceLocation p_268067_, Button.OnPress p_268052_) {
+      super(0, 0, width, height, p_268357_, p_268052_, DEFAULT_NARRATION);
       this.textureWidth = p_268114_;
       this.textureHeight = p_268103_;
       this.xTexStart = p_268106_;
@@ -32,6 +33,9 @@ public class TextAndImageButton extends Button {
       this.yOffset = p_268045_;
       this.usedTextureWidth = p_268151_;
       this.usedTextureHeight = p_267955_;
+      this.width = width;
+      this.height = height;
+      this.stringX = stringOffset;
    }
 
    public void renderWidget(GuiGraphics p_282062_, int p_283189_, int p_283584_, float p_283402_) {
@@ -40,13 +44,17 @@ public class TextAndImageButton extends Button {
    }
 
    public void renderString(GuiGraphics p_281792_, Font p_283239_, int p_283135_) {
-      int i = this.getX() + 2;
-      int j = this.getX() + this.getWidth() - this.usedTextureWidth - 6;
-      renderScrollingString(p_281792_, p_283239_, this.getMessage(), i, this.getY(), j, this.getY() + this.getHeight(), p_283135_);
+      if(this.stringX == -1) {
+         int i = this.getX() + 2;
+         int j = this.getX() + this.getWidth() - this.usedTextureWidth - 6;
+         renderScrollingString(p_281792_, p_283239_, this.getMessage(), i, this.getY(), j, this.getY() + this.getHeight(), p_283135_);
+      } else
+         p_281792_.drawString(p_283239_, this.getMessage(), this.getX() + this.stringX, this.getY() + this.getHeight()-8, p_283135_);
+
    }
 
    private int getXOffset() {
-      return this.getX() + (this.width / 2 - this.usedTextureWidth / 2) + this.xOffset;
+      return this.getX() + this.xOffset;
    }
 
    private int getYOffset() {
@@ -71,6 +79,9 @@ public class TextAndImageButton extends Button {
       private int textureHeight;
       private int xOffset;
       private int yOffset;
+      private int width;
+      private int height;
+      private int stringX;
 
       public Builder(Component p_267988_, ResourceLocation p_268260_, Button.OnPress p_268075_) {
          this.message = p_267988_;
@@ -106,9 +117,17 @@ public class TextAndImageButton extends Button {
          this.textureHeight = p_268310_;
          return this;
       }
+      public TextAndImageButton.Builder buttonSize(int w, int h){
+         this.width = w; this.height = h;
+         return this;
+      }
+      public TextAndImageButton.Builder stringX(int x){
+         this.stringX = x;
+         return this;
+      }
 
       public TextAndImageButton build() {
-         return new TextAndImageButton(this.message, this.xTexStart, this.yTexStart, this.xOffset, this.yOffset, this.yDiffTex, this.usedTextureWidth, this.usedTextureHeight, this.textureWidth, this.textureHeight, this.resourceLocation, this.onPress);
+         return new TextAndImageButton(this.message, this.xTexStart, this.yTexStart, this.xOffset, this.yOffset, this.yDiffTex, this.usedTextureWidth, this.usedTextureHeight, this.textureWidth, this.textureHeight, this.width, this.height, this.stringX, this.resourceLocation, this.onPress);
       }
    }
 }

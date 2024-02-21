@@ -1,5 +1,6 @@
 package net.minecraft.client.gui.screens.worldselection;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.TextAndImageButton;
@@ -9,6 +10,7 @@ import net.minecraft.client.gui.components.tabs.TabNavigationBar;
 import net.minecraft.client.gui.layouts.FrameLayout;
 import net.minecraft.client.gui.layouts.GridLayout;
 import net.minecraft.client.gui.navigation.ScreenRectangle;
+import net.minecraft.client.gui.screens.OptionsScreen;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
@@ -22,10 +24,15 @@ import java.util.function.Supplier;
 public class SelectGameScreen extends Screen {
 
     public static final ResourceLocation MENU_LOCATION = new ResourceLocation("textures/gui/container/menu/map_select.png");
+    public static final ResourceLocation SPRITE_LOCATION = new ResourceLocation("textures/gui/icons.png");
 
-    private static final int TEXTURE_WIDTH = 207;
-    private static final int TEXTURE_HEIGHT = 163;
-    private static final int TAB_HEIGHT = 21;
+    private static final int TEXTURE_WIDTH = 230;
+    private static final int TEXTURE_HEIGHT = 196;
+    private static final int OFFSET_WIDTH = 13;
+    private static final int OFFSET_HEIGHT = 30;
+    private static final int TAB_OFFSET = 12;
+    private static final int MENU_BORDER_HORIZONTAL = 8;
+    private static final int MENU_BORDER_VERTICAL = 5;
     @Nullable
     private final Screen lastScreen;
     @Nullable
@@ -36,6 +43,7 @@ public class SelectGameScreen extends Screen {
     private int y;
     private int myWidth;
     private int myHeight;
+    private float scale;
 
     private final TabManager tabManager = new TabManager(this::addRenderableWidget, (p_267853_) -> {
         this.removeWidget(p_267853_);
@@ -48,12 +56,13 @@ public class SelectGameScreen extends Screen {
 
     protected void init(){
         this.tabNavigationBar = TabNavigationBar.builder(this.tabManager, this.width)
-                .addTabs(new SelectGameScreen.LoadTab(),
-                        new SelectGameScreen.CreateTab(),
-                        new SelectGameScreen.JoinTab()).build();
+                .addTabs(new SelectGameScreen.ServerTab(minecraft),
+                        new SelectGameScreen.WorldTab(minecraft),
+                        new SelectGameScreen.RealmTab(minecraft)).build();
         this.addRenderableWidget(this.tabNavigationBar);
+        this.tabNavigationBar.selectTab(1, false);
 
-        this.bottomButtons = (new GridLayout()).columnSpacing(4);
+        this.bottomButtons = (new GridLayout()).columnSpacing(0);
         GridLayout.RowHelper gridlayout$rowhelper = this.bottomButtons.createRowHelper(1);
         gridlayout$rowhelper.addChild(Button.builder(CommonComponents.GUI_CANCEL, (p_232903_) -> {
             this.popScreen();
@@ -62,31 +71,28 @@ public class SelectGameScreen extends Screen {
             p_267851_.setTabOrderGroup(1);
             this.addRenderableWidget(p_267851_);
         });
-        this.tabNavigationBar.selectTab(0, false);
         this.repositionElements();
     }
 
     public void repositionElements() {
-        float scale = (this.minecraft.options.guiScale().get()*0.8F);
-        this.myWidth = (int)(TEXTURE_WIDTH *scale);
+        this.scale = this.minecraft.options.guiScale().get() * 0.7F;
+        this.myWidth = (int)(TEXTURE_WIDTH *scale)-OFFSET_WIDTH;
         this.myHeight = (int)(TEXTURE_HEIGHT *scale);
         this.x = this.width / 2 - myWidth / 2;
         this.y = this.height / 2 - myHeight / 2;
 
         if (this.tabNavigationBar != null && this.bottomButtons != null) {
-            this.tabNavigationBar.setWidth(this.myWidth);
-            this.tabNavigationBar.arrangeElements();
+            this.tabNavigationBar.setWidth(this.myWidth+1000);
+            this.tabNavigationBar.arrangeElements((int)(x+13), (int)(y+TAB_OFFSET));
             this.bottomButtons.arrangeElements();
-            FrameLayout.alignInRectangle(this.bottomButtons, this.x, this.y+5, TEXTURE_WIDTH, TAB_HEIGHT, 0, 0);
-            //ScreenRectangle screenrectangle = new ScreenRectangle(this.width / 2, y-(int)(TAB_HEIGHT*scale), 0, 0);
-            this.tabManager.setTabArea(x, y, 0, 0);
+            FrameLayout.centerInRectangle(this.bottomButtons, this.width/4, this.height-36, TEXTURE_WIDTH, 0);
+            this.tabManager.setTabArea(x+OFFSET_WIDTH*2, y+OFFSET_HEIGHT, myWidth, myHeight);
         }
     }
     public void render(GuiGraphics gfx, int mousex, int mousey, float p_282251_) {
         this.minecraft.panorama.render(gfx, this.height);
         this.tabNavigationBar.render(gfx);
-
-        gfx.blit(MENU_LOCATION, x, y, myWidth, myHeight, 0.0F, 0.0F, 64, 256, 64, 256);
+        gfx.blit(MENU_LOCATION, x+OFFSET_WIDTH, y+OFFSET_HEIGHT, myWidth, myHeight, 0.0F, 0.0F, 64, 256, 64, 256);
 
         super.render(gfx, width, height, p_282251_);
     }
@@ -96,38 +102,46 @@ public class SelectGameScreen extends Screen {
     public void popScreen() {
         this.minecraft.setScreen(this.lastScreen);
     }
-    protected TextAndImageButton openScreenButton(Component text, ResourceLocation image, int xOff, int yOff, Supplier<Screen> p_262119_) {
-        return TextAndImageButton.builder(text, image, (p_280808_) -> {
-                    this.minecraft.setScreen(p_262119_.get());
-                }).texStart(3, 109)
-                .offset(65, 3)
-                .yDiffTex(20)
-                .usedTextureSize(14, 14)
-                .textureSize(256, 256).build();
+
+    protected void openScreenButton(Component text, ResourceLocation image, int xOff, int yOff, Supplier<Screen> p_262119_){
+        callButton(text, image, xOff, yOff, (p_280808_) -> {
+            this.minecraft.setScreen(p_262119_.get());
+        });
+    }
+    protected TextAndImageButton callButton(Component text, ResourceLocation image, int xOff, int yOff, Button.OnPress p_254567_) {
+        return TextAndImageButton.builder(text, image, p_254567_)
+                .texStart(32, 0)
+                .offset(3, 3)
+                .yDiffTex(0)
+                .usedTextureSize(20,  20)
+                .textureSize(256, 256)
+                .buttonSize(250, 26)
+                .stringX(20)
+                .build();
     }
     @OnlyIn(Dist.CLIENT)
-    class LoadTab extends GridLayoutTab {
-        private static final Component TITLE = Component.translatable("test");
+    class WorldTab extends GridLayoutTab {
+        private static final Component TITLE = Component.translatable("menu.worlds");
 
-        LoadTab() {
+        WorldTab(Minecraft minecraft) {
             super(TITLE);
             GridLayout.RowHelper gridlayout$rowhelper = this.layout.createRowHelper(1);
-            //gridlayout$rowhelper.addChild(openScreenButton(Component.translatable("menu.singleplayer"), () -> new SelectWorldScreen(this)));
+            gridlayout$rowhelper.addChild(callButton(Component.translatable("menu.singleplayer"), SPRITE_LOCATION, 0, 0, (p_280808_) -> {}));
         }
     }
     @OnlyIn(Dist.CLIENT)
-    class CreateTab extends GridLayoutTab {
-        private static final Component TITLE = Component.translatable("test");
+    class ServerTab extends GridLayoutTab {
+        private static final Component TITLE = Component.translatable("menu.servers");
 
-        CreateTab() {
+        ServerTab(Minecraft minecraft) {
             super(TITLE);
         }
     }
     @OnlyIn(Dist.CLIENT)
-    class JoinTab extends GridLayoutTab {
-        private static final Component TITLE = Component.translatable("test");
+    class RealmTab extends GridLayoutTab {
+        private static final Component TITLE = Component.translatable("menu.realms");
 
-        JoinTab() {
+        RealmTab(Minecraft minecraft) {
             super(TITLE);
         }
     }

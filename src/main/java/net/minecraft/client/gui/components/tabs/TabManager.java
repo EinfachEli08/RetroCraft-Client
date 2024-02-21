@@ -28,7 +28,7 @@ public class TabManager {
    public void setTabArea(int x, int y, int w, int h) {
       Tab tab = this.getCurrentTab();
       if (tab != null) {
-         tab.doLayout(x,y,w,h);
+         tab.doLayout(x, y, w, h);
       }
 
    }

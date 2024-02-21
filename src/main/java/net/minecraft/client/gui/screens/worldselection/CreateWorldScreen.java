@@ -183,7 +183,7 @@ public class CreateWorldScreen extends Screen {
    public void repositionElements() {
       if (this.tabNavigationBar != null && this.bottomButtons != null) {
          this.tabNavigationBar.setWidth(this.width);
-         this.tabNavigationBar.arrangeElements();
+         this.tabNavigationBar.arrangeElements(0, 0);
          this.bottomButtons.arrangeElements();
          FrameLayout.centerInRectangle(this.bottomButtons, 0, this.height - 36, this.width, 36);
          int i = this.tabNavigationBar.getRectangle().bottom();
