@@ -49,7 +49,7 @@ public class TextAndImageButton extends Button {
          int j = this.getX() + this.getWidth() - this.usedTextureWidth - 6;
          renderScrollingString(p_281792_, p_283239_, this.getMessage(), i, this.getY(), j, this.getY() + this.getHeight(), p_283135_);
       } else
-         p_281792_.drawString(p_283239_, this.getMessage(), this.getX() + this.stringX, this.getY() + this.getHeight()-8, p_283135_);
+         p_281792_.drawString(p_283239_, this.getMessage(), this.getX() + this.stringX + this.usedTextureWidth, this.getY() + this.getHeight() /2-4, p_283135_);
 
    }
 

@@ -26,13 +26,12 @@ public class SelectGameScreen extends Screen {
     public static final ResourceLocation MENU_LOCATION = new ResourceLocation("textures/gui/container/menu/map_select.png");
     public static final ResourceLocation SPRITE_LOCATION = new ResourceLocation("textures/gui/icons.png");
 
-    private static final int TEXTURE_WIDTH = 230;
-    private static final int TEXTURE_HEIGHT = 196;
-    private static final int OFFSET_WIDTH = 13;
+    private static final int TEXTURE_WIDTH = 223;
+    private static final int TEXTURE_HEIGHT = 179;
+    private static final int OFFSET_WIDTH = 8;
     private static final int OFFSET_HEIGHT = 30;
-    private static final int TAB_OFFSET = 12;
-    private static final int MENU_BORDER_HORIZONTAL = 8;
-    private static final int MENU_BORDER_VERTICAL = 5;
+    private static final int TAB_OFFSET = 11;
+    private static final int MENU_OFFSET = 40;
     @Nullable
     private final Screen lastScreen;
     @Nullable
@@ -76,8 +75,8 @@ public class SelectGameScreen extends Screen {
 
     public void repositionElements() {
         this.scale = this.minecraft.options.guiScale().get() * 0.7F;
-        this.myWidth = (int)(TEXTURE_WIDTH *scale)-OFFSET_WIDTH;
-        this.myHeight = (int)(TEXTURE_HEIGHT *scale);
+        this.myWidth = (int)(TEXTURE_WIDTH *scale);
+        this.myHeight = (int)(TEXTURE_HEIGHT *scale)+OFFSET_HEIGHT*2;
         this.x = this.width / 2 - myWidth / 2;
         this.y = this.height / 2 - myHeight / 2;
 
@@ -86,7 +85,7 @@ public class SelectGameScreen extends Screen {
             this.tabNavigationBar.arrangeElements((int)(x+13), (int)(y+TAB_OFFSET));
             this.bottomButtons.arrangeElements();
             FrameLayout.centerInRectangle(this.bottomButtons, this.width/4, this.height-36, TEXTURE_WIDTH, 0);
-            this.tabManager.setTabArea(x+OFFSET_WIDTH*2, y+OFFSET_HEIGHT, myWidth, myHeight);
+            this.tabManager.setTabArea(x+OFFSET_WIDTH*2, y+MENU_OFFSET, myWidth, myHeight);
         }
     }
     public void render(GuiGraphics gfx, int mousex, int mousey, float p_282251_) {
@@ -110,13 +109,13 @@ public class SelectGameScreen extends Screen {
     }
     protected TextAndImageButton callButton(Component text, ResourceLocation image, int xOff, int yOff, Button.OnPress p_254567_) {
         return TextAndImageButton.builder(text, image, p_254567_)
-                .texStart(32, 0)
+                .texStart(0, 0)
                 .offset(3, 3)
                 .yDiffTex(0)
                 .usedTextureSize(20,  20)
                 .textureSize(256, 256)
-                .buttonSize(250, 26)
-                .stringX(20)
+                .buttonSize(240, 26)
+                .stringX(10)
                 .build();
     }
     @OnlyIn(Dist.CLIENT)
