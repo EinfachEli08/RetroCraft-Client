@@ -8,29 +8,21 @@ import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 import javax.annotation.Nullable;
-import net.minecraft.SharedConstants;
+
 import net.minecraft.Util;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.Button;
-import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.gui.components.LogoRenderer;
 import net.minecraft.client.gui.components.MultiLineLabel;
-import net.minecraft.client.gui.components.PlainTextButton;
 import net.minecraft.client.gui.components.SplashRenderer;
 import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.screens.multiplayer.JoinMultiplayerScreen;
 import net.minecraft.client.gui.screens.multiplayer.SafetyScreen;
-import net.minecraft.client.gui.screens.worldselection.SelectGameScreen;
 import net.minecraft.client.gui.screens.worldselection.SelectWorldScreen;
-import net.minecraft.client.player.controller.MouseSimulator;
-import net.minecraft.client.renderer.CubeMap;
-import net.minecraft.client.renderer.PanoramaRenderer;
 import net.minecraft.client.renderer.texture.TextureManager;
-import net.minecraft.client.resources.language.I18n;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
@@ -99,7 +91,7 @@ public class TitleScreen extends Screen {
       //int i = this.font.width(COPYRIGHT_TEXT);
       //int j = this.width - i - 2;
       int l = this.height / 4 + 35;
-      this.createNormalMenuOptions(l, 22, 200, 18, 0,true);
+      this.createNormalMenuOptions(l, 22, 200, 18, 0);
 
       this.minecraft.setConnectedToRealms(false);
 
@@ -121,7 +113,7 @@ public class TitleScreen extends Screen {
 
    }
 
-   private void createNormalMenuOptions(int p_96764_, int buttonTopSpacing, int buttonWidth, int buttonHeight, int ySpacingFromTop, boolean isTesting) {
+   private void createNormalMenuOptions(int p_96764_, int buttonTopSpacing, int buttonWidth, int buttonHeight, int ySpacingFromTop) {
 
       this.addRenderableWidget(Button.builder(Component.translatable("menu.singleplayer"), (p_280832_) -> {
          this.minecraft.setScreen(new SelectWorldScreen(this));
@@ -140,27 +132,22 @@ public class TitleScreen extends Screen {
          this.realmsButtonClicked();
       }).bounds(this.width / 2 - 100, p_96764_ + buttonTopSpacing * 2 + ySpacingFromTop, buttonWidth, buttonHeight).tooltip(tooltip).build())).active = flag;
 
-      if(isTesting){
-         this.addRenderableWidget(Button.builder(Component.translatable("test"), (p_280838_) -> {
-            this.minecraft.setScreen(new SelectGameScreen(this));
-         }).bounds(this.width / 2 - 100, p_96764_ + buttonTopSpacing * 3 + ySpacingFromTop, buttonWidth, buttonHeight).build());
-      }
 
       this.addRenderableWidget(Button.builder(Component.translatable("menu.options"), (p_280838_) -> {
          this.minecraft.setScreen(new OptionsScreen(this, this.minecraft.options));
-      }).bounds(this.width / 2 - 100, !isTesting? p_96764_ + buttonTopSpacing * 3 + ySpacingFromTop : p_96764_ + buttonTopSpacing * 4 + ySpacingFromTop, buttonWidth, buttonHeight).build());
+      }).bounds(this.width / 2 - 100,  p_96764_ + buttonTopSpacing * 3 + ySpacingFromTop , buttonWidth, buttonHeight).build());
 
       this.addRenderableWidget(Button.builder(Component.translatable("narrator.button.language"), (p_280838_) -> {
          this.minecraft.setScreen(new LanguageSelectScreen(this, this.minecraft.options, this.minecraft.getLanguageManager()));
-      }).bounds(this.width / 2 - 100, !isTesting? p_96764_ + buttonTopSpacing * 4 + ySpacingFromTop : p_96764_ + buttonTopSpacing * 5 + ySpacingFromTop, buttonWidth, buttonHeight).build());
+      }).bounds(this.width / 2 - 100, p_96764_ + buttonTopSpacing * 4 + ySpacingFromTop , buttonWidth, buttonHeight).build());
 
       this.addRenderableWidget(Button.builder(Component.translatable("narrator.button.accessibility"), (p_280838_) -> {
          this.minecraft.setScreen(new AccessibilityOptionsScreen(this, this.minecraft.options));
-      }).bounds(this.width / 2 - 100, !isTesting? p_96764_ + buttonTopSpacing * 5 + ySpacingFromTop : p_96764_ + buttonTopSpacing * 6 + ySpacingFromTop, buttonWidth, buttonHeight).build());
+      }).bounds(this.width / 2 - 100,  p_96764_ + buttonTopSpacing * 5 + ySpacingFromTop , buttonWidth, buttonHeight).build());
 
       this.addRenderableWidget(Button.builder(Component.translatable("menu.quit"), (p_280831_) -> {
          this.minecraft.stop();
-      }).bounds(this.width / 2 - 100, !isTesting? p_96764_ + buttonTopSpacing * 6 + ySpacingFromTop : p_96764_ + buttonTopSpacing * 7 + ySpacingFromTop, buttonWidth, buttonHeight).build());
+      }).bounds(this.width / 2 - 100,  p_96764_ + buttonTopSpacing * 6 + ySpacingFromTop , buttonWidth, buttonHeight).build());
    }
 
    @Nullable

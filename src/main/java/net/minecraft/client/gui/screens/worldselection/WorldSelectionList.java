@@ -65,15 +65,7 @@ import org.slf4j.Logger;
 @OnlyIn(Dist.CLIENT)
 public class WorldSelectionList extends ObjectSelectionList<WorldSelectionList.Entry> {
    static final Logger LOGGER = LogUtils.getLogger();
-   static final DateFormat DATE_FORMAT = new SimpleDateFormat();
-   private static final ResourceLocation ICON_MISSING = new ResourceLocation("textures/misc/unknown_server.png");
-   static final ResourceLocation ICON_OVERLAY_LOCATION = new ResourceLocation("textures/gui/world_selection.png");
-   static final Component FROM_NEWER_TOOLTIP_1 = Component.translatable("selectWorld.tooltip.fromNewerVersion1").withStyle(ChatFormatting.RED);
-   static final Component FROM_NEWER_TOOLTIP_2 = Component.translatable("selectWorld.tooltip.fromNewerVersion2").withStyle(ChatFormatting.RED);
-   static final Component SNAPSHOT_TOOLTIP_1 = Component.translatable("selectWorld.tooltip.snapshot1").withStyle(ChatFormatting.GOLD);
-   static final Component SNAPSHOT_TOOLTIP_2 = Component.translatable("selectWorld.tooltip.snapshot2").withStyle(ChatFormatting.GOLD);
    static final Component WORLD_LOCKED_TOOLTIP = Component.translatable("selectWorld.locked").withStyle(ChatFormatting.RED);
-   static final Component WORLD_REQUIRES_CONVERSION = Component.translatable("selectWorld.conversion.tooltip").withStyle(ChatFormatting.RED);
    private final SelectWorldScreen screen;
    private CompletableFuture<List<LevelSummary>> pendingLevels;
    @Nullable
@@ -81,13 +73,13 @@ public class WorldSelectionList extends ObjectSelectionList<WorldSelectionList.E
    private String filter;
    private final WorldSelectionList.LoadingHeader loadingHeader;
 
-   public WorldSelectionList(SelectWorldScreen p_239540_, Minecraft p_239541_, int p_239542_, int p_239543_, int p_239544_, int p_239545_, int p_239546_, String p_239547_, @Nullable WorldSelectionList p_239548_) {
-      super(p_239541_, p_239542_, p_239543_, p_239544_, p_239545_, p_239546_);
-      this.screen = p_239540_;
+   public WorldSelectionList(SelectWorldScreen SWS, Minecraft p_239541_, int p_239542_, int p_239543_, int p_239544_, int p_239545_, int rowHeight, String p_239547_, @Nullable WorldSelectionList list) {
+      super(p_239541_, p_239542_, p_239543_, p_239544_, p_239545_, rowHeight);
+      this.screen = SWS;
       this.loadingHeader = new WorldSelectionList.LoadingHeader(p_239541_);
       this.filter = p_239547_;
-      if (p_239548_ != null) {
-         this.pendingLevels = p_239548_.pendingLevels;
+      if (list != null) {
+         this.pendingLevels = list.pendingLevels;
       } else {
          this.pendingLevels = this.loadLevels();
       }
@@ -103,7 +95,7 @@ public class WorldSelectionList extends ObjectSelectionList<WorldSelectionList.E
    @Nullable
    private List<LevelSummary> pollLevelsIgnoreErrors() {
       try {
-         return this.pendingLevels.getNow((List<LevelSummary>)null);
+         return this.pendingLevels.getNow(null);
       } catch (CancellationException | CompletionException completionexception) {
          return null;
       }
@@ -142,14 +134,6 @@ public class WorldSelectionList extends ObjectSelectionList<WorldSelectionList.E
       }
 
       this.currentlyDisplayedLevels = p_239665_;
-   }
-
-   public void updateFilter(String p_239901_) {
-      if (this.currentlyDisplayedLevels != null && !p_239901_.equals(this.filter)) {
-         this.fillLevels(p_239901_, this.currentlyDisplayedLevels);
-      }
-
-      this.filter = p_239901_;
    }
 
    private CompletableFuture<List<LevelSummary>> loadLevels() {
@@ -205,11 +189,11 @@ public class WorldSelectionList extends ObjectSelectionList<WorldSelectionList.E
    }
 
    protected int getScrollbarPosition() {
-      return super.getScrollbarPosition() + 20;
+      return super.getScrollbarPosition() - 5;
    }
 
    public int getRowWidth() {
-      return super.getRowWidth() + 50;
+      return super.getRowWidth() + 35;
    }
 
    public void setSelected(@Nullable WorldSelectionList.Entry p_233190_) {
@@ -276,14 +260,6 @@ public class WorldSelectionList extends ObjectSelectionList<WorldSelectionList.E
 
    @OnlyIn(Dist.CLIENT)
    public final class WorldListEntry extends WorldSelectionList.Entry implements AutoCloseable {
-      private static final int ICON_WIDTH = 32;
-      private static final int ICON_HEIGHT = 32;
-      private static final int ICON_OVERLAY_X_JOIN = 0;
-      private static final int ICON_OVERLAY_X_JOIN_WITH_NOTIFY = 32;
-      private static final int ICON_OVERLAY_X_WARNING = 64;
-      private static final int ICON_OVERLAY_X_ERROR = 96;
-      private static final int ICON_OVERLAY_Y_UNSELECTED = 0;
-      private static final int ICON_OVERLAY_Y_SELECTED = 32;
       private final Minecraft minecraft;
       private final SelectWorldScreen screen;
       private final LevelSummary summary;
@@ -342,63 +318,17 @@ public class WorldSelectionList extends ObjectSelectionList<WorldSelectionList.E
          return Component.translatable("narrator.select", component1);
       }
 
-      public void render(GuiGraphics p_281612_, int p_281353_, int p_283181_, int p_282820_, int p_282420_, int p_281855_, int p_283204_, int p_283025_, boolean p_283396_, float p_282938_) {
+      public void render(GuiGraphics gfx, int p_281353_, int p_283181_, int p_282820_, int p_282420_, int p_281855_, int p_283204_, int p_283025_, boolean p_283396_, float p_282938_) {
          String s = this.summary.getLevelName();
-         String s1 = this.summary.getLevelId();
-         long i = this.summary.getLastPlayed();
-         if (i != -1L) {
-            s1 = s1 + " (" + WorldSelectionList.DATE_FORMAT.format(new Date(i)) + ")";
-         }
-
          if (StringUtils.isEmpty(s)) {
             s = I18n.get("selectWorld.world") + " " + (p_281353_ + 1);
          }
+         gfx.drawString(this.minecraft.font, s, p_282820_ + 32 + 3, p_283181_ + (this.minecraft.font.lineHeight/2) + 2, 16777215, false);
 
-         Component component = this.summary.getInfo();
-         p_281612_.drawString(this.minecraft.font, s, p_282820_ + 32 + 3, p_283181_ + 1, 16777215, false);
-         p_281612_.drawString(this.minecraft.font, s1, p_282820_ + 32 + 3, p_283181_ + 9 + 3, 8421504, false);
-         p_281612_.drawString(this.minecraft.font, component, p_282820_ + 32 + 3, p_283181_ + 9 + 9 + 3, 8421504, false);
          RenderSystem.enableBlend();
-         p_281612_.blit(this.icon.textureLocation(), p_282820_, p_283181_, 0.0F, 0.0F, 32, 32, 32, 32);
+         gfx.blit(this.icon.textureLocation(), p_282820_, p_283181_, 0.0F, 0.0F, 20, 20, 20, 20);
          RenderSystem.disableBlend();
-         if (this.minecraft.options.touchscreen().get() || p_283396_) {
-            p_281612_.fill(p_282820_, p_283181_, p_282820_ + 32, p_283181_ + 32, -1601138544);
-            int j = p_283204_ - p_282820_;
-            boolean flag = j < 32;
-            int k = flag ? 32 : 0;
-            if (this.summary instanceof LevelSummary.SymlinkLevelSummary) {
-               p_281612_.blit(WorldSelectionList.ICON_OVERLAY_LOCATION, p_282820_, p_283181_, 96.0F, (float)k, 32, 32, 256, 256);
-               p_281612_.blit(WorldSelectionList.ICON_OVERLAY_LOCATION, p_282820_, p_283181_, 32.0F, (float)k, 32, 32, 256, 256);
-               return;
-            }
 
-            if (this.summary.isLocked()) {
-               p_281612_.blit(WorldSelectionList.ICON_OVERLAY_LOCATION, p_282820_, p_283181_, 96.0F, (float)k, 32, 32, 256, 256);
-               if (flag) {
-                  this.screen.setTooltipForNextRenderPass(this.minecraft.font.split(WorldSelectionList.WORLD_LOCKED_TOOLTIP, 175));
-               }
-            } else if (this.summary.requiresManualConversion()) {
-               p_281612_.blit(WorldSelectionList.ICON_OVERLAY_LOCATION, p_282820_, p_283181_, 96.0F, (float)k, 32, 32, 256, 256);
-               if (flag) {
-                  this.screen.setTooltipForNextRenderPass(this.minecraft.font.split(WorldSelectionList.WORLD_REQUIRES_CONVERSION, 175));
-               }
-            } else if (this.summary.markVersionInList()) {
-               p_281612_.blit(WorldSelectionList.ICON_OVERLAY_LOCATION, p_282820_, p_283181_, 32.0F, (float)k, 32, 32, 256, 256);
-               if (this.summary.askToOpenWorld()) {
-                  p_281612_.blit(WorldSelectionList.ICON_OVERLAY_LOCATION, p_282820_, p_283181_, 96.0F, (float)k, 32, 32, 256, 256);
-                  if (flag) {
-                     this.screen.setTooltipForNextRenderPass(ImmutableList.of(WorldSelectionList.FROM_NEWER_TOOLTIP_1.getVisualOrderText(), WorldSelectionList.FROM_NEWER_TOOLTIP_2.getVisualOrderText()));
-                  }
-               } else if (!SharedConstants.getCurrentVersion().isStable()) {
-                  p_281612_.blit(WorldSelectionList.ICON_OVERLAY_LOCATION, p_282820_, p_283181_, 64.0F, (float)k, 32, 32, 256, 256);
-                  if (flag) {
-                     this.screen.setTooltipForNextRenderPass(ImmutableList.of(WorldSelectionList.SNAPSHOT_TOOLTIP_1.getVisualOrderText(), WorldSelectionList.SNAPSHOT_TOOLTIP_2.getVisualOrderText()));
-                  }
-               }
-            } else {
-               p_281612_.blit(WorldSelectionList.ICON_OVERLAY_LOCATION, p_282820_, p_283181_, 0.0F, (float)k, 32, 32, 256, 256);
-            }
-         }
 
       }
 
