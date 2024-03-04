@@ -33,12 +33,25 @@ public class SelectWorldScreen extends Screen {
       /*
          TODO: To tweak the cutting of at the top and bottom, edit the variables below
       */
-      int cuttingTop = 93;
+      int cuttingTop = 90;
       int cuttingBottom = 90;
 
+      int buttonWidth = 90;
 
       this.list = new WorldSelectionList(this, this.minecraft, this.width-5, this.height, this.height/2-cuttingTop, this.height/2 + cuttingBottom, 24, "", this.list);
       this.addWidget(this.list);
+
+      this.addRenderableWidget(Button.builder(Component.translatable("test1"),(p_232984_) -> {
+
+      }).bounds(this.width / 2 - (buttonWidth/2) - buttonWidth, this.height / 2 - 124, buttonWidth, 20).build());
+
+      this.addRenderableWidget(Button.builder(Component.translatable("test2"),(p_232984_) -> {
+
+      }).bounds(this.width / 2 - (buttonWidth/2) , this.height / 2 - 124,buttonWidth, 20).build());
+
+      this.addRenderableWidget(Button.builder(Component.translatable("test3"),(p_232984_) -> {
+
+      }).bounds(this.width / 2 - (buttonWidth/2) + buttonWidth, this.height / 2 - 124,buttonWidth, 20).build());
 
       this.selectButton = this.addRenderableWidget(Button.builder(Component.translatable("selectWorld.select"), (p_232984_) -> {
          this.list.getSelectedOpt().ifPresent(WorldSelectionList.WorldListEntry::joinWorld);
@@ -89,7 +102,6 @@ public class SelectWorldScreen extends Screen {
 
       this.list.render(gfx, p_281534_, p_281859_, p_283289_);
 
-      //gfx.drawCenteredString(this.font, this.title, this.width / 2, 8, 16777215);
       super.render(gfx, p_281534_, p_281859_, p_283289_);
    }
 
