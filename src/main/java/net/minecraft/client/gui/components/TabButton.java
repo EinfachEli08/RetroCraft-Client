@@ -17,7 +17,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 public class TabButton extends AbstractWidget {
    private static final ResourceLocation TEXTURE_LOCATION = new ResourceLocation("textures/gui/tab_button.png");
    private static final int TEXTURE_WIDTH = 130;
-   private static final int TEXTURE_HEIGHT = 21;
+   private static final int TEXTURE_HEIGHT = 23;
    private static final int TEXTURE_BORDER = 4;
    private static final int TEXTURE_BORDER_BOTTOM = 100;
    private final TabManager tabManager;
