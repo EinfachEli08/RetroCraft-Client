@@ -193,7 +193,7 @@ public class WorldSelectionList extends ObjectSelectionList<WorldSelectionList.E
    }
 
    public int getRowWidth() {
-      return super.getRowWidth() + 35;
+      return super.getRowWidth() + 20;
    }
 
    public void setSelected(@Nullable WorldSelectionList.Entry p_233190_) {

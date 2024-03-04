@@ -21,12 +21,7 @@ public class SelectWorldScreen extends Screen {
    private Button renameButton;
    private Button copyButton;
    private WorldSelectionList list;
-
    public static final ResourceLocation MENU_LOCATION = new ResourceLocation("textures/gui/container/menu/map_select.png");
-
-
-
-
 
    public SelectWorldScreen(Screen p_101338_) {
       super(Component.translatable("selectWorld.title"));
@@ -35,7 +30,14 @@ public class SelectWorldScreen extends Screen {
 
    protected void init() {
 
-      this.list = new WorldSelectionList(this, this.minecraft, this.width-5, this.height, this.height/2-95, this.height/2 + 90, 24, "", this.list);
+      /*
+         TODO: To tweak the cutting of at the top and bottom, edit the variables below
+      */
+      int cuttingTop = 93;
+      int cuttingBottom = 90;
+
+
+      this.list = new WorldSelectionList(this, this.minecraft, this.width-5, this.height, this.height/2-cuttingTop, this.height/2 + cuttingBottom, 24, "", this.list);
       this.addWidget(this.list);
 
       this.selectButton = this.addRenderableWidget(Button.builder(Component.translatable("selectWorld.select"), (p_232984_) -> {
@@ -70,17 +72,20 @@ public class SelectWorldScreen extends Screen {
 
    public void render(GuiGraphics gfx, int p_281534_, int p_281859_, float p_283289_) {
 
-      int offsetHeight = 30;
-      int offsetWidth = 13;
-
       float scale = this.minecraft.options.guiScale().get() * 0.7F;
-      int myWidth = (int) (230 * scale) - 13;
-      int myHeight = (int) (196 * scale);
-      int x = this.width / 2 - myWidth / 2;
-      int y = this.height / 2 - myHeight / 2;
+      float scaleFactor = 1.2F;
+
+      int unscaledImgWidth = 224;
+      int unscaledImgHeight = 176;
+
+      int imgWidth = (int) (224 * scaleFactor);
+      int imgHeight = (int) (176 * scaleFactor);
+
+      int x = (this.width / 2 - imgWidth / 2);
+      int y = (this.height / 2 - imgHeight / 2);
 
       this.renderBackground(gfx);
-      gfx.blit(MENU_LOCATION, x +offsetWidth, y +offsetHeight, myWidth, myHeight, 0.0F, 0.0F, 64, 256, 64, 256);
+      gfx.blit(MENU_LOCATION,x, y, imgWidth, imgHeight , 0.0F, 0.0F, unscaledImgWidth, unscaledImgHeight, 256, 256);
 
       this.list.render(gfx, p_281534_, p_281859_, p_283289_);
 
