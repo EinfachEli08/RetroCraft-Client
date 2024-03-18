@@ -109,7 +109,7 @@ public class TitleScreen extends Screen {
 
       this.minecraft.controllerHint.clearSwitch();
       this.minecraft.controllerHint.setSwitch(0, "Select");
-      this.minecraft.controllerHint.setSwitch(1, "Back");
+
 
    }
 

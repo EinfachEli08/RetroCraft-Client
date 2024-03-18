@@ -30,6 +30,11 @@ public class SelectWorldScreen extends Screen {
 
    protected void init() {
 
+      this.minecraft.controllerHint.clearSwitch();
+      this.minecraft.controllerHint.setSwitch(0, "Select");
+      this.minecraft.controllerHint.setSwitch(1, "Back");
+      this.minecraft.controllerHint.setSwitch(2, "Change Smth Idfk");
+      this.minecraft.controllerHint.setSwitch(3, "Save Options");
       /*
          TODO: To tweak the cutting of at the top and bottom, edit the variables below
       */
@@ -41,15 +46,15 @@ public class SelectWorldScreen extends Screen {
       this.list = new WorldSelectionList(this, this.minecraft, this.width-5, this.height, this.height/2-cuttingTop, this.height/2 + cuttingBottom, 24, "", this.list);
       this.addWidget(this.list);
 
-      this.addRenderableWidget(Button.builder(Component.translatable("test1"),(p_232984_) -> {
+      this.addRenderableWidget(Button.builder(Component.translatable("Load"),(p_232984_) -> {
 
       }).bounds(this.width / 2 - (buttonWidth/2) - buttonWidth, this.height / 2 - 124, buttonWidth, 20).build());
 
-      this.addRenderableWidget(Button.builder(Component.translatable("test2"),(p_232984_) -> {
+      this.addRenderableWidget(Button.builder(Component.translatable("Create"),(p_232984_) -> {
 
       }).bounds(this.width / 2 - (buttonWidth/2) , this.height / 2 - 124,buttonWidth, 20).build());
 
-      this.addRenderableWidget(Button.builder(Component.translatable("test3"),(p_232984_) -> {
+      this.addRenderableWidget(Button.builder(Component.translatable("Join"),(p_232984_) -> {
 
       }).bounds(this.width / 2 - (buttonWidth/2) + buttonWidth, this.height / 2 - 124,buttonWidth, 20).build());
 

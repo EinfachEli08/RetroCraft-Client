@@ -76,6 +76,7 @@ public class LevelLoadingScreen extends Screen {
    }
 
    protected void init(){
+
       done = false;
       this.logoRenderer = new LogoRenderer(false);
    }

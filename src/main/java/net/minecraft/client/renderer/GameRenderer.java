@@ -249,15 +249,15 @@ public class GameRenderer implements AutoCloseable {
    @Nullable
    private static ShaderInstance rendertypeGuiGhostRecipeOverlayShader;
 
-   public GameRenderer(Minecraft p_234219_, ItemInHandRenderer p_234220_, ResourceManager p_234221_, RenderBuffers p_234222_) {
-      this.minecraft = p_234219_;
+   public GameRenderer(Minecraft mc, ItemInHandRenderer p_234220_, ResourceManager p_234221_, RenderBuffers p_234222_) {
+      this.minecraft = mc;
       this.resourceManager = p_234221_;
       this.itemInHandRenderer = p_234220_;
-      this.mapRenderer = new MapRenderer(p_234219_.getTextureManager());
-      this.lightTexture = new LightTexture(this, p_234219_);
+      this.mapRenderer = new MapRenderer(mc.getTextureManager());
+      this.lightTexture = new LightTexture(this, mc);
       this.renderBuffers = p_234222_;
       this.postEffect = null;
-      this.minecraft.controllerHint = new ControllerHintOverlay(p_234219_);
+      this.minecraft.controllerHint = new ControllerHintOverlay(mc);
    }
 
    public void close() {

@@ -1960,6 +1960,7 @@ public class Minecraft extends ReentrantBlockableEventLoop<Runnable> implements 
    }
 
    public void doWorldLoad(String p_261891_, LevelStorageSource.LevelStorageAccess p_261564_, PackRepository p_261826_, WorldStem p_261470_, boolean p_261465_) {
+
       this.clearLevel();
       this.progressListener.set((StoringChunkProgressListener)null);
       Instant instant = Instant.now();

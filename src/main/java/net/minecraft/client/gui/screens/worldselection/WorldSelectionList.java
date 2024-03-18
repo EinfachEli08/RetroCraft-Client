@@ -497,6 +497,7 @@ public class WorldSelectionList extends ObjectSelectionList<WorldSelectionList.E
       }
 
       private void loadWorld() {
+         this.minecraft.controllerHint.clearSwitch();
          this.minecraft.getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.UI_BUTTON_CLICK, 1.0F));
          if (this.minecraft.getLevelSource().levelExists(this.summary.getLevelId())) {
             this.queueLoadScreen();
