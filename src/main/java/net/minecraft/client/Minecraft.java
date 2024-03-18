@@ -383,9 +383,7 @@ public class Minecraft extends ReentrantBlockableEventLoop<Runnable> implements 
    private TutorialToast socialInteractionsToast;
    private ProfilerFiller profiler = InactiveProfiler.INSTANCE;
    private int fpsPieRenderTicks;
-   private final ContinuousProfiler fpsPieProfiler = new ContinuousProfiler(Util.timeSource, () -> {
-      return this.fpsPieRenderTicks;
-   });
+   private final ContinuousProfiler fpsPieProfiler = new ContinuousProfiler(Util.timeSource, () -> this.fpsPieRenderTicks);
    @Nullable
    private ProfileResults fpsPieResults;
    private MetricsRecorder metricsRecorder = InactiveMetricsRecorder.INSTANCE;
@@ -617,11 +615,7 @@ public class Minecraft extends ReentrantBlockableEventLoop<Runnable> implements 
    }
 
    private String createTitle() {
-      StringBuilder stringbuilder = new StringBuilder("Minecraft");
-      if (checkModStatus().shouldReportAsModified()) {
-         stringbuilder.append("*");
-      }
-
+      StringBuilder stringbuilder = new StringBuilder("RetroCraft");
       stringbuilder.append(" ");
       stringbuilder.append(SharedConstants.getCurrentVersion().getName());
       ClientPacketListener clientpacketlistener = this.getConnection();

@@ -12,6 +12,7 @@ import java.util.function.IntSupplier;
 import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.LogoRenderer;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.SimpleTexture;
 import net.minecraft.client.resources.metadata.texture.TextureMetadataSection;
@@ -29,7 +30,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 @OnlyIn(Dist.CLIENT)
 public class LoadingOverlay extends Overlay {
 
-   static final ResourceLocation MOJANG_LOGO = new ResourceLocation("textures/gui/title/mojang.png");
+   static final ResourceLocation MOJANG_LOGO = new ResourceLocation("textures/gui/title/minecraft.png");
    static final ResourceLocation FOURJ_LOGO = new ResourceLocation("textures/gui/title/4j.png");
    private static final int LOGO_BACKGROUND_COLOR = FastColor.ARGB32.color(100, 255, 255, 255);
    private static final IntSupplier BRAND_BACKGROUND = () -> {
@@ -60,34 +61,36 @@ public class LoadingOverlay extends Overlay {
       return p_169325_ & 16777215 | p_169326_ << 24;
    }
 
-   public void render(GuiGraphics p_281839_, int p_282704_, int p_283650_, float p_283394_) {
-      int i = p_281839_.guiWidth();
-      int j = p_281839_.guiHeight();
-      long k = Util.getMillis();
+   public void render(GuiGraphics gfx, int p_282704_, int p_283650_, float p_283394_) {
+
+      int guiWidth = gfx.guiWidth();
+      int guiHeight = gfx.guiHeight();
+      long millis = Util.getMillis();
+
       if (this.fadeIn && this.fadeInStart == -1L) {
-         this.fadeInStart = k;
+         this.fadeInStart = millis;
       }
 
-      float f = this.fadeOutStart > -1L ? (float)(k - this.fadeOutStart) / 10.0F : -1.0F;
-      float f1 = this.fadeInStart > -1L ? (float)(k - this.fadeInStart) / 500.0F : -1.0F;
+      float f = this.fadeOutStart > -1L ? (float)(millis - this.fadeOutStart) / 10.0F : -1.0F;
+      float f1 = this.fadeInStart > -1L ? (float)(millis - this.fadeInStart) / 500.0F : -1.0F;
       float f2;
       float f6 = this.reload.getActualProgress();
       this.currentProgress = Mth.clamp(this.currentProgress * 0.95F + f6 * 0.050000012F, 0.0F, 1.0F);
       if (f >= 1.0F) {
          if (this.minecraft.screen != null) {
-            this.minecraft.screen.render(p_281839_, 0, 0, p_283394_);
+            this.minecraft.screen.render(gfx, 0, 0, p_283394_);
          }
 
          int l = Mth.ceil((1.0F - Mth.clamp(f - 1.0F, 0.0F, 1.0F)) * 255.0F);
-         p_281839_.fill(RenderType.guiOverlay(), 0, 0, i, j, replaceAlpha(BRAND_BACKGROUND.getAsInt(), l));
+         gfx.fill(RenderType.guiOverlay(), 0, 0, guiWidth, guiHeight, replaceAlpha(BRAND_BACKGROUND.getAsInt(), l));
          f2 = 1.0F - Mth.clamp(f - 1.0F, 0.0F, 1.0F);
       } else if (this.fadeIn) {
          if (this.minecraft.screen != null && f1 < 1.0F) {
-            this.minecraft.screen.render(p_281839_, p_282704_, p_283650_, p_283394_);
+            this.minecraft.screen.render(gfx, p_282704_, p_283650_, p_283394_);
          }
 
          int l1 = Mth.ceil(Mth.clamp((double)f1, 0.15D, 1.0D) * 255.0D);
-         p_281839_.fill(RenderType.guiOverlay(), 0, 0, i, j, replaceAlpha(BRAND_BACKGROUND.getAsInt(), l1));
+         gfx.fill(RenderType.guiOverlay(), 0, 0, guiWidth, guiHeight, replaceAlpha(BRAND_BACKGROUND.getAsInt(), l1));
          f2 = Mth.clamp(f1, 0.0F, 1.0F);
       } else {
          GlStateManager._clearColor(1, 1, 1, 1);
@@ -99,7 +102,7 @@ public class LoadingOverlay extends Overlay {
 
 
       if (f >= 2.0F) {
-         this.minecraft.setOverlay((Overlay)null);
+         this.minecraft.setOverlay(null);
       }
 
       if (this.fadeOutStart == -1L && this.reload.isDone() && (!this.fadeIn || f1 >= 2.0F)) {
@@ -112,39 +115,25 @@ public class LoadingOverlay extends Overlay {
 
          this.fadeOutStart = Util.getMillis();
          if (this.minecraft.screen != null) {
-            this.minecraft.screen.init(this.minecraft, p_281839_.guiWidth(), p_281839_.guiHeight());
+            this.minecraft.screen.init(this.minecraft, gfx.guiWidth(), gfx.guiHeight());
          }
       }
 
       RenderSystem.disableDepthTest();
       RenderSystem.depthMask(false);
       RenderSystem.enableBlend();
-      //RenderSystem.blendFunc(770, 1);
 
-      p_281839_.setColor(1.0F, 1.0F, 1.0F, f2);
+      gfx.setColor(1.0F, 1.0F, 1.0F, f2);
 
-      if(currentProgress > 0.8F){
-         p_281839_.blit(FOURJ_LOGO, i / 2 - LOGO_SCALE/4, j/2 - LOGO_SCALE/4, 0, 0, LOGO_SCALE/2, LOGO_SCALE/2, LOGO_SCALE/2, LOGO_SCALE/2);
-      } else {
-         p_281839_.blit(MOJANG_LOGO, i / 2 - LOGO_SCALE/3, j/2 - LOGO_SCALE/3, 0, 0, (int)(LOGO_SCALE/1.5F), (int)(LOGO_SCALE/1.5F), (int)(LOGO_SCALE/1.5F), (int)(LOGO_SCALE/1.5F));
-      }
-      p_281839_.setColor(1.0F, 1.0F, 1.0F, 1.0F);
-      //p_281839_.fill(0, 0, i, j, FastColor.ARGB32.color((int)k/4, 0, 0, 0));
+      gfx.blit(MOJANG_LOGO, guiWidth / 2 - LOGO_SCALE/2, guiHeight/2 - ((LOGO_SCALE/4)/2), 0, 0, LOGO_SCALE, LOGO_SCALE/4, LOGO_SCALE, LOGO_SCALE/4);
 
-      //RenderSystem.defaultBlendFunc();
+      gfx.setColor(1.0F, 1.0F, 1.0F, 1.0F);
       RenderSystem.disableBlend();
       RenderSystem.depthMask(true);
       RenderSystem.enableDepthTest();
    }
-
-
-
-   public boolean isPauseScreen() {
-      return true;
-   }
-
-   @OnlyIn(Dist.CLIENT)
-   static class LogoTexture extends SimpleTexture {
+    @OnlyIn(Dist.CLIENT)
+    static class LogoTexture extends SimpleTexture {
       public LogoTexture() {
          super(LoadingOverlay.MOJANG_LOGO);
       }
