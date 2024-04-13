@@ -492,63 +492,72 @@ public class Gui {
       }
    }
 
+
    private void renderHotbar(float p_283031_, GuiGraphics gfx, int ypos) {
       Player player = this.getCameraPlayer();
-      if (player != null) {
-         ItemStack itemstack = player.getOffhandItem();
-         HumanoidArm humanoidarm = player.getMainArm().getOpposite();
-         int i = this.screenWidth / 2;
-         gfx.pose().pushPose();
-         gfx.pose().translate(0.0F, 0.0F, -90.0F);
-         
-         gfx.blit(WIDGETS_LOCATION, i - 91, this.screenHeight - ypos, 0, 0, 182, 22);
-         gfx.blit(WIDGETS_LOCATION, i - 91 - 1 + player.getInventory().selected * 20, this.screenHeight - ypos - 1, 0, 22, 24, 22);
-         
-         if (!itemstack.isEmpty()) {
-            if (humanoidarm == HumanoidArm.LEFT) {
-               gfx.blit(WIDGETS_LOCATION, i - 91 - 29, this.screenHeight - 43, 24, 22, 29, 24);
-            } else {
-               gfx.blit(WIDGETS_LOCATION, i + 91, this.screenHeight - 43, 53, 22, 29, 24);
-            }
-         }
+       ItemStack itemstack = player.getOffhandItem();
+       HumanoidArm humanoidarm = player.getMainArm().getOpposite();
+       int i = this.screenWidth / 2;
+       gfx.pose().pushPose();
+       gfx.pose().translate(0.0F, 0.0F, -90.0F);
 
-         gfx.pose().popPose();
-         int l = 1;
 
-         for(int i1 = 0; i1 < 9; ++i1) {
-            int j1 = i - 90 + i1 * 20 + 2;
-            int y = this.screenHeight - ypos + 3;
-            this.renderSlot(gfx, j1, y, p_283031_ + 100, player, player.getInventory().items.get(i1), l++);
-         }
+       //TODO: implement idle opacity reduction
+       //HOTBAR
+       gfx.blit(WIDGETS_LOCATION, i - 91, this.screenHeight - ypos, 0, 0, 182, 22);
 
-         if (!itemstack.isEmpty()) {
-            int i2 = this.screenHeight - 16 - 3;
-            if (humanoidarm == HumanoidArm.LEFT) {
-               this.renderSlot(gfx, i - 91 - 26, i2, p_283031_ + 100, player, itemstack, l++);
-            } else {
-               this.renderSlot(gfx, i + 91 + 10, i2, p_283031_ + 100, player, itemstack, l++);
-            }
-         }
+       //HOTBAR SELECTED SLOT
+       gfx.blit(WIDGETS_LOCATION, i - 91 - 1 + player.getInventory().selected * 20, this.screenHeight - ypos-1, 0, 22, 24, 24);
 
-         RenderSystem.enableBlend();
-         
-         if (this.minecraft.options.attackIndicator().get() == AttackIndicatorStatus.HOTBAR) {
-            float f = this.minecraft.player.getAttackStrengthScale(0.0F);
-            if (f < 1.0F) {
-               int j2 = this.screenHeight - 20;
-               int k2 = i + 91 + 6;
-               if (humanoidarm == HumanoidArm.RIGHT) {
-                  k2 = i - 91 - 22;
-               }
+       if (!itemstack.isEmpty()) {
+          if (humanoidarm == HumanoidArm.LEFT) {
+             gfx.blit(WIDGETS_LOCATION, i - 91 - 29, this.screenHeight - ypos - 1, 24, 22, 29, 24);
 
-               int l1 = (int)(f * 19.0F);
-               gfx.blit(GUI_ICONS_LOCATION, k2, j2, 0, 94, 18, 18);
-               gfx.blit(GUI_ICONS_LOCATION, k2, j2 + 18 - l1, 18, 112 - l1, 18, l1);
-            }
-         }
 
-         RenderSystem.disableBlend();
-      }
+          } else {
+             gfx.blit(WIDGETS_LOCATION, i + 91, this.screenHeight - ypos - 1, 53, 22, 29, 24);
+          }
+       }
+
+       gfx.pose().popPose();
+       int l = 1;
+       int itemY = this.screenHeight - ypos + 3;
+
+      //HOTBAR ITEM
+       for(int i1 = 0; i1 < 9; ++i1) {
+          int j1 = i - 90 + i1 * 20 + 2;
+
+          this.renderSlot(gfx, j1, itemY, p_283031_ + 100, player, player.getInventory().items.get(i1), l++);
+       }
+
+       // FLOATING OFFHAND ITEM
+       if (!itemstack.isEmpty()) {
+
+          if (humanoidarm == HumanoidArm.LEFT) {
+             this.renderSlot(gfx, i - 91 - 26, itemY, p_283031_ + 100, player, itemstack, l++);
+          } else {
+             this.renderSlot(gfx, i + 91 + 10, itemY, p_283031_ + 100, player, itemstack, l++);
+          }
+       }
+
+       RenderSystem.enableBlend();
+
+       if (this.minecraft.options.attackIndicator().get() == AttackIndicatorStatus.HOTBAR) {
+          float f = this.minecraft.player.getAttackStrengthScale(0.0F);
+          if (f < 1.0F) {
+             int j2 = this.screenHeight - 20;
+             int k2 = i + 91 + 6;
+             if (humanoidarm == HumanoidArm.RIGHT) {
+                k2 = i - 91 - 22;
+             }
+
+             int l1 = (int)(f * 19.0F);
+             gfx.blit(GUI_ICONS_LOCATION, k2, j2, 0, 94, 18, 18);
+             gfx.blit(GUI_ICONS_LOCATION, k2, j2 + 18 - l1, 18, 112 - l1, 18, l1);
+          }
+       }
+
+       RenderSystem.disableBlend();
    }
 
    public void renderJumpMeter(PlayerRideableJumping p_282774_, GuiGraphics p_282939_, int p_283351_) {

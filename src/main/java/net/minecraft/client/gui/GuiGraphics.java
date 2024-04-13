@@ -320,8 +320,8 @@ public class GuiGraphics {
       this.fill(p_281496_ + p_281334_ - 1, p_282076_ + 1, p_281496_ + p_281334_, p_282076_ + p_283576_ - 1, p_283618_);
    }
 
-   public void blit(ResourceLocation p_283377_, int p_281970_, int p_282111_, int p_283134_, int p_282778_, int p_281478_, int p_281821_) {
-      this.blit(p_283377_, p_281970_, p_282111_, 0, (float)p_283134_, (float)p_282778_, p_281478_, p_281821_, 256, 256);
+   public void blit(ResourceLocation resourceLocation, int xPos, int yPos, int p_283134_, int p_282778_, int p_281478_, int p_281821_) {
+      this.blit(resourceLocation, xPos, yPos, 0, (float)p_283134_, (float)p_282778_, p_281478_, p_281821_, 256, 256);
    }
 
    public void blit(ResourceLocation p_283573_, int p_283574_, int p_283670_, int p_283545_, float p_283029_, float p_283061_, int p_282845_, int p_282558_, int p_282832_, int p_281851_) {
